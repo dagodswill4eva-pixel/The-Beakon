@@ -33,11 +33,11 @@ import portrait from "./assets/my image.png";
 import aboutPortrait from "./assets/2nd image.jpg";
 
 import phoneSystem from "./assets/portfolio/phone system.png";
-import aiAnalytics from "./assets/portfolio/ai agent.png";
+import aiAnalytics from "./assets/portfolio/aI agent.png";
 import applicationFollowup from "./assets/portfolio/application follow up.png";
 import tourReminder from "./assets/portfolio/tour reminder workflow.png";
 import nurtureCampaign from "./assets/portfolio/nurture campaign.png";
-import aiLeadRescue from "./assets/portfolio/ai lead rescue.png";
+import aiLeadRescue from "./assets/portfolio/aI lead rescue.png";
 import ecersAutomation from "./assets/portfolio/ecers- automation.png";
 import itersAutomation from "./assets/portfolio/weekly Iters automation.png";
 
