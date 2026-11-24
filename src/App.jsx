@@ -52,6 +52,7 @@ import itersAutomation from "./assets/portfolio/weekly Iters automation.png";
 const email = "akingbadejames2@gmail.com";
 const whatsapp = "2348141616160";
 const linkedin = "https://www.linkedin.com/in/james-akingbade-8b8554246/";
+const bookingUrl = "https://calendly.com/akingbadejames2/30min";
 
 const projects = [
   {
@@ -468,18 +469,6 @@ const industryIcons = {
   briefcase: Briefcase,
 };
 
-const chapterList = [
-  { id: "chapter-hero", label: "Start" },
-  { id: "chapter-capabilities", label: "Services" },
-  { id: "chapter-leaks", label: "Leaks" },
-  { id: "chapter-systems", label: "Systems" },
-  { id: "chapter-work", label: "Work" },
-  { id: "chapter-process", label: "Process" },
-  { id: "chapter-engagements", label: "Engagements" },
-  { id: "chapter-proof", label: "Proof" },
-  { id: "chapter-questions", label: "Questions" },
-];
-
 function ScrollProgress() {
   const barRef = useRef(null);
 
@@ -503,45 +492,6 @@ function ScrollProgress() {
   }, []);
 
   return <div ref={barRef} className="v2-scroll-progress" aria-hidden="true" />;
-}
-
-function ChapterRail() {
-  const [active, setActive] = useState(chapterList[0].id);
-
-  useEffect(() => {
-    const sections = chapterList
-      .map((chapter) => document.getElementById(chapter.id))
-      .filter(Boolean);
-
-    if (!sections.length) return undefined;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: "-42% 0px -48% 0px", threshold: 0 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <nav className="v2-rail" aria-label="Page sections">
-      {chapterList.map((chapter) => (
-        <a
-          key={chapter.id}
-          href={`#${chapter.id}`}
-          className={active === chapter.id ? "is-active" : ""}
-        >
-          <span aria-hidden="true" />
-          {chapter.label}
-        </a>
-      ))}
-    </nav>
-  );
 }
 
 function IndustryLens({ active, onChange }) {
@@ -574,10 +524,10 @@ function Capabilities() {
     <section className="v2-caps" id="chapter-capabilities" aria-label="Core service areas">
       <div className="section-wrap">
         <div className="v2-caps-head">
-          <span className="v2-eyebrow">Four core disciplines</span>
+          <span className="v2-eyebrow">What I do</span>
           <p>
-            Most projects draw on two or three of these. You commission the
-            parts the problem actually needs.
+            Most projects use two or three of these. You only pay for the parts
+            you need.
           </p>
         </div>
 
@@ -631,21 +581,21 @@ function PainSection({ industry }) {
       <div className="section-wrap">
         <div className="v2-section-head">
           <div>
-            <span className="v2-eyebrow">The diagnosis</span>
+            <span className="v2-eyebrow">What goes wrong</span>
             <h2 className="v2-display">
-              Growth does not leak in
+              Three places
               <br />
-              one place. <em>It leaks in four.</em>
+              <em>it goes wrong.</em>
             </h2>
           </div>
           <div className="v2-head-side">
             <p>
-              Before adding tools, we find where the journey currently breaks.
-              These are the four points that cost {industry.short.toLowerCase()}{" "}
-              teams the most enquiries, hours and trust.
+              Before adding anything new, I find where it breaks. These three
+              things cost {industry.short.toLowerCase()} teams the most time and
+              the most customers.
             </p>
             <Link className="v2-link" to="/contact">
-              Get a leak assessment <ArrowUpRight size={14} />
+              Get a check-up <ArrowUpRight size={14} />
             </Link>
           </div>
         </div>
@@ -654,8 +604,7 @@ function PainSection({ industry }) {
           {industry.pains.map((pain, index) => (
             <article className="v2-pain-card" key={pain.title}>
               <div className="v2-pain-index">
-                <span>LEAK {String(index + 1).padStart(2, "0")}</span>
-                <span>{pain.title.length > 26 ? "PRIORITY" : "COMMON"}</span>
+                <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
               <h3>{pain.title}</h3>
               <p>{pain.body}</p>
@@ -675,18 +624,17 @@ function SystemsSection({ industry }) {
       <div className="section-wrap">
         <div className="v2-section-head">
           <div>
-            <span className="v2-eyebrow">The systems</span>
+            <span className="v2-eyebrow">What I build</span>
             <h2 className="v2-display">
-              Four connected systems.
+              Three simple systems.
               <br />
               <em>One calm operation.</em>
             </h2>
           </div>
           <div className="v2-head-side">
             <p>
-              Each layer can stand alone, but they are designed to work
-              together — so information moves forward instead of being
-              retyped, remembered or lost.
+              Each one works on its own. Together, information moves forward
+              instead of being retyped, remembered or lost.
             </p>
             <span className="v2-badge">{industry.name}</span>
           </div>
@@ -721,7 +669,7 @@ function SystemsSection({ industry }) {
   );
 }
 
-function IndustryWork({ industry, limit = 4, id = "chapter-work" }) {
+function IndustryWork({ industry, limit = 3, id = "chapter-work" }) {
   const work = industry.featured
     .map((slug) => allProjects.find((project) => project.slug === slug))
     .filter(Boolean)
@@ -732,7 +680,7 @@ function IndustryWork({ industry, limit = 4, id = "chapter-work" }) {
       <div className="section-wrap">
         <div className="v2-section-head">
           <div>
-            <span className="v2-eyebrow">The evidence</span>
+            <span className="v2-eyebrow">The work</span>
             <h2 className="v2-display">
               Not concepts.
               <br />
@@ -741,9 +689,8 @@ function IndustryWork({ industry, limit = 4, id = "chapter-work" }) {
           </div>
           <div className="v2-head-side">
             <p>
-              A selection of the work most relevant to {industry.name.toLowerCase()}.
-              Each piece links to the full project, including what was built and
-              which tools were used.
+              The work closest to {industry.name.toLowerCase()}. Each one opens
+              to the full project.
             </p>
             <Link className="v2-link" to={`/industries/${industry.slug}`}>
               See all {industry.short.toLowerCase()} work <ArrowUpRight size={14} />
@@ -853,7 +800,7 @@ function PackagesSection({ industry }) {
       <div className="section-wrap">
         <div className="v2-section-head">
           <div>
-            <span className="v2-eyebrow">Ways to work together</span>
+            <span className="v2-eyebrow">How to start</span>
             <h2 className="v2-display">
               Start where
               <br />
@@ -862,9 +809,8 @@ function PackagesSection({ industry }) {
           </div>
           <div className="v2-head-side">
             <p>
-              Three ways to engage, sized by how much of the system you want
-              handled. Every engagement begins with clarity about scope,
-              timing and what done looks like.
+              Two ways to start, depending on how much you want handled. Scope,
+              timing and price are agreed before anything begins.
             </p>
           </div>
         </div>
@@ -888,7 +834,7 @@ function PackagesSection({ industry }) {
                 ))}
               </ul>
               <Link className="v2-link" to="/contact">
-                Discuss this option <ArrowRight size={14} />
+                Ask about this <ArrowRight size={14} />
               </Link>
             </article>
           ))}
@@ -902,12 +848,12 @@ function MobileActionBar() {
   return (
     <div className="v2-mobile-cta">
       <div>
-        <strong>Ready to fix the leaks?</strong>
+        <strong>Want to talk it through?</strong>
         <span>20 minutes · no pitch</span>
       </div>
-      <Link className="button button-gold" to="/contact">
+      <a className="button button-gold" href={bookingUrl} target="_blank" rel="noreferrer">
         Book a call <ArrowUpRight size={15} />
-      </Link>
+      </a>
     </div>
   );
 }
@@ -917,15 +863,15 @@ function FaqSection({ industry }) {
     <section className="v2-section" id="chapter-questions">
       <div className="section-wrap v2-faq">
         <div>
-          <span className="v2-eyebrow">Straight answers</span>
+          <span className="v2-eyebrow">Questions</span>
           <h2 className="v2-display" style={{ fontSize: "clamp(34px, 4.4vw, 54px)", margin: "18px 0 16px" }}>
             The questions
             <br />
             <em>worth asking.</em>
           </h2>
           <p className="v2-lede">
-            If something is not covered here, send it over — a direct answer is
-            usually faster than a sales call.
+            If something is missing, just ask. A direct answer is faster than a
+            sales call.
           </p>
         </div>
 
@@ -1506,7 +1452,6 @@ function Home() {
   return (
     <>
       <ScrollProgress />
-      <ChapterRail />
 
       <section
         className="v2-hero"
@@ -1539,9 +1484,14 @@ function Home() {
             <IndustryLens active={activeIndustry} onChange={setActiveIndustry} />
 
             <div className="v2-hero-actions">
-              <Link className="button button-gold" to="/contact">
-                Book a 20-minute fit call <ArrowUpRight size={17} />
-              </Link>
+              <a
+                className="button button-gold"
+                href={bookingUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Book a 30-minute call <ArrowUpRight size={17} />
+              </a>
               <Link className="v2-link" to={`/industries/${industry.slug}`}>
                 The {industry.short.toLowerCase()} page <ArrowRight size={15} />
               </Link>
@@ -1587,7 +1537,6 @@ function Home() {
       <PainSection industry={industry} />
       <SystemsSection industry={industry} />
       <IndustryWork industry={industry} />
-      <ProcessSection />
       <PackagesSection industry={industry} />
 
       <div id="chapter-proof">
@@ -2580,6 +2529,39 @@ function Reviews() {
 }
 
 
+function BookingSection() {
+  return (
+    <section className="section-wrap booking-section" id="book">
+      <div className="booking-head">
+        <span className="eyebrow">BOOK A CALL</span>
+        <h2>
+          Pick a time that<br />works for <span>you.</span>
+        </h2>
+        <p>
+          Thirty minutes, no pitch. Bring the problem and I will tell you
+          straight whether I can help.
+        </p>
+        <a
+          className="booking-out"
+          href={bookingUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open the calendar in a new tab <ArrowUpRight size={15} />
+        </a>
+      </div>
+
+      <div className="booking-frame">
+        <iframe
+          src={bookingUrl}
+          title="Book a 30 minute call with James Akingbade"
+          loading="lazy"
+        />
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", project: "" });
 
@@ -2659,6 +2641,8 @@ function Contact() {
           </p>
         </form>
       </section>
+
+      <BookingSection />
     </>
   );
 }
