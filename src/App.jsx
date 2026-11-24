@@ -25,9 +25,16 @@ import {
   Monitor,
   Presentation,
   Sparkles,
+  GraduationCap,
+  Truck,
+  ShoppingBag,
+  Briefcase,
+  Plus,
 } from "lucide-react";
 import "./App.css";
 import "./creative-portfolio.css";
+import "./site-v2.css";
+import { industries, getIndustry } from "./industries";
 import logo from "./assets/The Beakon Logo.png";
 import portrait from "./assets/my image.png";
 import aboutPortrait from "./assets/2nd image.jpg";
@@ -264,7 +271,7 @@ const websiteProjects = [
 ];
 
 
-const creativeProjects = [{"slug": "customer-product-feedback", "title": "Customer & Product Feedback", "category": "Interactive Learning & eLearning", "description": "An interactive customer feedback experience that guides users through product questions and captures their experience.", "tools": ["Genially", "Interactive Design"], "kind": "video", "media": "/portfolio/customer_and_product_feed.mp4", "cover": "/portfolio/customer-product-feedback-preview.png", "overview": "A mobile-first feedback experience combining product questions with a structured customer response journey.", "work": ["Customer feedback flow", "Product experience questions", "Structured response journey"]}, {"slug": "customer-management-simulation", "title": "Customer Management Simulation", "category": "Interactive Learning & eLearning", "description": "A scenario-based customer management simulation with decision-making activities and self-assessment.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/Customer_Management_Simul.mp4", "cover": "/portfolio/customer-management-simulation-preview.png", "overview": "An interactive learning simulation built around customer scenarios and response choices.", "work": ["Scenario-based learning", "Choose-the-best-response activity", "Self-assessment"]}, {"slug": "soft-skills-development", "title": "Soft Skills Development", "category": "Interactive Learning & eLearning", "description": "A mobile learning experience exploring practical soft skills through short instructional sections.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/Soft_Skills_Development_G.mp4", "cover": "/portfolio/soft-skills-development-preview.png", "overview": "A mobile-oriented learning experience covering skills such as conflict resolution, critical thinking and active listening.", "work": ["Conflict resolution content", "Critical thinking activities", "Active listening concepts"]}, {"slug": "becoming-the-goat-curriculum", "title": "Becoming the GOAT Curriculum", "category": "Interactive Learning & eLearning", "description": "An interactive curriculum experience with learning activities, reflection and self-assessment.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/M1_Becoming_the_GOAT_Curr.mp4", "cover": "/portfolio/becoming-the-goat-curriculum-preview.png", "overview": "A curriculum-based learning experience combining instructional content with interactive reflection.", "work": ["Interactive learning activities", "Reflection prompts", "Self-assessment and Sphere of Control"]}, {"slug": "foundations-of-becoming", "title": "Foundations of Becoming", "category": "Interactive Learning & eLearning", "description": "A guided learning experience with student activities and reflection prompts.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/M2___Foundations_of_Becom.mp4", "cover": "/portfolio/foundations-of-becoming-preview.png", "overview": "An educational experience designed to guide learners through foundational concepts and activities.", "work": ["Student activities", "Reflection prompts", "Structured instructional content"]}, {"slug": "urban-illustrated-presentation", "title": "Urban Illustrated Presentation", "category": "Presentation & Visual Communication", "description": "An illustrated educational presentation using animated scenes and visual storytelling.", "tools": ["PowerPoint", "Canva"], "kind": "video", "media": "/portfolio/Urban_Illustrated_Present.mp4", "cover": "/portfolio/urban-illustrated-presentation-preview.png", "overview": "An illustrated presentation that uses character-led scenes and visual sequencing to communicate instructional content.", "work": ["Illustrated visual storytelling", "Animated presentation scenes", "Instructional content"]}, {"slug": "light-invasion", "title": "Light Invasion", "category": "Interactive Learning & eLearning", "description": "An illustrated interactive story built around characters, scenes and a fantasy adventure.", "tools": ["Genially", "Canva"], "kind": "video", "media": "/portfolio/Light_invasion.mp4", "cover": "/portfolio/light-invasion-preview.png", "overview": "A story-led digital experience using illustrated characters and scenes to create an engaging narrative.", "work": ["Character-led storytelling", "Illustrated scenes", "Interactive narrative experience"]}, {"slug": "last-mile-delivery-industry", "title": "Die Last-Mile-Delivery-Branche", "category": "Presentation & Visual Communication", "description": "A German-language presentation exploring the last-mile delivery industry, including market context and definitions.", "tools": ["PowerPoint", "Prezi"], "kind": "pdf", "media": "/portfolio/Die Last-Mile-Delivery-Branche.pdf", "cover": "/portfolio/last-mile-delivery-industry-preview.png", "overview": "A presentation exploring the last-mile delivery sector in Germany, moving from market overview to core industry definitions.", "work": ["Market overview", "Industry definitions", "German-language presentation"]}, {"slug": "understanding-grade-determination", "title": "Understanding Grade Determination", "category": "Presentation & Visual Communication", "description": "An educational presentation explaining the principles and practices behind academic grading systems.", "tools": ["PowerPoint", "Canva"], "kind": "pdf", "media": "/portfolio/3f533384359ad4cfc60bf9ddbf0.pdf", "cover": "/portfolio/understanding-grade-determination-preview.png", "overview": "An educational presentation using diagrams and structured visual explanations to explore grade determination.", "work": ["Academic grading concepts", "Visual explanations and diagrams", "Educational presentation"]}, {"slug": "corporate-history-strategic-resource", "title": "Corporate History as a Strategic Resource", "category": "Presentation & Visual Communication", "description": "A corporate storytelling presentation exploring how organisational history can support brand communication.", "tools": ["PowerPoint", "Canva"], "kind": "pdf", "media": "/portfolio/Trust_.pdf", "cover": "/portfolio/corporate-history-strategic-resource-preview.png", "overview": "A visual presentation about the role of corporate history in marketing and brand storytelling.", "work": ["Corporate history narrative", "Brand heritage visuals", "Marketing communication"]}, {"slug": "aac-inclusive-classrooms", "title": "AAC in Inclusive Classrooms", "category": "Presentation & Visual Communication", "description": "A professional development presentation about practical strategies for supporting students with complex communication needs.", "tools": ["PowerPoint", "Canva"], "kind": "pdf", "media": "/portfolio/AAC in Inclusive Classrooms.pdf", "cover": "/portfolio/aac-inclusive-classrooms-preview.png", "overview": "A professional development presentation focused on augmentative and alternative communication in inclusive classrooms.", "work": ["AAC concepts and communication rights", "Inclusive classroom strategies", "Professional development content"]}];
+const creativeProjects = [{"slug": "customer-product-feedback", "title": "Customer & Product Feedback", "category": "Interactive Learning & eLearning", "description": "An interactive customer feedback experience that guides users through product questions and captures their experience.", "tools": ["Genially", "Interactive Design"], "kind": "video", "media": "/portfolio/customer_and_product_feed.mp4", "cover": "/portfolio/customer-product-feedback-preview.jpg", "overview": "A mobile-first feedback experience combining product questions with a structured customer response journey.", "work": ["Customer feedback flow", "Product experience questions", "Structured response journey"]}, {"slug": "customer-management-simulation", "title": "Customer Management Simulation", "category": "Interactive Learning & eLearning", "description": "A scenario-based customer management simulation with decision-making activities and self-assessment.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/Customer_Management_Simul.mp4", "cover": "/portfolio/customer-management-simulation-preview.jpg", "overview": "An interactive learning simulation built around customer scenarios and response choices.", "work": ["Scenario-based learning", "Choose-the-best-response activity", "Self-assessment"]}, {"slug": "soft-skills-development", "title": "Soft Skills Development", "category": "Interactive Learning & eLearning", "description": "A mobile learning experience exploring practical soft skills through short instructional sections.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/Soft_Skills_Development_G.mp4", "cover": "/portfolio/soft-skills-development-preview.jpg", "overview": "A mobile-oriented learning experience covering skills such as conflict resolution, critical thinking and active listening.", "work": ["Conflict resolution content", "Critical thinking activities", "Active listening concepts"]}, {"slug": "becoming-the-goat-curriculum", "title": "Becoming the GOAT Curriculum", "category": "Interactive Learning & eLearning", "description": "An interactive curriculum experience with learning activities, reflection and self-assessment.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/M1_Becoming_the_GOAT_Curr.mp4", "cover": "/portfolio/becoming-the-goat-curriculum-preview.jpg", "overview": "A curriculum-based learning experience combining instructional content with interactive reflection.", "work": ["Interactive learning activities", "Reflection prompts", "Self-assessment and Sphere of Control"]}, {"slug": "foundations-of-becoming", "title": "Foundations of Becoming", "category": "Interactive Learning & eLearning", "description": "A guided learning experience with student activities and reflection prompts.", "tools": ["Genially", "Interactive Learning"], "kind": "video", "media": "/portfolio/M2___Foundations_of_Becom.mp4", "cover": "/portfolio/foundations-of-becoming-preview.jpg", "overview": "An educational experience designed to guide learners through foundational concepts and activities.", "work": ["Student activities", "Reflection prompts", "Structured instructional content"]}, {"slug": "urban-illustrated-presentation", "title": "Urban Illustrated Presentation", "category": "Presentation & Visual Communication", "description": "An illustrated educational presentation using animated scenes and visual storytelling.", "tools": ["PowerPoint", "Canva"], "kind": "video", "media": "/portfolio/Urban_Illustrated_Present.mp4", "cover": "/portfolio/urban-illustrated-presentation-preview.jpg", "overview": "An illustrated presentation that uses character-led scenes and visual sequencing to communicate instructional content.", "work": ["Illustrated visual storytelling", "Animated presentation scenes", "Instructional content"]}, {"slug": "light-invasion", "title": "Light Invasion", "category": "Interactive Learning & eLearning", "description": "An illustrated interactive story built around characters, scenes and a fantasy adventure.", "tools": ["Genially", "Canva"], "kind": "video", "media": "/portfolio/Light_invasion.mp4", "cover": "/portfolio/light-invasion-preview.jpg", "overview": "A story-led digital experience using illustrated characters and scenes to create an engaging narrative.", "work": ["Character-led storytelling", "Illustrated scenes", "Interactive narrative experience"]}, {"slug": "last-mile-delivery-industry", "title": "Die Last-Mile-Delivery-Branche", "category": "Presentation & Visual Communication", "description": "A German-language presentation exploring the last-mile delivery industry, including market context and definitions.", "tools": ["PowerPoint", "Prezi"], "kind": "pdf", "media": "/portfolio/Die Last-Mile-Delivery-Branche.pdf", "cover": "/portfolio/last-mile-delivery-industry-preview.jpg", "overview": "A presentation exploring the last-mile delivery sector in Germany, moving from market overview to core industry definitions.", "work": ["Market overview", "Industry definitions", "German-language presentation"]}, {"slug": "understanding-grade-determination", "title": "Understanding Grade Determination", "category": "Presentation & Visual Communication", "description": "An educational presentation explaining the principles and practices behind academic grading systems.", "tools": ["PowerPoint", "Canva"], "kind": "pdf", "media": "/portfolio/3f533384359ad4cfc60bf9ddbf0.pdf", "cover": "/portfolio/understanding-grade-determination-preview.jpg", "overview": "An educational presentation using diagrams and structured visual explanations to explore grade determination.", "work": ["Academic grading concepts", "Visual explanations and diagrams", "Educational presentation"]}, {"slug": "corporate-history-strategic-resource", "title": "Corporate History as a Strategic Resource", "category": "Presentation & Visual Communication", "description": "A corporate storytelling presentation exploring how organisational history can support brand communication.", "tools": ["PowerPoint", "Canva"], "kind": "pdf", "media": "/portfolio/Trust_.pdf", "cover": "/portfolio/corporate-history-strategic-resource-preview.jpg", "overview": "A visual presentation about the role of corporate history in marketing and brand storytelling.", "work": ["Corporate history narrative", "Brand heritage visuals", "Marketing communication"]}, {"slug": "aac-inclusive-classrooms", "title": "AAC in Inclusive Classrooms", "category": "Presentation & Visual Communication", "description": "A professional development presentation about practical strategies for supporting students with complex communication needs.", "tools": ["PowerPoint", "Canva"], "kind": "pdf", "media": "/portfolio/AAC in Inclusive Classrooms.pdf", "cover": "/portfolio/aac-inclusive-classrooms-preview.jpg", "overview": "A professional development presentation focused on augmentative and alternative communication in inclusive classrooms.", "work": ["AAC concepts and communication rights", "Inclusive classroom strategies", "Professional development content"]}];
 
 const allProjects = [...projects, ...websiteProjects, ...creativeProjects];
 
@@ -377,6 +384,567 @@ function ScrollToTop() {
   }, [pathname]);
 
   return null;
+}
+
+const siteMeta = {
+  "/": {
+    title: "The Beakon — Growth systems, built for your industry",
+    description:
+      "Enquiry, follow-up and client systems for education, logistics, retail and professional-service businesses. Built with strategy, automation and design.",
+  },
+  "/industries": {
+    title: "Industry Lenses — The Beakon",
+    description:
+      "See the systems and the work built for each industry: early education, logistics and transport, retail and e-commerce, coaching and consulting.",
+  },
+  "/work": {
+    title: "Selected Work — The Beakon",
+    description:
+      "CRM automation, websites, interactive learning and presentation work — selected projects with the detail behind each build.",
+  },
+  "/about": {
+    title: "About James Akingbade — The Beakon",
+    description:
+      "The thinking behind The Beakon: clarity, purpose and usability applied to technology, systems and digital experiences.",
+  },
+  "/services": {
+    title: "Services — The Beakon",
+    description:
+      "Website design, CRM and automation, interactive learning and presentation design for businesses that need systems to work.",
+  },
+  "/reviews": {
+    title: "Client Reviews — The Beakon",
+    description: "Feedback from clients on automation, presentation, learning and website projects.",
+  },
+  "/contact": {
+    title: "Start a Conversation — The Beakon",
+    description:
+      "Tell me about the process that needs improving or the idea you want to build. Remote projects, based in Nigeria.",
+  },
+};
+
+function DocumentMeta() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const industry = pathname.startsWith("/industries/")
+      ? getIndustry(pathname.split("/")[2])
+      : null;
+
+    const project = pathname.startsWith("/work/")
+      ? allProjects.find((item) => item.slug === pathname.split("/")[2])
+      : null;
+
+    const meta = industry
+      ? {
+          title: `${industry.name} — The Beakon`,
+          description: industry.promise,
+        }
+      : project
+        ? {
+            title: `${project.title} — The Beakon`,
+            description: project.description,
+          }
+        : siteMeta[pathname] || siteMeta["/"];
+
+    document.title = meta.title;
+
+    let tag = document.querySelector('meta[name="description"]');
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute("name", "description");
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", meta.description);
+  }, [pathname]);
+
+  return null;
+}
+
+const industryIcons = {
+  cap: GraduationCap,
+  truck: Truck,
+  bag: ShoppingBag,
+  briefcase: Briefcase,
+};
+
+const chapterList = [
+  { id: "chapter-hero", label: "Start" },
+  { id: "chapter-capabilities", label: "Services" },
+  { id: "chapter-leaks", label: "Leaks" },
+  { id: "chapter-systems", label: "Systems" },
+  { id: "chapter-work", label: "Work" },
+  { id: "chapter-process", label: "Process" },
+  { id: "chapter-engagements", label: "Engagements" },
+  { id: "chapter-proof", label: "Proof" },
+  { id: "chapter-questions", label: "Questions" },
+];
+
+function ScrollProgress() {
+  const barRef = useRef(null);
+
+  useEffect(() => {
+    const update = () => {
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${Math.min(progress, 1)})`;
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return <div ref={barRef} className="v2-scroll-progress" aria-hidden="true" />;
+}
+
+function ChapterRail() {
+  const [active, setActive] = useState(chapterList[0].id);
+
+  useEffect(() => {
+    const sections = chapterList
+      .map((chapter) => document.getElementById(chapter.id))
+      .filter(Boolean);
+
+    if (!sections.length) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-42% 0px -48% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <nav className="v2-rail" aria-label="Page sections">
+      {chapterList.map((chapter) => (
+        <a
+          key={chapter.id}
+          href={`#${chapter.id}`}
+          className={active === chapter.id ? "is-active" : ""}
+        >
+          <span aria-hidden="true" />
+          {chapter.label}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+function IndustryLens({ active, onChange }) {
+  return (
+    <div className="v2-lens">
+      <span className="v2-lens-label">Choose your industry lens</span>
+      <div className="v2-lens-track" role="group" aria-label="Choose your industry">
+        {industries.map((industry) => {
+          const Icon = industryIcons[industry.icon];
+          return (
+            <button
+              key={industry.slug}
+              type="button"
+              className={`v2-lens-tab ${active === industry.slug ? "is-active" : ""}`}
+              aria-pressed={active === industry.slug}
+              onClick={() => onChange(industry.slug)}
+            >
+              <Icon size={13} strokeWidth={1.8} />
+              {industry.short}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function Capabilities() {
+  return (
+    <section className="v2-caps" id="chapter-capabilities" aria-label="Core service areas">
+      <div className="section-wrap">
+        <div className="v2-caps-head">
+          <span className="v2-eyebrow">Four core disciplines</span>
+          <p>
+            Most projects draw on two or three of these. You commission the
+            parts the problem actually needs.
+          </p>
+        </div>
+
+        <div className="v2-caps-grid">
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <article className="v2-caps-card" key={service.number}>
+                <div className="v2-caps-top">
+                  <span>{service.number}</span>
+                  <Icon size={18} strokeWidth={1.5} />
+                </div>
+                <h3>{service.title}</h3>
+                <ul>
+                  {service.items.slice(0, 3).map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProofBand({ industry }) {
+  const stats = [
+    ...industry.stats,
+    { value: "08", label: "published client reviews" },
+  ];
+
+  return (
+    <section className="v2-proof" aria-label="At a glance">
+      <div className="section-wrap v2-proof-inner">
+        {stats.map((stat) => (
+          <div className="v2-proof-item" key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PainSection({ industry }) {
+  return (
+    <section className="v2-section" id="chapter-leaks">
+      <div className="section-wrap">
+        <div className="v2-section-head">
+          <div>
+            <span className="v2-eyebrow">The diagnosis</span>
+            <h2 className="v2-display">
+              Growth does not leak in
+              <br />
+              one place. <em>It leaks in four.</em>
+            </h2>
+          </div>
+          <div className="v2-head-side">
+            <p>
+              Before adding tools, we find where the journey currently breaks.
+              These are the four points that cost {industry.short.toLowerCase()}{" "}
+              teams the most enquiries, hours and trust.
+            </p>
+            <Link className="v2-link" to="/contact">
+              Get a leak assessment <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </div>
+
+        <div className="v2-pain-grid">
+          {industry.pains.map((pain, index) => (
+            <article className="v2-pain-card" key={pain.title}>
+              <div className="v2-pain-index">
+                <span>LEAK {String(index + 1).padStart(2, "0")}</span>
+                <span>{pain.title.length > 26 ? "PRIORITY" : "COMMON"}</span>
+              </div>
+              <h3>{pain.title}</h3>
+              <p>{pain.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SystemsSection({ industry }) {
+  const icons = [Workflow, Sparkles, Layers3, Monitor];
+
+  return (
+    <section className="v2-section" id="chapter-systems">
+      <div className="section-wrap">
+        <div className="v2-section-head">
+          <div>
+            <span className="v2-eyebrow">The systems</span>
+            <h2 className="v2-display">
+              Four connected systems.
+              <br />
+              <em>One calm operation.</em>
+            </h2>
+          </div>
+          <div className="v2-head-side">
+            <p>
+              Each layer can stand alone, but they are designed to work
+              together — so information moves forward instead of being
+              retyped, remembered or lost.
+            </p>
+            <span className="v2-badge">{industry.name}</span>
+          </div>
+        </div>
+
+        <div className="v2-system-grid">
+          {industry.systems.map((system, index) => {
+            const Icon = icons[index % icons.length];
+            return (
+              <article className="v2-system-card" key={system.number}>
+                <div className="v2-system-top">
+                  <span className="v2-system-number">{system.number}</span>
+                  <span className="v2-system-icon">
+                    <Icon size={19} strokeWidth={1.5} />
+                  </span>
+                </div>
+                <h3>{system.title}</h3>
+                <p>{system.body}</p>
+                <div className="v2-chip-row">
+                  {system.items.map((item) => (
+                    <span className="v2-chip" key={item}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IndustryWork({ industry, limit = 4, id = "chapter-work" }) {
+  const work = industry.featured
+    .map((slug) => allProjects.find((project) => project.slug === slug))
+    .filter(Boolean)
+    .slice(0, limit);
+
+  return (
+    <section className="v2-section" id={id}>
+      <div className="section-wrap">
+        <div className="v2-section-head">
+          <div>
+            <span className="v2-eyebrow">The evidence</span>
+            <h2 className="v2-display">
+              Not concepts.
+              <br />
+              <em>Actual builds.</em>
+            </h2>
+          </div>
+          <div className="v2-head-side">
+            <p>
+              A selection of the work most relevant to {industry.name.toLowerCase()}.
+              Each piece links to the full project, including what was built and
+              which tools were used.
+            </p>
+            <Link className="v2-link" to={`/industries/${industry.slug}`}>
+              See all {industry.short.toLowerCase()} work <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </div>
+
+        <div className="v2-work-grid">
+          {work.map((project, index) => (
+            <Link
+              key={project.slug}
+              to={`/work/${project.slug}`}
+              className={`v2-work-card ${index === 0 ? "is-wide" : ""}`}
+            >
+              <div
+                className={`v2-work-media ${
+                  project.tools?.includes("GoHighLevel") ? "is-ui" : ""
+                }`}
+              >
+                <span className="v2-work-tag">{project.category}</span>
+                <img
+                  src={project.cover}
+                  alt={`${project.title} preview`}
+                  loading="lazy"
+                />
+              </div>
+              <div className="v2-work-body">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="v2-work-foot">
+                  <span className="v2-link">View project</span>
+                  <span className="v2-work-arrow">
+                    <ArrowUpRight size={16} />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProcessSection() {
+  const steps = [
+    {
+      title: "Diagnose",
+      body: "We map how enquiries, jobs or clients actually move today. No assumptions, no tool-worship — just a clear picture of where value is lost.",
+      caption: "Week 1 · Audit & findings",
+    },
+    {
+      title: "Design the system",
+      body: "I propose the shortest path from problem to outcome: which systems, which automations, which pages, and what the team will actually have to do.",
+      caption: "Week 1–2 · Architecture & agreement",
+    },
+    {
+      title: "Build and connect",
+      body: "Workflows, pipelines, pages and messages are built, tested with real scenarios and connected to the tools you already use.",
+      caption: "Week 2–4 · Build & integrate",
+    },
+    {
+      title: "Hand over and improve",
+      body: "Your team is trained, documentation is left behind, and we review what the system is producing so it keeps getting better.",
+      caption: "Week 4+ · Training & review",
+    },
+  ];
+
+  return (
+    <section className="v2-section" id="chapter-process">
+      <div className="section-wrap v2-process">
+        <div className="v2-process-sticky">
+          <span className="v2-eyebrow">The method</span>
+          <h2 className="v2-display">
+            Calm process.
+            <br />
+            <em>Measurable progress.</em>
+          </h2>
+          <p className="v2-lede">
+            The work follows four stages. You always know what is happening,
+            what is next and what you will receive at the end of each one.
+          </p>
+        </div>
+
+        <div className="v2-process-list">
+          {steps.map((step, index) => (
+            <Reveal className="v2-process-step" key={step.title}>
+              <span className="v2-process-num">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+                <small>{step.caption}</small>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PackagesSection({ industry }) {
+  return (
+    <section className="v2-section" id="chapter-engagements">
+      <div className="section-wrap">
+        <div className="v2-section-head">
+          <div>
+            <span className="v2-eyebrow">Ways to work together</span>
+            <h2 className="v2-display">
+              Start where
+              <br />
+              <em>you are.</em>
+            </h2>
+          </div>
+          <div className="v2-head-side">
+            <p>
+              Three ways to engage, sized by how much of the system you want
+              handled. Every engagement begins with clarity about scope,
+              timing and what done looks like.
+            </p>
+          </div>
+        </div>
+
+        <div className="v2-packages">
+          {industry.packages.map((pack) => (
+            <article
+              className={`v2-package ${pack.featured ? "is-featured" : ""}`}
+              key={pack.name}
+            >
+              {pack.featured && <span className="v2-package-flag">Most chosen</span>}
+              <span className="v2-package-duration">{pack.duration}</span>
+              <h3>{pack.name}</h3>
+              <p>{pack.summary}</p>
+              <ul>
+                {pack.includes.map((item) => (
+                  <li key={item}>
+                    <CheckCircle2 size={14} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link className="v2-link" to="/contact">
+                Discuss this option <ArrowRight size={14} />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MobileActionBar() {
+  return (
+    <div className="v2-mobile-cta">
+      <div>
+        <strong>Ready to fix the leaks?</strong>
+        <span>20 minutes · no pitch</span>
+      </div>
+      <Link className="button button-gold" to="/contact">
+        Book a call <ArrowUpRight size={15} />
+      </Link>
+    </div>
+  );
+}
+
+function FaqSection({ industry }) {
+  return (
+    <section className="v2-section" id="chapter-questions">
+      <div className="section-wrap v2-faq">
+        <div>
+          <span className="v2-eyebrow">Straight answers</span>
+          <h2 className="v2-display" style={{ fontSize: "clamp(34px, 4.4vw, 54px)", margin: "18px 0 16px" }}>
+            The questions
+            <br />
+            <em>worth asking.</em>
+          </h2>
+          <p className="v2-lede">
+            If something is not covered here, send it over — a direct answer is
+            usually faster than a sales call.
+          </p>
+        </div>
+
+        <div className="v2-faq-list">
+          {industry.faq.map((item) => (
+            <details className="v2-faq-item" key={item.q}>
+              <summary>
+                {item.q}
+                <span className="v2-faq-plus">
+                  <Plus size={14} />
+                </span>
+              </summary>
+              <p className="v2-faq-answer">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 
@@ -730,6 +1298,7 @@ function Navbar() {
             </div>
           </div>
 
+          <NavLink to="/industries" onClick={closeMenu}>Industries</NavLink>
           <NavLink to="/about" onClick={closeMenu}>About</NavLink>
           <NavLink to="/services" onClick={closeMenu}>Services</NavLink>
           <NavLink to="/reviews" onClick={closeMenu}>Reviews</NavLink>
@@ -755,6 +1324,7 @@ function Footer() {
 
         <div className="footer-links">
           <Link to="/work">Work</Link>
+          <Link to="/industries">Industries</Link>
           <Link to="/about">About</Link>
           <Link to="/services">Services</Link>
           <Link to="/reviews">Reviews</Link>
@@ -929,436 +1499,255 @@ function ProjectCard({ project, index = 0 }) {
 
 
 function Home() {
-  const [activeProject, setActiveProject] = useState(0);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [activeIndustry, setActiveIndustry] = useState(industries[0].slug);
+  const industry = getIndustry(activeIndustry) || industries[0];
+  const LensIcon = industryIcons[industry.icon];
 
-  const featuredProjects = [
-    ...websiteProjects.slice(0, 2),
-    projects[0],
-  ];
-
-  const currentProject = featuredProjects[activeProject];
-
-  useEffect(() => {
-    if (isCarouselPaused) return;
-
-    const interval = window.setInterval(() => {
-      setActiveProject((current) =>
-        (current + 1) % featuredProjects.length
-      );
-    }, 5000);
-
-    return () => window.clearInterval(interval);
-  }, [isCarouselPaused, featuredProjects.length]);
-
-  const goToPrevious = () => {
-    setActiveProject((current) =>
-      current === 0 ? featuredProjects.length - 1 : current - 1
-    );
-  };
-
-  const goToNext = () => {
-    setActiveProject((current) =>
-      current === featuredProjects.length - 1 ? 0 : current + 1
-    );
-  };
   return (
     <>
-      
-<section className="hero hero-redesign section-wrap">
-  <motion.div
-    className="hero-copy"
-    initial={{ opacity: 0, y: 35 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8, ease: "easeOut" }}
-  >
-    <div className="eyebrow">
-      <span className="status-dot" />
-      TECHNOLOGY · DIGITAL SOLUTIONS · BUSINESS GROWTH
-    </div>
+      <ScrollProgress />
+      <ChapterRail />
 
-    <h1>
-      Turning ideas
-      <br />
-      into <span>intelligent</span>
-      <br />
-      digital solutions.
-    </h1>
+      <section
+        className="v2-hero"
+        id="chapter-hero"
+        style={{ "--v2-accent": industry.accent, "--v2-accent-soft": industry.accent }}
+      >
+        <div className="v2-hero-aurora" aria-hidden="true" />
 
-    <p className="hero-description">
-      I'm James Akingbade, a Technology & Digital Solutions Consultant
-      focused on business growth. I help businesses find direction,
-      build smarter systems and make technology work with purpose.
-    </p>
+        <div className="section-wrap v2-hero-grid">
+          <motion.div
+            className="v2-hero-copy"
+            key={`copy-${industry.slug}`}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <span className="v2-eyebrow">{industry.eyebrow}</span>
 
-    <div className="hero-actions">
-      <Link className="button button-gold" to="/work">
-        Explore my work <ArrowUpRight size={17} />
-      </Link>
+            <h1 className="v2-display v2-hero-title">
+              {[0, 2].map((index) => (
+                <span key={`${industry.slug}-${index}`}>
+                  {industry.headline[index]}{" "}
+                  <em>{industry.headline[index + 1]}</em>
+                </span>
+              ))}
+            </h1>
 
-      <Link className="text-link" to="/about">
-        Discover my approach <ArrowRight size={17} />
-      </Link>
-    </div>
+            <p className="v2-hero-desc">{industry.promise}</p>
 
-    <div className="hero-note">
-      <span className="note-line" />
-      STRATEGY · SYSTEMS · DESIGN · AUTOMATION
-    </div>
-  </motion.div>
+            <IndustryLens active={activeIndustry} onChange={setActiveIndustry} />
 
-  <motion.div
-    className="hero-portrait-wrap"
-    initial={{ opacity: 0, x: 45, scale: 0.97 }}
-    animate={{ opacity: 1, x: 0, scale: 1 }}
-    transition={{ duration: 1, delay: 0.15, ease: "easeOut" }}
-  >
-    <div className="portrait-frame">
-      <img
-        src={portrait}
-        alt="James Akingbade, Technology and Digital Solutions Consultant"
-        className="hero-portrait"
-      />
-    </div>
+            <div className="v2-hero-actions">
+              <Link className="button button-gold" to="/contact">
+                Book a 20-minute fit call <ArrowUpRight size={17} />
+              </Link>
+              <Link className="v2-link" to={`/industries/${industry.slug}`}>
+                The {industry.short.toLowerCase()} page <ArrowRight size={15} />
+              </Link>
+            </div>
 
-    <div className="portrait-caption">
-      <span className="caption-mark">B.</span>
-      <div>
-        <strong>James Akingbade</strong>
-        <span>Technology & Digital Solutions Consultant</span>
-      </div>
-    </div>
+            <div className="v2-hero-meta">
+              <span>THE BEAKON / {industry.short.toUpperCase()}</span>
+              <span>BASED IN NIGERIA · WORKING GLOBALLY</span>
+            </div>
+          </motion.div>
 
-    <div className="portrait-orbit" />
+          <motion.div
+            className="v2-stage"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          >
+            <span className="v2-stage-caption">
+              JAMES AKINGBADE · TECHNOLOGY &amp; DIGITAL SOLUTIONS
+            </span>
+            <div className="v2-stage-orbit" aria-hidden="true" />
 
-    <div className="hero-floating-note">
-      <span className="status-dot" />
-      <div>
-        <strong>Ideas. Systems. Growth.</strong>
-        <span>Built with purpose.</span>
-      </div>
-    </div>
-  </motion.div>
+            <div className="v2-stage-frame">
+              <img
+                src={portrait}
+                alt="James Akingbade, technology and digital solutions consultant"
+              />
+            </div>
 
-  <div className="hero-bottom">
-    <span>THE BEAKON</span>
-    <span>BASED IN NIGERIA · WORKING GLOBALLY</span>
-  </div>
-</section>
-
-
-      <section className="intro-strip">
-        <div className="section-wrap intro-inner">
-          <p>
-            Good technology should do more than look impressive. It should
-            help people <strong>work smarter</strong>, make better decisions
-            and move their businesses forward.
-          </p>
-          <Sparkles className="intro-symbol" size={30} />
+            <div className="v2-stage-note">
+              <span className="v2-stage-note-label">
+                <LensIcon size={12} strokeWidth={1.8} />
+                {industry.short} lens
+              </span>
+              <p>{industry.lensNote}</p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-     <section className="home-work-section featured-work-section">
-  <div className="section-wrap">
-    <Reveal className="section-heading">
-      <div>
-        <span className="eyebrow">01 / SELECTED WORK</span>
-        <h2>Ideas into action.<br /><span>A closer look.</span></h2>
-      </div>
-      <p>
-        Explore selected projects across CRM systems, automation
-        and digital experiences.
-      </p>
-    </Reveal>
+      <ProofBand industry={industry} />
+      <Capabilities />
+      <PainSection industry={industry} />
+      <SystemsSection industry={industry} />
+      <IndustryWork industry={industry} />
+      <ProcessSection />
+      <PackagesSection industry={industry} />
 
-    <div
-  className="featured-carousel"
-  onMouseEnter={() => setIsCarouselPaused(true)}
-  onMouseLeave={() => setIsCarouselPaused(false)}
->
-      <div className="featured-visual">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentProject.slug}
-            className="featured-image-stage"
-            initial={{ opacity: 0, scale: 1.025 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.985 }}
-            transition={{ duration: 0.4 }}
-          >
-            {currentProject.cover ? (
-  <img
-    src={currentProject.cover}
-    alt={`${currentProject.title} project`}
-  />
-) : (
-  <div className="website-project-preview">
-    <span className="website-preview-overline">
-      THE BEAKON / WEBSITE REDESIGN
-    </span>
-    <strong>{currentProject.previewLabel}</strong>
-    <span>{currentProject.previewDescription}</span>
-  </div>
-)}
-            <span className="featured-image-label">
-              THE BEAKON / PROJECT {String(activeProject + 1).padStart(2, "0")}
-            </span>
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="featured-image-count">
-          <span>{String(activeProject + 1).padStart(2, "0")}</span>
-          <span>/</span>
-          <span>{String(featuredProjects.length).padStart(2, "0")}</span>
-        </div>
+      <div id="chapter-proof">
+        <HomeReviews eyebrow="07 / CLIENT EXPERIENCES" />
       </div>
 
-      <div className="featured-details">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentProject.slug}
-            className="featured-details-inner"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.35 }}
-          >
-            <span className="eyebrow">{currentProject.category}</span>
+      <FaqSection industry={industry} />
+      <ContactBanner />
+      <div className="v2-cta-spacer" />
+      <MobileActionBar />
+    </>
+  );
+}
 
-            <h3>{currentProject.title}</h3>
+function Industries() {
+  return (
+    <>
+      <section className="v2-industry-hero">
+        <div className="section-wrap">
+          <span className="v2-eyebrow">THE BEAKON / INDUSTRY PRACTICE</span>
+          <h1 className="v2-display v2-industry-title">
+            Different sectors.
+            <br />
+            <em>The same discipline.</em>
+          </h1>
 
-            <p>{currentProject.description}</p>
-
-            <div className="featured-tools">
-              {currentProject.tools.map((tool) => (
-                <span key={tool}>{tool}</span>
-              ))}
+          <div className="v2-industry-hero-grid">
+            <div>
+              <p className="v2-lede" style={{ maxWidth: "56ch" }}>
+                The problems rhyme more than they differ: enquiries lost, follow-up
+                forgotten, systems held together by memory. Pick the industry closest
+                to your business and see the systems and the work built around it.
+              </p>
             </div>
 
-            <Link
-              className="featured-view-link"
-              to={`/work/${currentProject.slug}`}
-            >
-              Explore this project <ArrowUpRight size={18} />
-            </Link>
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="featured-controls">
-          <div className="featured-progress">
-            {featuredProjects.map((project, index) => (
-              <button
-                key={project.slug}
-                type="button"
-                aria-label={`Show project ${index + 1}: ${project.title}`}
-                className={index === activeProject ? "active" : ""}
-                onClick={() => setActiveProject(index)}
-              >
-                <span />
-              </button>
-            ))}
-          </div>
-
-          <div className="featured-arrows">
-            <button
-              type="button"
-              onClick={goToPrevious}
-              aria-label="Previous project"
-            >
-              <ArrowRight size={19} className="arrow-backward" />
-            </button>
-
-            <button
-              type="button"
-              onClick={goToNext}
-              aria-label="Next project"
-            >
-              <ArrowRight size={19} />
-            </button>
+            <aside className="v2-industry-hero-side">
+              <span className="v2-badge">04 INDUSTRY LENSES</span>
+              <p>
+                Every lens is drawn from project work in that sector — not a template
+                with the industry name swapped in.
+              </p>
+            </aside>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div className="section-end-link">
-      <Link className="text-link" to="/work">
-        Explore the complete portfolio <ArrowRight size={17} />
-      </Link>
-    </div>
-  </div>
-</section>
-
-      
-<section className="home-about-section approach-section">
-  <div className="section-wrap">
-    <div className="approach-heading">
-      <Reveal>
-        <span className="eyebrow">02 / THE APPROACH</span>
-        <h2>
-          Better solutions<br />
-          begin with <span>better thinking.</span>
-        </h2>
-      </Reveal>
-
-      <Reveal className="approach-intro">
-        <span className="approach-mark">B.</span>
-        <p className="about-lead">
-          Technology is only useful when it solves the right problem.
-        </p>
-        <p>
-          Every project deserves more than a quick fix. I take time to
-          understand the people, processes and goals behind a business,
-          then bring together the right tools and ideas to move things forward.
-        </p>
-        <Link className="text-link" to="/about">
-          More about my approach <ArrowRight size={17} />
-        </Link>
-      </Reveal>
-    </div>
-
-    <div className="approach-process">
-      <div className="approach-process-line" />
-
-      <div className="approach-step-grid">
-        <Reveal className="approach-step">
-          <div className="approach-step-top">
-            <span className="approach-step-number">01</span>
-            <span className="approach-step-icon">
-              <Layers3 size={23} />
-            </span>
+      <section className="v2-section">
+        <div className="section-wrap">
+          <div className="v2-industry-list">
+            {industries.map((industry) => {
+              const Icon = industryIcons[industry.icon];
+              return (
+                <Link
+                  className="v2-industry-tile"
+                  key={industry.slug}
+                  to={`/industries/${industry.slug}`}
+                >
+                  <div className="v2-industry-tile-top">
+                    <Icon size={24} strokeWidth={1.4} />
+                    <span className="v2-kicker">{industry.short}</span>
+                  </div>
+                  <h2>{industry.name}</h2>
+                  <p>{industry.promise}</p>
+                  <span className="v2-link">
+                    Open this lens <ArrowUpRight size={14} />
+                  </span>
+                </Link>
+              );
+            })}
           </div>
-          <h3>Understand</h3>
-          <p>
-            Get to the heart of the challenge. Understand the business,
-            the people involved and what needs to work better.
-          </p>
-          <span className="approach-step-caption">START WITH CLARITY</span>
-        </Reveal>
-
-        <Reveal className="approach-step">
-          <div className="approach-step-top">
-            <span className="approach-step-number">02</span>
-            <span className="approach-step-icon">
-              <Sparkles size={23} />
-            </span>
-          </div>
-          <h3>Design</h3>
-          <p>
-            Map out a thoughtful direction. Choose the right approach,
-            tools and structure for the needs of the project.
-          </p>
-          <span className="approach-step-caption">THINK WITH PURPOSE</span>
-        </Reveal>
-
-        <Reveal className="approach-step">
-          <div className="approach-step-top">
-            <span className="approach-step-number">03</span>
-            <span className="approach-step-icon">
-              <Workflow size={23} />
-            </span>
-          </div>
-          <h3>Build</h3>
-          <p>
-            Turn the plan into something useful. Create, connect and
-            refine solutions with usability in mind.
-          </p>
-          <span className="approach-step-caption">MAKE IT WORK</span>
-        </Reveal>
-      </div>
-    </div>
-
-    <div className="approach-footer">
-      <span>THE BEAKON METHOD</span>
-      <span>CLARITY <i /> DIRECTION <i /> EXECUTION</span>
-    </div>
-  </div>
-</section>
-
-
-     
-<section className="home-services-section capabilities-section">
-  <div className="section-wrap">
-    <Reveal className="capabilities-heading">
-      <div>
-        <span className="eyebrow">03 / WHAT I BRING TO THE TABLE</span>
-        <h2>
-          Different capabilities.<br />
-          <span>One clear direction.</span>
-        </h2>
-      </div>
-
-      <div className="capabilities-intro">
-        <p>
-          From business systems to digital experiences, I bring together
-          practical technology and creative thinking to address different
-          business needs.
-        </p>
-        <Link className="text-link" to="/services">
-          Explore all services <ArrowRight size={17} />
-        </Link>
-      </div>
-    </Reveal>
-
-    <div className="capabilities-list">
-      {services.map((service, index) => {
-        const Icon = service.icon;
-
-        return (
-          <motion.article
-            className="capability-row"
-            key={service.number}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.55, delay: index * 0.08 }}
-          >
-            <div className="capability-number">
-              {service.number}
-            </div>
-
-            <div className="capability-icon">
-              <Icon size={25} strokeWidth={1.5} />
-            </div>
-
-            <div className="capability-content">
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-
-              <div className="capability-tags">
-                {service.items.slice(0, 3).map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              className="capability-link"
-              to="/services"
-              aria-label={`Explore ${service.title}`}
-            >
-              <ArrowUpRight size={21} />
-            </Link>
-          </motion.article>
-        );
-      })}
-    </div>
-
-    <div className="capabilities-footer">
-      <span>STRATEGY / SYSTEMS / DIGITAL EXECUTION</span>
-      <Link to="/services">
-        VIEW SERVICE DETAILS <ArrowUpRight size={15} />
-      </Link>
-    </div>
-  </div>
-</section>
-
-      <HomeReviews />
+        </div>
+      </section>
 
       <ContactBanner />
     </>
   );
 }
 
+function IndustryPage() {
+  const { slug } = useParams();
+  const industry = getIndustry(slug);
+
+  if (!industry) {
+    return (
+      <section className="section-wrap not-found">
+        <span className="eyebrow">INDUSTRY NOT FOUND</span>
+        <h1>That lens doesn't exist yet.</h1>
+        <Link className="button button-gold" to="/industries">
+          View all industries
+        </Link>
+      </section>
+    );
+  }
+
+  const Icon = industryIcons[industry.icon];
+
+  return (
+    <>
+      <section
+        className="v2-industry-hero"
+        style={{ "--v2-accent": industry.accent, "--v2-accent-soft": industry.accent }}
+      >
+        <div className="v2-hero-aurora" aria-hidden="true" />
+        <div className="section-wrap">
+          <Link className="v2-back" to="/industries">
+            <ArrowRight className="back-link-icon" size={14} />
+            All industry lenses
+          </Link>
+
+          <span className="v2-eyebrow">{industry.eyebrow}</span>
+
+          <h1 className="v2-display v2-industry-title">
+            {[0, 2].map((index) => (
+              <span key={`${industry.slug}-title-${index}`}>
+                {industry.headline[index]}{" "}
+                <em>{industry.headline[index + 1]}</em>
+              </span>
+            ))}
+          </h1>
+
+          <div className="v2-industry-hero-grid">
+            <div>
+              <p className="v2-lede" style={{ maxWidth: "54ch" }}>
+                {industry.promise}
+              </p>
+
+              <div className="v2-industry-stats">
+                {industry.stats.map((stat) => (
+                  <div className="v2-industry-stat" key={stat.label}>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <aside className="v2-industry-hero-side">
+              <span className="v2-badge">
+                <Icon size={12} strokeWidth={1.8} />
+                {industry.name}
+              </span>
+              <p>{industry.lensNote}</p>
+              <Link className="v2-link" to="/contact">
+                Start with an audit <ArrowUpRight size={14} />
+              </Link>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <PainSection industry={industry} />
+      <SystemsSection industry={industry} />
+      <IndustryWork industry={industry} limit={8} />
+      <ProcessSection />
+      <PackagesSection industry={industry} />
+      <FaqSection industry={industry} />
+      <ContactBanner />
+    </>
+  );
+}
 
 function Work() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -2136,13 +2525,13 @@ const homepageReviews = clientReviews.filter((review) =>
 // Eric Richards' long review is intentionally held back from public display for now.
 const publishedReviews = clientReviews.filter((review) => review.name !== "ericrichards");
 
-function HomeReviews() {
+function HomeReviews({ eyebrow = "CLIENT EXPERIENCES" }) {
   return (
     <section className="home-reviews-section">
       <div className="section-wrap">
         <div className="reviews-section-heading">
           <div>
-            <span className="eyebrow">04 / CLIENT EXPERIENCES</span>
+            <span className="eyebrow">{eyebrow}</span>
             <h2>Trusted by founders,<br /><span>agencies & creators.</span></h2>
           </div>
           <div className="home-reviews-intro">
@@ -2279,7 +2668,7 @@ function ContactBanner() {
     <section className="contact-banner closing-cta">
       <div className="section-wrap closing-cta-inner">
         <Reveal className="closing-cta-copy">
-          <span className="eyebrow">04 / THE NEXT STEP</span>
+          <span className="eyebrow">THE NEXT STEP</span>
 
           <h2>
             Have an idea<br />
@@ -2355,6 +2744,8 @@ function AnimatedRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/work" element={<Work />} />
           <Route path="/work/:slug" element={<ProjectDetails />} />
+          <Route path="/industries" element={<Industries />} />
+          <Route path="/industries/:slug" element={<IndustryPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/reviews" element={<Reviews />} />
@@ -2371,6 +2762,7 @@ function App() {
     <BrowserRouter>
       <CursorGlow />
       <ScrollToTop />
+      <DocumentMeta />
       <div id="top">
         <Navbar />
         <AnimatedRoutes />
