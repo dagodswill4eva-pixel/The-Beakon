@@ -555,11 +555,15 @@ function Capabilities() {
   );
 }
 
-function ProofBand({ industry }) {
-  const stats = [
-    ...industry.stats,
-    { value: "08", label: "published client reviews" },
-  ];
+const proofStats = [
+  { value: "04", label: "websites rebuilt" },
+  { value: "08", label: "automation systems built" },
+  { value: "11", label: "learning & presentation builds" },
+  { value: "08", label: "published client reviews" },
+];
+
+function ProofBand() {
+  const stats = proofStats;
 
   return (
     <section className="v2-proof" aria-label="At a glance">
@@ -821,7 +825,7 @@ function PackagesSection({ industry }) {
               className={`v2-package ${pack.featured ? "is-featured" : ""}`}
               key={pack.name}
             >
-              {pack.featured && <span className="v2-package-flag">Most chosen</span>}
+              {pack.featured && <span className="v2-package-flag">Recommended</span>}
               <span className="v2-package-duration">{pack.duration}</span>
               <h3>{pack.name}</h3>
               <p>{pack.summary}</p>
@@ -1532,7 +1536,7 @@ function Home() {
         </div>
       </section>
 
-      <ProofBand industry={industry} />
+      <ProofBand />
       <Capabilities />
       <PainSection industry={industry} />
       <SystemsSection industry={industry} />
@@ -1664,7 +1668,7 @@ function IndustryPage() {
               </p>
 
               <div className="v2-industry-stats">
-                {industry.stats.map((stat) => (
+                {proofStats.map((stat) => (
                   <div className="v2-industry-stat" key={stat.label}>
                     <strong>{stat.value}</strong>
                     <span>{stat.label}</span>

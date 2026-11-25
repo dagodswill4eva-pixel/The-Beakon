@@ -11,11 +11,6 @@ export const industries = [
       "Simple systems for nurseries and childcare settings. Parents get a quick reply, a reminder before their visit, and follow-up after it. Nothing gets forgotten.",
     lensNote:
       "Built from real work: ECERS and ITERS checklists, visit reminders and application follow-up.",
-    stats: [
-      { value: "08", label: "automation systems built" },
-      { value: "11", label: "learning & presentation builds" },
-      { value: "04", label: "websites redesigned" },
-    ],
     painLabel: "WHAT GOES WRONG",
     pains: [
       {
@@ -120,11 +115,6 @@ export const industries = [
     promise:
       "Booking and follow-up systems for transport and delivery businesses. A request becomes a job. The customer always knows what happens next.",
     lensNote: "Built from transfer-service, delivery and customer-operations work.",
-    stats: [
-      { value: "01", label: "transport website rebuilt" },
-      { value: "08", label: "operations systems built" },
-      { value: "11", label: "presentations built" },
-    ],
     painLabel: "WHAT GOES WRONG",
     pains: [
       {
@@ -227,11 +217,6 @@ export const industries = [
     promise:
       "Websites and follow-up for shops that sell online. Clear pages, easy checkout, and customers who come back.",
     lensNote: "Built from workwear and sportswear store redesigns.",
-    stats: [
-      { value: "02", label: "online shops redesigned" },
-      { value: "08", label: "automation systems built" },
-      { value: "11", label: "presentations built" },
-    ],
     painLabel: "WHAT GOES WRONG",
     pains: [
       {
@@ -329,11 +314,6 @@ export const industries = [
     promise:
       "Websites and admin systems for coaches and consultants. People understand what you do, book a call, and get looked after from day one.",
     lensNote: "Built from coaching-brand website and professional-services work.",
-    stats: [
-      { value: "01", label: "coaching site rebuilt" },
-      { value: "08", label: "automation systems built" },
-      { value: "11", label: "presentations built" },
-    ],
     painLabel: "WHAT GOES WRONG",
     pains: [
       {
