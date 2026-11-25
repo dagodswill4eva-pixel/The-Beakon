@@ -36,7 +36,7 @@ import "./App.css";
 import "./creative-portfolio.css";
 import "./site-v2.css";
 import { industries, getIndustry } from "./industries";
-import logo from "./assets/The Beakon Logo.png";
+import logo from "./assets/beakon-lockup-dark.svg";
 import portrait from "./assets/my image.png";
 import aboutPortrait from "./assets/2nd image.jpg";
 
