@@ -81,6 +81,14 @@ export const industries = [
         ],
         featured: true,
       },
+      {
+        name: "Ongoing help",
+        duration: "Monthly",
+        summary:
+          "I keep the reminders running and fix things as they change, like a new term or a new class.",
+        includes: ["A monthly check", "Small fixes as things change", "Priority support"],
+        featured: false,
+      },
     ],
     faq: [
       {
@@ -90,6 +98,14 @@ export const industries = [
       {
         q: "Will this replace my staff?",
         a: "No. It does the chasing and the reminding. Your team gets that time back for the children and the parents.",
+      },
+      {
+        q: "Can it handle more than one setting?",
+        a: "Yes. Each site can have its own list and calendar, and you can see all of them together.",
+      },
+      {
+        q: "How quickly can we start?",
+        a: "Most check-ups start within a week. A full build starts once you agree with what the check-up found.",
       },
     ],
   },
@@ -172,6 +188,14 @@ export const industries = [
         ],
         featured: true,
       },
+      {
+        name: "Ongoing help",
+        duration: "Monthly",
+        summary:
+          "I keep the quotes and bookings running, and adjust the flow as the work changes.",
+        includes: ["A monthly check", "Small adjustments", "Priority support"],
+        featured: false,
+      },
     ],
     faq: [
       {
@@ -181,6 +205,14 @@ export const industries = [
       {
         q: "Can it handle several drivers or vehicles?",
         a: "Yes. Each job can carry its own driver, vehicle and status, all viewable in one place.",
+      },
+      {
+        q: "Will customers mind automatic messages?",
+        a: "They are written in your voice and sent at the right moment. Most people read a confirmation as good service.",
+      },
+      {
+        q: "Do you build the website too?",
+        a: "Yes. The website can be part of the work, or done on its own.",
       },
     ],
   },
@@ -258,6 +290,14 @@ export const industries = [
         ],
         featured: true,
       },
+      {
+        name: "Ongoing help",
+        duration: "Monthly",
+        summary:
+          "I keep the emails running through busy seasons and improve pages as you add products.",
+        includes: ["Seasonal email builds", "Small page improvements", "A monthly report"],
+        featured: false,
+      },
     ],
     faq: [
       {
@@ -267,6 +307,14 @@ export const industries = [
       {
         q: "Which platform do you work on?",
         a: "Whatever your shop already runs on. If it cannot do what you need, I tell you before you pay for anything.",
+      },
+      {
+        q: "Will a new design hurt my Google ranking?",
+        a: "Pages keep their addresses and titles. I change things in steps rather than all at once.",
+      },
+      {
+        q: "Do you write the product copy?",
+        a: "I set the structure and the direction. For long pieces I will tell you when a specialist writer is worth the money.",
       },
     ],
   },
@@ -349,6 +397,14 @@ export const industries = [
         ],
         featured: true,
       },
+      {
+        name: "Ongoing help",
+        duration: "Monthly",
+        summary:
+          "I keep the site and intake flow working as your offer changes, and build new pages when you need them.",
+        includes: ["A monthly review", "New pages as you need them", "Priority support"],
+        featured: false,
+      },
     ],
     faq: [
       {
@@ -358,6 +414,14 @@ export const industries = [
       {
         q: "What if I only need a deck?",
         a: "Presentation work can be booked on its own. You do not need the full system first.",
+      },
+      {
+        q: "Do you write my positioning?",
+        a: "I ask the questions, test your current message with your market, and propose the words. You approve the final voice.",
+      },
+      {
+        q: "Can you work with my existing site?",
+        a: "Yes. Where the base is sound, I improve the structure and the wording instead of rebuilding.",
       },
     ],
   },

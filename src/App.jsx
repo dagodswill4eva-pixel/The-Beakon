@@ -809,8 +809,8 @@ function PackagesSection({ industry }) {
           </div>
           <div className="v2-head-side">
             <p>
-              Two ways to start, depending on how much you want handled. Scope,
-              timing and price are agreed before anything begins.
+              Three ways to start, depending on how much you want handled.
+              Scope, timing and price are agreed before anything begins.
             </p>
           </div>
         </div>
