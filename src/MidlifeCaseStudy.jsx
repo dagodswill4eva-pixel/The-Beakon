@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import "./midlife-case-study.css";
+
+const prototypeUrl = "/demos/midlife-wellness-alliance.html";
 
 const problems = [
   {
@@ -380,6 +382,20 @@ export default function MidlifeCaseStudy() {
             behind it.
           </p>
 
+          <div className="mlw-actions">
+            <a
+              className="button button-gold"
+              href={prototypeUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open the live prototype <ArrowUpRight size={17} />
+            </a>
+            <a className="closing-booking-link" href="#the-work">
+              See the built views <ArrowRight size={15} />
+            </a>
+          </div>
+
           <p className="mlw-note">
             Fictional demonstration project. The organization, providers, events
             and figures are invented; no live Wix site, Zoom account or email
@@ -433,7 +449,7 @@ export default function MidlifeCaseStudy() {
         </div>
       </section>
 
-      <section className="mlw-section">
+      <section className="mlw-section" id="the-work">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
             <span className="v2-eyebrow">THE WORK</span>
@@ -534,8 +550,9 @@ export default function MidlifeCaseStudy() {
 
           <p className="mlw-note" style={{ marginTop: 28, marginBottom: 0 }}>
             The prototype is a working front end on local sample data — no build
-            step, no external assets, runs in any browser. Full interactive
-            prototype and implementation guide are available on request.
+            step, no external assets, runs in any browser. Open it and click
+            through the filters, a provider profile and the registration form.
+            The implementation guide is available on request.
           </p>
         </div>
       </section>
@@ -547,8 +564,16 @@ export default function MidlifeCaseStudy() {
             <h2>See the other projects.</h2>
           </div>
           <div className="closing-cta-actions">
-            <Link className="button button-gold" to="/work">
-              All selected work <ArrowUpRight size={17} />
+            <a
+              className="button button-gold"
+              href={prototypeUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open the live prototype <ArrowUpRight size={17} />
+            </a>
+            <Link className="closing-booking-link" to="/work">
+              All selected work <ArrowRight size={15} />
             </Link>
             <Link className="closing-booking-link" to="/contact">
               Start a conversation <ArrowUpRight size={15} />

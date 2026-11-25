@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Midlife Wellness Alliance — Trusted Midlife & Menopause Care</title>
+<meta name="description" content="A fictional portfolio demonstration of a women's health nonprofit website and verified provider directory built in the Wix Studio pattern.">
+<style>
+:root{
+  --sage:#526B5A; --forest:#344B3D; --cream:#F7F3ED; --mauve:#B98F9D; --blush:#E9D9D8;
+  --charcoal:#333A35; --white:#fff; --sage-soft:#E7EDE8; --line:#E2DACE; --muted:#687064;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 18px 40px -28px rgba(51,58,53,.45);
+  --shadow-lg:0 34px 70px -40px rgba(51,58,53,.55);
+  --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--charcoal);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.015em;color:var(--forest);margin:0 0 .5em;line-height:1.12}
+h1{font-size:clamp(2.4rem,4.6vw,3.9rem);line-height:1.04}
+h2{font-size:clamp(1.85rem,3vw,2.7rem)}
+h3{font-size:1.32rem;line-height:1.25}
+h4{font-size:1.05rem}
+p{margin:0 0 1.1em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--forest);color:#fff;padding:12px 20px;border-radius:10px;z-index:200;transition:top .2s}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--mauve);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.eyebrow{font-size:.72rem;letter-spacing:.19em;text-transform:uppercase;color:var(--sage);font-weight:700;margin:0 0 1rem;font-family:var(--sans)}
+.lede{font-size:1.13rem;color:#4C554C;max-width:62ch}
+.btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--forest);color:#fff;border:1px solid var(--forest);
+  padding:.85rem 1.5rem;border-radius:999px;font-size:.93rem;font-weight:600;text-decoration:none;cursor:pointer;
+  font-family:var(--sans);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.btn:hover{background:#2A3D31;transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;color:var(--forest);border-color:#C9C1B3}
+.btn.ghost:hover{background:#fff;border-color:var(--sage)}
+.btn.sm{padding:.55rem 1.05rem;font-size:.84rem}
+.btn.block{width:100%;justify-content:center}
+.link{color:var(--forest);font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--blush);padding-bottom:1px}
+.link:hover{border-color:var(--mauve)}
+/* ---------- header ---------- */
+header.site{position:sticky;top:0;z-index:90;background:rgba(247,243,237,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:1.6rem;height:82px}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.mark{width:40px;height:40px;border-radius:50%;background:var(--forest);display:grid;place-items:center;flex:0 0 auto}
+.mark svg{width:22px;height:22px}
+.brand-txt{display:flex;flex-direction:column;line-height:1.05}
+.brand-txt b{font-family:var(--serif);font-size:1.08rem;color:var(--forest);letter-spacing:-.01em}
+.brand-txt span{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.nav-links{display:flex;gap:1.35rem;align-items:center}
+.nav-links a{font-size:.9rem;font-weight:500;text-decoration:none;color:#414A41;padding:.3rem 0;border-bottom:1.5px solid transparent}
+.nav-links a:hover,.nav-links a.active{color:var(--forest);border-bottom-color:var(--mauve)}
+.nav-cta{display:flex;gap:.6rem;align-items:center}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:.5rem .6rem;cursor:pointer}
+.burger span{display:block;width:20px;height:2px;background:var(--forest);margin:4px 0;border-radius:2px}
+.drawer{display:none;border-top:1px solid var(--line);background:var(--cream);padding:1rem 0 1.6rem}
+.drawer.open{display:block}
+.drawer a{display:block;padding:.7rem 0;text-decoration:none;font-weight:600;color:var(--forest);border-bottom:1px solid var(--line)}
+/* ---------- hero ---------- */
+.hero{padding:5rem 0 4.5rem;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;align-items:center}
+.hero h1{margin-bottom:1.2rem}
+.hero .lede{margin-bottom:2rem}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.4rem}
+.trust-row{display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.6rem;border-top:1px solid var(--line)}
+.trust-row div{display:flex;flex-direction:column}
+.trust-row b{font-family:var(--serif);font-size:1.6rem;color:var(--forest);line-height:1}
+.trust-row span{font-size:.76rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;margin-top:.35rem}
+.hero-art{position:relative;display:grid;gap:1rem}
+.arch{position:relative;border-radius:220px 220px 22px 22px;overflow:hidden;background:linear-gradient(165deg,#DCE5DC 0%,#E9D9D8 58%,#F0E3DF 100%);min-height:420px;box-shadow:var(--shadow-lg)}
+.arch svg{position:absolute;inset:0;width:100%;height:100%}
+.arch-note{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(52,75,61,.86),rgba(52,75,61,0));color:#F7F3ED;padding:2.6rem 1.7rem 1.5rem;font-family:var(--serif);font-size:1.02rem;line-height:1.4}
+.float-card{position:absolute;left:-22px;bottom:52px;background:#fff;border-radius:14px;padding:.9rem 1.1rem;box-shadow:var(--shadow-lg);border:1px solid var(--line);max-width:235px}
+.float-card b{display:block;font-family:var(--serif);font-size:1.02rem;color:var(--forest);margin-bottom:.15rem}
+.float-card span{font-size:.76rem;color:var(--muted);line-height:1.4;display:block}
+/* ---------- sections ---------- */
+section.band{padding:4.6rem 0}
+.band.tint{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.band.deep{background:var(--forest);color:#EDEAE2}
+.band.deep h2,.band.deep h3{color:#F7F3ED}
+.band.deep .eyebrow{color:#C8D3C8}
+.band.blush{background:var(--blush)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2.6rem;flex-wrap:wrap}
+.sec-head p{margin:.4rem 0 0;color:#4C554C;max-width:52ch}
+.grid{display:grid;gap:1.5rem}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.7rem;box-shadow:0 1px 0 rgba(51,58,53,.02);transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card .tag{display:inline-block;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--sage);background:var(--sage-soft);padding:.28rem .6rem;border-radius:999px;margin-bottom:.9rem}
+.card h3{margin-bottom:.5rem}
+.card p{font-size:.93rem;color:#4C554C;margin-bottom:1rem}
+.card .meta{font-size:.79rem;color:var(--muted);display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:1rem}
+.art-block{height:132px;border-radius:12px;margin:-.4rem 0 1.2rem;background:linear-gradient(135deg,#DCE5DC,#E9D9D8);position:relative;overflow:hidden}
+.art-block svg{position:absolute;inset:0;width:100%;height:100%}
+.art-block.b{background:linear-gradient(135deg,#E9D9D8,#F0E7DD)}
+.art-block.c{background:linear-gradient(135deg,#D9E3DB,#EFE9DE)}
+/* event list */
+.ev{display:flex;gap:1.4rem;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;align-items:flex-start}
+.ev + .ev{margin-top:1rem}
+.date-chip{flex:0 0 74px;text-align:center;border-radius:12px;background:var(--sage-soft);padding:.65rem .3rem;border:1px solid #D5DFD6}
+.date-chip b{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--forest);line-height:1}
+.date-chip span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--sage)}
+.ev-body{flex:1;min-width:0}
+.ev-body h3{margin-bottom:.25rem;font-size:1.18rem}
+.ev-body p{font-size:.9rem;margin-bottom:.6rem;color:#4C554C}
+.ev-meta{font-size:.78rem;color:var(--muted);display:flex;gap:.9rem;flex-wrap:wrap}
+.ev-actions{display:flex;flex-direction:column;gap:.5rem;align-items:flex-end}
+/* directory */
+.dir-layout{display:grid;grid-template-columns:274px 1fr;gap:2.2rem;align-items:start}
+.filters{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;position:sticky;top:100px}
+.filters h3{font-size:1rem;font-family:var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:1.1rem}
+.fgroup{margin-bottom:1.15rem}
+.fgroup label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5A635A;margin-bottom:.4rem}
+input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{
+  width:100%;font-family:var(--sans);font-size:.92rem;color:var(--charcoal);background:#FDFCFA;
+  border:1px solid #D8D0C3;border-radius:10px;padding:.66rem .8rem;transition:border .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(82,107,90,.14);outline:none}
+textarea{min-height:110px;resize:vertical}
+.searchbar{display:flex;gap:.6rem;margin-bottom:1.2rem}
+.searchbar input{font-size:1rem;padding:.8rem 1rem}
+.results-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1.4rem;flex-wrap:wrap}
+.results-bar p{margin:0;font-size:.88rem;color:#4C554C}
+.results-bar b{color:var(--forest)}
+.prov-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.prov{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;display:flex;flex-direction:column}
+.prov-top{display:flex;gap:1rem;margin-bottom:.9rem}
+.avatar{width:64px;height:64px;border-radius:50%;flex:0 0 64px;display:grid;place-items:center;font-family:var(--serif);font-size:1.3rem;color:#fff;letter-spacing:.02em}
+.t-sage{background:#526B5A}.t-mauve{background:#A97F8D}.t-forest{background:#344B3D}.t-clay{background:#9C7C63}.t-slate{background:#5E6F7A}.t-plum{background:#7C6072}
+.prov-top h3{font-size:1.1rem;margin-bottom:.15rem}
+.prov-top .cred{font-size:.8rem;color:var(--muted);display:block;margin-bottom:.2rem}
+.prov-top .spec{font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sage)}
+.prov .loc{font-size:.8rem;color:var(--muted);margin-bottom:.55rem}
+.prov .bio{font-size:.88rem;color:#4C554C;margin-bottom:.8rem;flex:1}
+.pills{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1rem}
+.pill{font-size:.71rem;background:#F2EFE8;border:1px solid #E4DCCF;color:#5A635A;padding:.2rem .55rem;border-radius:999px}
+.badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#3F6B4D;background:#E4EEE5;padding:.22rem .55rem;border-radius:999px}
+.empty{background:#fff;border:1px dashed #CFC6B7;border-radius:var(--r);padding:3rem 2rem;text-align:center}
+.empty h3{margin-bottom:.4rem}
+.empty p{color:var(--muted);font-size:.94rem;max-width:46ch;margin:0 auto 1.2rem}
+.mobile-filter-btn{display:none}
+/* profile */
+.profile-grid{display:grid;grid-template-columns:340px 1fr;gap:2.6rem;align-items:start}
+.side-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.6rem;margin-bottom:1.2rem}
+.side-card h4{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:.9rem;font-weight:700}
+.portrait{width:100%;aspect-ratio:1;border-radius:16px;display:grid;place-items:center;font-family:var(--serif);font-size:3.4rem;color:#fff;margin-bottom:1.2rem}
+.kv{font-size:.88rem;display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid #F0EBE2}
+.kv:last-child{border:none}
+.kv span{color:var(--muted)}
+.kv b{text-align:right;font-weight:600}
+.profile-body h1{margin-bottom:.3rem}
+.profile-body .sub{font-size:1rem;color:var(--muted);margin-bottom:1.4rem}
+.disclaimer{background:#FBF7F0;border-left:3px solid var(--mauve);padding:1rem 1.2rem;border-radius:0 10px 10px 0;font-size:.83rem;color:#5A5F55;line-height:1.6}
+/* forms */
+.form-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:2rem;box-shadow:var(--shadow)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.05rem}
+.field label{display:block;font-size:.8rem;font-weight:700;letter-spacing:.04em;color:#4A544A;margin-bottom:.35rem}
+.field .hint{font-size:.75rem;color:var(--muted);margin-top:.3rem;display:block}
+.err{color:#8C3B3B;font-size:.76rem;margin-top:.3rem;display:none}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:#B05757}
+.field.invalid .err{display:block}
+.check{display:flex;gap:.6rem;align-items:flex-start;font-size:.83rem;color:#4C554C;line-height:1.5}
+.check input{margin-top:.25rem;width:16px;height:16px;accent-color:var(--sage);flex:0 0 auto}
+.confirm{text-align:center;padding:1.4rem .5rem}
+.confirm .tick{width:64px;height:64px;border-radius:50%;background:var(--sage-soft);display:grid;place-items:center;margin:0 auto 1.2rem}
+.confirm h3{font-size:1.5rem}
+/* newsletter */
+.news{display:flex;gap:.6rem;flex-wrap:wrap;max-width:520px}
+.news input{flex:1;min-width:220px}
+/* footer */
+footer.site{background:var(--forest);color:#D9DFD7;padding:3.6rem 0 2rem;margin-top:0}
+footer.site h4{font-family:var(--sans);font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:#A9BBA9;margin-bottom:1rem}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:2.6rem}
+footer.site a{color:#D9DFD7;text-decoration:none;font-size:.89rem;display:block;padding:.22rem 0}
+footer.site a:hover{color:#fff;text-decoration:underline}
+footer.site .brand-txt b{color:#F7F3ED}
+footer.site .brand-txt span{color:#A9BBA9}
+footer.site .mark{background:#F7F3ED}
+footer.site .mark svg path{stroke:var(--forest)}
+.fbot{border-top:1px solid rgba(247,243,237,.16);padding-top:1.4rem;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:#A9BBA9}
+.demo-note{background:#F2EDE4;border:1px solid #E0D7C8;border-radius:12px;padding:.8rem 1rem;font-size:.78rem;color:#6A7166;margin-bottom:1.6rem}
+/* toast */
+#toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,140%);background:var(--forest);color:#fff;padding:.85rem 1.4rem;border-radius:999px;font-size:.88rem;box-shadow:var(--shadow-lg);z-index:200;transition:transform .35s cubic-bezier(.2,.9,.3,1.3);max-width:90vw}
+#toast.show{transform:translate(-50%,0)}
+/* responsive */
+@media(max-width:1040px){
+  .hero-grid{grid-template-columns:1fr;gap:2.6rem}
+  .arch{min-height:340px}
+  .float-card{left:auto;right:12px;bottom:16px}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr;gap:2rem}
+  .profile-grid{grid-template-columns:1fr}
+  .portrait{max-width:220px}
+}
+@media(max-width:900px){
+  .nav-links,.nav-cta .btn.ghost{display:none}
+  .burger{display:block}
+  .g3{grid-template-columns:1fr 1fr}
+  .dir-layout{grid-template-columns:1fr}
+  .filters{position:static;display:none}
+  .filters.open{display:block}
+  .mobile-filter-btn{display:inline-flex}
+  .prov-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  body{font-size:16.5px}
+  .g3,.g2,.g4,.prov-grid,.frow{grid-template-columns:1fr}
+  .hero{padding:3rem 0 2.6rem}
+  section.band{padding:3.2rem 0}
+  .ev{flex-direction:column;gap:.9rem}
+  .ev-actions{align-items:flex-start;flex-direction:row}
+  .fgrid{grid-template-columns:1fr}
+  .sec-head{align-items:flex-start}
+  .searchbar{flex-direction:column}
+  .trust-row{gap:1.3rem}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#app">Skip to main content</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#/home" aria-label="Midlife Wellness Alliance home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21c0-6 2-9 7-11-1 6-3 9-7 11Z" stroke="#F7F3ED" stroke-width="1.4" stroke-linejoin="round"/><path d="M12 21c0-6-2-9-7-11 1 6 3 9 7 11Z" stroke="#F7F3ED" stroke-width="1.4" stroke-linejoin="round"/><path d="M12 21V9" stroke="#F7F3ED" stroke-width="1.4"/><circle cx="12" cy="6" r="2.2" stroke="#F7F3ED" stroke-width="1.4"/></svg></span>
+      <span class="brand-txt"><b>Midlife Wellness Alliance</b><span>Chicago, Illinois</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#/directory" data-nav="directory">Find a Provider</a>
+      <a href="#/events" data-nav="events">Events</a>
+      <a href="#/resources" data-nav="resources">Resources</a>
+      <a href="#/blog" data-nav="blog">Journal</a>
+      <a href="#/about" data-nav="about">About</a>
+      <a href="#/sponsors" data-nav="sponsors">Sponsors</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn ghost sm" href="#/contact">Contact</a>
+      <a class="btn sm" href="#/directory">Find a Provider</a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer">
+    <div class="wrap">
+      <a href="#/directory">Find a Provider</a>
+      <a href="#/events">Events</a>
+      <a href="#/resources">Resources</a>
+      <a href="#/blog">Journal</a>
+      <a href="#/about">About</a>
+      <a href="#/sponsors">Sponsors</a>
+      <a href="#/contact">Contact</a>
+    </div>
+  </div>
+</header>
+
+<main id="app" tabindex="-1"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="#/home" style="margin-bottom:1rem">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21c0-6 2-9 7-11-1 6-3 9-7 11Z" stroke="#344B3D" stroke-width="1.4" stroke-linejoin="round"/><path d="M12 21c0-6-2-9-7-11 1 6 3 9 7 11Z" stroke="#344B3D" stroke-width="1.4" stroke-linejoin="round"/><path d="M12 21V9" stroke="#344B3D" stroke-width="1.4"/><circle cx="12" cy="6" r="2.2" stroke="#344B3D" stroke-width="1.4"/></svg></span>
+          <span class="brand-txt"><b>Midlife Wellness Alliance</b><span>Chicago, Illinois</span></span>
+        </a>
+        <p style="font-size:.88rem;max-width:34ch;color:#B9C6B8;margin-bottom:1.2rem">Education, community, and access to trusted care for women navigating perimenopause and menopause.</p>
+        <p style="font-size:.82rem;color:#A9BBA9;margin:0">A fictional organization created for a portfolio demonstration.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="#/directory">Provider Directory</a>
+        <a href="#/events">Webinars &amp; Events</a>
+        <a href="#/resources">Resource Library</a>
+        <a href="#/blog">The Journal</a>
+      </div>
+      <div>
+        <h4>Organization</h4>
+        <a href="#/about">Our Mission</a>
+        <a href="#/about">Team</a>
+        <a href="#/sponsors">Sponsors</a>
+        <a href="#/contact">Contact</a>
+      </div>
+      <div>
+        <h4>Stay connected</h4>
+        <p style="font-size:.88rem;color:#B9C6B8;margin-bottom:.8rem">Monthly education and event invitations. No spam.</p>
+        <form class="news" id="footerNews" novalidate>
+          <label class="sr" for="fn-email">Email address</label>
+          <input id="fn-email" type="email" placeholder="you@example.com" required>
+          <button class="btn sm" type="submit" style="background:#F7F3ED;color:#344B3D;border-color:#F7F3ED">Join</button>
+        </form>
+        <p style="font-size:.74rem;color:#A9BBA9;margin-top:.7rem">This demo form does not send data anywhere.</p>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 Midlife Wellness Alliance — fictional demonstration project.</span>
+      <span>Accessibility target: WCAG 2.2 AA · Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   MIDLIFE WELLNESS ALLIANCE — INTERACTIVE PROTOTYPE
+   Vanilla JS SPA. Local sample data stands in for Wix CMS.
+   Data shape mirrors the proposed "ProviderDirectory" collection.
+   ============================================================ */
+
+const PROVIDERS = [
+  {id:"p1",first:"Amara",last:"Whitfield",cred:"MD, NCMP",specialty:"Menopause care",type:"Physician",practice:"Lakeshore Women's Health",city:"Chicago",state:"IL",zip:"60611",
+   services:["Menopause care","Hormone therapy","Perimenopause evaluation","Annual well-woman exams"],
+   bio:"A board-certified gynecologist focused on the perimenopause transition. Dr. Whitfield built her practice around longer appointments and shared decision-making, so patients leave with a plan they understand.",
+   exp:"18 years in women's health; Menopause Society certified practitioner; clinical instructor at a Chicago academic medical center.",
+   website:"lakeshorewomens.example.org",phone:"(312) 555-0142",email:"care@lakeshorewomens.example.org",appt:"Online booking, Tue–Thu",
+   ins:"Blue Cross PPO, Aetna, Cigna, Medicare",langs:["English","Spanish"],verified:true,vdate:"2026-10-14",updated:"2026-10-14",featured:true,tint:"t-sage"},
+
+  {id:"p2",first:"Priya",last:"Raghunathan",cred:"MD",specialty:"Endocrinology",type:"Physician",practice:"Northside Endocrine & Hormone Center",city:"Evanston",state:"IL",zip:"60201",
+   services:["Hormonal health","Thyroid care","Perimenopause evaluation","Bone health"],
+   bio:"An endocrinologist who works with women whose midlife symptoms overlap with thyroid, metabolic, or bone health concerns. She emphasizes lab interpretation in context rather than in isolation.",
+   exp:"12 years in reproductive endocrinology; research interest in bone density changes during the menopause transition.",
+   website:"northsideendocrine.example.org",phone:"(847) 555-0177",email:"intake@northsideendocrine.example.org",appt:"Referral or self-referral, Mon–Fri",
+   ins:"Blue Cross PPO, UnitedHealthcare, Medicare",langs:["English","Tamil","Hindi"],verified:true,vdate:"2026-09-30",updated:"2026-09-30",featured:false,tint:"t-slate"},
+
+  {id:"p3",first:"Nia",last:"Okafor",cred:"DO",specialty:"Primary care",type:"Physician",practice:"Bronzeville Family Health",city:"Chicago",state:"IL",zip:"60615",
+   services:["Primary care","Midlife wellness visits","Preventive screenings","Hormone therapy"],
+   bio:"A family physician providing whole-person primary care with a specific interest in midlife women's health. Her visits include time to talk through sleep, mood, and cardiovascular risk together.",
+   exp:"10 years in community primary care; leads a neighborhood blood pressure and bone health screening program.",
+   website:"bronzevillefamily.example.org",phone:"(773) 555-0119",email:"front.desk@bronzevillefamily.example.org",appt:"Same-week openings, Mon–Sat",
+   ins:"Medicaid, Blue Cross Community, Aetna",langs:["English","Igbo"],verified:true,vdate:"2026-11-02",updated:"2026-11-02",featured:false,tint:"t-forest"},
+
+  {id:"p4",first:"Elena",last:"Vasquez",cred:"MD",specialty:"Gynecology",type:"Physician",practice:"Prairie Path Gynecology",city:"Oak Park",state:"IL",zip:"60301",
+   services:["Gynecology","Menopause care","Pelvic pain","Contraception"],
+   bio:"A gynecologist known for calm, thorough visits. She supports patients through symptom changes, abnormal bleeding evaluations, and decisions about hormone and non-hormone treatment.",
+   exp:"14 years in general gynecology; trained in minimally invasive gynecologic surgery.",
+   website:"prairiepathgyn.example.org",phone:"(708) 555-0163",email:"hello@prairiepathgyn.example.org",appt:"Online scheduling, Mon–Thu",
+   ins:"Blue Cross PPO, Humana, Cigna",langs:["English","Spanish"],verified:true,vdate:"2026-08-19",updated:"2026-10-01",featured:true,tint:"t-mauve"},
+
+  {id:"p5",first:"Rachel",last:"Lindqvist",cred:"LCSW",specialty:"Mental wellness",type:"Therapist",practice:"Calm Harbor Counseling",city:"Chicago",state:"IL",zip:"60614",
+   services:["Anxiety and mood","Midlife transitions","Sleep support","Grief and loss"],
+   bio:"A licensed clinical social worker supporting women through the emotional side of midlife — anxiety that appeared out of nowhere, identity shifts, and the grief that can accompany change.",
+   exp:"11 years in outpatient mental health; certified in cognitive behavioral therapy for insomnia (CBT-I).",
+   website:"calmharbor.example.org",phone:"(312) 555-0188",email:"appointments@calmharbor.example.org",appt:"Telehealth and in-person, weekday evenings",
+   ins:"Blue Cross PPO, Aetna, self-pay sliding scale",langs:["English","Swedish"],verified:true,vdate:"2026-10-22",updated:"2026-10-22",featured:false,tint:"t-plum"},
+
+  {id:"p6",first:"Hannah",last:"Cho",cred:"PT, DPT",specialty:"Pelvic health",type:"Physical therapist",practice:"Midway Pelvic Rehab",city:"Chicago",state:"IL",zip:"60632",
+   services:["Pelvic floor therapy","Incontinence care","Post-surgical rehab","Pelvic pain"],
+   bio:"A pelvic health physical therapist who treats leakage, pelvic pain, and post-surgical recovery with a hands-on, unhurried approach. Every plan starts with an explanation of what is actually happening.",
+   exp:"9 years in orthopedic and pelvic rehabilitation; adjunct instructor in a doctoral physical therapy program.",
+   website:"midwaypelvic.example.org",phone:"(773) 555-0154",email:"reception@midwaypelvic.example.org",appt:"Direct access, no referral needed",
+   ins:"Blue Cross PPO, UnitedHealthcare, Workers' Comp",langs:["English","Korean"],verified:true,vdate:"2026-07-11",updated:"2026-09-15",featured:false,tint:"t-clay"},
+
+  {id:"p7",first:"Simone",last:"Baptiste",cred:"RD, LD",specialty:"Nutrition",type:"Dietitian",practice:"Nourish Midlife Nutrition",city:"Chicago",state:"IL",zip:"60610",
+   services:["Midlife nutrition","Bone health","Metabolic health","Sustainable weight support"],
+   bio:"A registered dietitian who works without rigid rules. Her practice focuses on protein, bone health, and steady energy during the menopause transition, with meal patterns that fit real schedules.",
+   exp:"8 years in clinical and outpatient nutrition; group program facilitator for midlife nutrition workshops.",
+   website:"nourishmidlife.example.org",phone:"(312) 555-0121",email:"hello@nourishmidlife.example.org",appt:"Telehealth, Mon–Fri",
+   ins:"Blue Cross PPO, self-pay packages",langs:["English","French"],verified:true,vdate:"2026-11-08",updated:"2026-11-08",featured:true,tint:"t-sage"},
+
+  {id:"p8",first:"Marguerite",last:"Feld",cred:"MD, MSCP",specialty:"Menopause care",type:"Physician",practice:"Wheaton Menopause Institute",city:"Wheaton",state:"IL",zip:"60187",
+   services:["Menopause care","Complex hormone therapy","Second-opinion consultations","Genitourinary symptoms"],
+   bio:"A menopause-focused physician who sees patients who have already tried the standard path and still feel unheard. Consultations are long, and written summaries are sent to referring clinicians.",
+   exp:"22 years in gynecology; Menopause Society certified; speaks at regional primary care conferences.",
+   website:"wheatonmenopause.example.org",phone:"(630) 555-0198",email:"office@wheatonmenopause.example.org",appt:"By appointment, 6–8 week wait",
+   ins:"Medicare, Blue Cross PPO, self-pay",langs:["English","German"],verified:true,vdate:"2026-06-25",updated:"2026-09-02",featured:false,tint:"t-forest"},
+
+  {id:"p9",first:"Trevor",last:"Ellison",cred:"WHNP-BC",specialty:"Gynecology",type:"Nurse practitioner",practice:"Uptown Women's Care",city:"Chicago",state:"IL",zip:"60640",
+   services:["Well-woman care","Contraception","Perimenopause support","STI screening"],
+   bio:"A women's health nurse practitioner offering accessible, judgment-free gynecologic care. Patients frequently mention the amount of time spent on questions that other visits rushed past.",
+   exp:"7 years in women's health nursing and advanced practice; LGBTQ+ affirming care training.",
+   website:"uptownwomens.example.org",phone:"(773) 555-0170",email:"care@uptownwomens.example.org",appt:"Online booking, Tue–Sat",
+   ins:"Medicaid, Blue Cross Community, Aetna",langs:["English","Spanish"],verified:true,vdate:"2026-10-05",updated:"2026-10-05",featured:false,tint:"t-slate"},
+
+  {id:"p10",first:"Dana",last:"Whitmore",cred:"NBC-HWC",specialty:"Women's health coaching",type:"Coach",practice:"Second Spring Coaching",city:"Chicago",state:"IL",zip:"60622",
+   services:["Midlife coaching","Habit and lifestyle support","Sleep routines","Stress management"],
+   bio:"A board-certified health and wellness coach who works alongside a patient's clinical team. Sessions focus on the practical pieces — sleep, movement, boundaries — that make medical plans stick.",
+   exp:"6 years in health coaching; group facilitator for employer midlife wellness programs.",
+   website:"secondspringcoaching.example.org",phone:"(312) 555-0136",email:"coach@secondspringcoaching.example.org",appt:"Telehealth, evenings and weekends",
+   ins:"Self-pay; some employer wellness stipends",langs:["English"],verified:true,vdate:"2026-09-18",updated:"2026-09-18",featured:false,tint:"t-mauve"},
+
+  {id:"p11",first:"Yuki",last:"Tanaka",cred:"MD",specialty:"Menopause care",type:"Physician",practice:"Ravenswood Integrative Gynecology",city:"Chicago",state:"IL",zip:"60625",
+   services:["Menopause care","Hormone therapy","Integrative symptom management","Sleep and mood support"],
+   bio:"A gynecologist who combines evidence-based hormone therapy with practical lifestyle support. She is direct about what the evidence does and does not show, which patients describe as a relief.",
+   exp:"15 years in gynecology; completed additional training in menopause medicine and integrative care.",
+   website:"ravenswoodgyn.example.org",phone:"(773) 555-0129",email:"info@ravenswoodgyn.example.org",appt:"Online booking, Mon–Thu",
+   ins:"Blue Cross PPO, Cigna, Medicare",langs:["English","Japanese"],verified:true,vdate:"2026-11-12",updated:"2026-11-12",featured:true,tint:"t-plum"},
+
+  {id:"p12",first:"Camille",last:"Dupre",cred:"LMT, CST",specialty:"Pelvic health",type:"Bodywork practitioner",practice:"Still Point Bodywork",city:"Chicago",state:"IL",zip:"60657",
+   services:["Pelvic floor bodywork","Postpartum recovery","Chronic pain support","Relaxation and stress care"],
+   bio:"A licensed massage therapist specializing in pelvic and abdominal bodywork. Sessions are fully explained in advance and paced to the patient's comfort, with clothing options discussed beforehand.",
+   exp:"10 years in therapeutic bodywork; advanced training in craniosacral and pelvic floor techniques.",
+   website:"stillpointbodywork.example.org",phone:"(773) 555-0147",email:"book@stillpointbodywork.example.org",appt:"By appointment, Wed–Sun",
+   ins:"Self-pay; superbill available",langs:["English","French"],verified:true,vdate:"2026-08-30",updated:"2026-08-30",featured:false,tint:"t-clay"},
+
+  {id:"p13",first:"Adaeze",last:"Nwosu",cred:"MD",specialty:"Primary care",type:"Physician",practice:"South Shore Women's Primary Care",city:"Chicago",state:"IL",zip:"60649",
+   services:["Primary care","Midlife wellness visits","Cardiovascular risk","Diabetes prevention"],
+   bio:"A primary care physician whose practice centers women over 40. Visits are built around the whole picture — blood pressure, glucose, sleep, and stress — rather than one symptom at a time.",
+   exp:"13 years in internal medicine; quality improvement lead for a community health network.",
+   website:"southshorewomens.example.org",phone:"(773) 555-0191",email:"appointments@southshorewomens.example.org",appt:"Same-week openings, Mon–Fri",
+   ins:"Medicaid, Medicare, Blue Cross Community",langs:["English","Igbo","Yoruba"],verified:true,vdate:"2026-10-29",updated:"2026-10-29",featured:false,tint:"t-forest"},
+
+  {id:"p14",first:"Ruth",last:"Kessler",cred:"PsyD",specialty:"Mental wellness",type:"Therapist",practice:"Lincoln Park Midlife Psychology",city:"Chicago",state:"IL",zip:"60614",
+   services:["Midlife transitions","Anxiety and mood","Couples and relationships","Body image"],
+   bio:"A clinical psychologist working with women in their 40s and 50s on anxiety, relationship shifts, and the sense of being invisible in midlife. She offers both short-term and ongoing therapy.",
+   exp:"16 years in clinical psychology; specializes in midlife developmental transitions.",
+   website:"lincolnparkmidlife.example.org",phone:"(312) 555-0155",email:"intake@lincolnparkmidlife.example.org",appt:"Telehealth and in-person, Mon–Thu",
+   ins:"Blue Cross PPO, self-pay",langs:["English"],verified:true,vdate:"2026-09-09",updated:"2026-09-09",featured:false,tint:"t-sage"}
+];
+
+const EVENTS = [
+  {id:"e1",date:"2026-12-03",time:"6:00 PM CT",title:"Understanding Perimenopause: What's Really Happening",speaker:"Dr. Amara Whitfield, MD, NCMP",cat:"Education",
+   desc:"A plain-language walk through the hormonal shifts of perimenopause, why symptoms vary so widely, and how to tell what is worth investigating.",upcoming:true,replay:false},
+  {id:"e2",date:"2026-12-10",time:"12:00 PM CT",title:"Sleep, Hormones, and the Midlife Reset",speaker:"Simone Baptiste, RD, LD",cat:"Lifestyle",
+   desc:"Practical routines for disrupted sleep, with a realistic look at caffeine, evening light, and what sleep changes are actually hormonal.",upcoming:true,replay:false},
+  {id:"e3",date:"2027-01-14",time:"6:00 PM CT",title:"Talking to Your Doctor About Hormone Therapy",speaker:"Dr. Yuki Tanaka, MD",cat:"Clinical",
+   desc:"How to prepare for the conversation, what questions to ask, and how to weigh benefits and risks with your clinician.",upcoming:true,replay:false},
+  {id:"e4",date:"2027-02-11",time:"6:00 PM CT",title:"Pelvic Floor Health After 40",speaker:"Dr. Hannah Cho, PT, DPT",cat:"Clinical",
+   desc:"Leakage, pressure, and pelvic pain are common — and treatable. A physical therapist explains what pelvic rehab actually involves.",upcoming:true,replay:false},
+  {id:"e5",date:"2027-03-11",time:"12:00 PM CT",title:"Anxiety, Mood, and the Midlife Transition",speaker:"Rachel Lindqvist, LCSW",cat:"Mental wellness",
+   desc:"Why anxiety can appear for the first time in midlife, and evidence-based approaches to settling a nervous system that feels unfamiliar.",upcoming:true,replay:false},
+  {id:"e6",date:"2027-04-08",time:"6:00 PM CT",title:"Nutrition That Works With Your Changing Body",speaker:"Simone Baptiste, RD, LD",cat:"Lifestyle",
+   desc:"Protein, bone health, and steady energy without rigid rules. Includes a practical week of meal ideas.",upcoming:true,replay:false},
+  {id:"e7",date:"2026-11-12",time:"6:00 PM CT",title:"Menopause 101: Building Your Care Team",speaker:"Dr. Elena Vasquez, MD",cat:"Education",
+   desc:"Who to see for what, how to assemble a care team, and how to advocate for yourself when a concern is dismissed.",upcoming:false,replay:true},
+  {id:"e8",date:"2026-10-15",time:"6:00 PM CT",title:"Strength Training in Midlife",speaker:"Dana Whitmore, NBC-HWC",cat:"Lifestyle",
+   desc:"A gentler starting point for resistance training, bone health, and rebuilding confidence in the gym.",upcoming:false,replay:true},
+  {id:"e9",date:"2026-09-17",time:"12:00 PM CT",title:"Navigating Workplace Conversations",speaker:"Rachel Lindqvist, LCSW",cat:"Community",
+   desc:"Talking about symptoms, accommodations, and boundaries at work without oversharing or burning credibility.",upcoming:false,replay:false}
+];
+
+const RESOURCES = [
+  {id:"r1",title:"Perimenopause: A Plain-Language Guide",cat:"Menopause Education",type:"Guide · 18 pages",len:"22 min read",desc:"What changes, when, and why — with a symptom timeline you can bring to an appointment."},
+  {id:"r2",title:"Questions to Ask Your Provider About Menopause",cat:"Provider Conversations",type:"Checklist · 2 pages",len:"6 min read",desc:"Twelve questions that make a short appointment more useful, plus space to write your own."},
+  {id:"r3",title:"Hormone Therapy: The Evidence in Context",cat:"Hormonal Health",type:"Guide · 14 pages",len:"19 min read",desc:"A careful summary of current evidence, written to be read alongside your clinician's advice."},
+  {id:"r4",title:"Sleep Reset: A Four-Week Plan",cat:"Sleep & Lifestyle",type:"Workbook · 12 pages",len:"25 min read",desc:"A gradual routine for night waking, hot flashes at night, and the 3 a.m. wake-up loop."},
+  {id:"r5",title:"Bone Health After 45",cat:"Midlife Wellness",type:"Guide · 10 pages",len:"14 min read",desc:"Screening timelines, movement that builds bone, and how to read a DEXA result."},
+  {id:"r6",title:"Anxiety in Midlife: Why Now?",cat:"Mental Wellness",type:"Article",len:"8 min read",desc:"The hormonal and life-stage overlap behind midlife anxiety, and what actually helps."},
+  {id:"r7",title:"Pelvic Floor Basics",cat:"Midlife Wellness",type:"Guide · 8 pages",len:"11 min read",desc:"What the pelvic floor does, common symptoms, and when to ask for a referral."},
+  {id:"r8",title:"Talking With Your Partner About Midlife",cat:"Mental Wellness",type:"Conversation guide",len:"9 min read",desc:"Scripts and starting points for the conversations that keep getting postponed."},
+  {id:"r9",title:"Nutrition for Steady Energy",cat:"Sleep & Lifestyle",type:"Guide · 9 pages",len:"12 min read",desc:"Protein, fiber, and meal timing for days that run long."},
+  {id:"r10",title:"Understanding Your Lab Results",cat:"Hormonal Health",type:"Explainer",len:"10 min read",desc:"What common midlife labs measure, and the limits of what they can tell you."},
+  {id:"r11",title:"Preparing for a Second Opinion",cat:"Provider Conversations",type:"Checklist · 1 page",len:"4 min read",desc:"What to bring, what to ask, and how to get records transferred without the runaround."},
+  {id:"r12",title:"Movement for Midlife: Starting Safely",cat:"Midlife Wellness",type:"Guide · 11 pages",len:"15 min read",desc:"Strength, balance, and recovery for people returning to movement after years away."}
+];
+
+const POSTS = [
+  {id:"b1",title:"The Appointment That Changed How I Understood Perimenopause",cat:"Patient Perspective",author:"Editorial Team",date:"November 18, 2026",read:"7 min",
+   excerpt:"Three women describe the moment a clinician finally explained what was happening — and what made the difference.",
+   body:["For two years, the explanation was stress. Then it was age. Then it was nothing at all.","What changed, in each of the three conversations we heard, was not a diagnosis. It was a clinician who stopped, asked what a normal week looked like, and then described the physiology out loud.","That sounds small. In practice, it is often the difference between leaving an appointment with a plan and leaving with a printed handout you will never open.","We asked three community members what made those visits different. Their answers had less to do with expertise than with structure: a longer appointment, a written summary, and a follow-up message that arrived before the next question did."]},
+  {id:"b2",title:"What the Evidence Actually Says About Hormone Therapy",cat:"Hormonal Health",author:"Dr. Yuki Tanaka, MD",date:"November 4, 2026",read:"11 min",
+   excerpt:"Clearing up two decades of confusion without oversimplifying the research.",
+   body:["The conversation about hormone therapy has been distorted by a single set of headlines from 2002 that most people remember without the context.","Current guidance is more nuanced than either the alarm or the enthusiasm suggests. For many women in their 40s and early 50s with bothersome symptoms, the balance of benefit and risk is favorable. For others, it is not.","What matters is the individual picture: age, time since menopause, personal and family history, and what symptom is actually being treated.","This article is education, not medical advice. Bring these questions to a clinician who knows your history."]},
+  {id:"b3",title:"Sleep Is the First Thing to Fix",cat:"Sleep & Lifestyle",author:"Simone Baptiste, RD, LD",date:"October 21, 2026",read:"6 min",
+   excerpt:"Before supplements, before another app subscription — the boring fundamentals that change how midlife feels.",
+   body:["When sleep falls apart, everything else gets harder to evaluate. Mood, appetite, concentration, and pain tolerance all shift.","Start with a consistent wake time, morning light, and a room that is genuinely cool. These three changes cost nothing and outperform most purchases.","If night waking persists after four weeks, that is a clinical question, not a discipline problem. Ask for a conversation about sleep specifically."]},
+  {id:"b4",title:"Why Pelvic Health Is Not a Niche Topic",cat:"Midlife Wellness",author:"Dr. Hannah Cho, PT, DPT",date:"October 7, 2026",read:"8 min",
+   excerpt:"Leakage and pelvic pain affect far more women than the number who ask for help. That gap is the problem.",
+   body:["Pelvic floor dysfunction is common, treatable, and dramatically under-discussed.","Physical therapy for the pelvic floor is not invasive by default. It begins with education, breathing, and movement, and progresses only as far as is useful.","If you have stopped doing something you love because of leakage or pain, that is a reason to ask for a referral — not a reason to accept it."]},
+  {id:"b5",title:"How We Verify Every Provider in the Directory",cat:"Organization",author:"Editorial Team",date:"September 24, 2026",read:"5 min",
+   excerpt:"Our listing process, the fields we check, and why verification dates are printed on every profile.",
+   body:["A directory is only as good as its maintenance. We verify license status, practice name, location, and contact details before a listing goes live.","Each profile displays the date it was last verified. Records older than six months are flagged internally for re-checking.","We do not accept payment for placement. Sponsors are recognized separately and never influence search ranking.","If you spot an error, the contact form reaches a human who will correct it."]},
+  {id:"b6",title:"Talking to Your Teenager About Menopause",cat:"Community",author:"Rachel Lindqvist, LCSW",date:"September 10, 2026",read:"6 min",
+   excerpt:"Households run differently when a parent is exhausted. Naming it out loud usually helps more than hiding it.",
+   body:["Many parents in midlife are managing symptoms quietly, often while caring for children and aging parents at the same time.","Children notice changes in mood and energy whether or not they are explained. A short, factual conversation reduces the guesswork.","Keep it brief, keep it age-appropriate, and leave room for questions later."]}
+];
+
+const state = {q:"",specialty:"",location:"",service:"",type:"",visible:6};
+
+/* ---------- helpers ---------- */
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const initials = p => p.first[0]+p.last[0];
+const fmtDate = iso => new Date(iso+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+const dayNum = iso => new Date(iso+"T12:00:00").getDate();
+const monShort = iso => new Date(iso+"T12:00:00").toLocaleDateString("en-US",{month:"short"}).toUpperCase();
+
+function toast(msg){
+  const t=$("#toast"); t.textContent=msg; t.classList.add("show");
+  clearTimeout(window.__tt); window.__tt=setTimeout(()=>t.classList.remove("show"),3200);
+}
+
+/* ---------- shared partials ---------- */
+function botanical(){
+  return `<svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#526B5A" stop-opacity=".18"/><stop offset="1" stop-color="#B98F9D" stop-opacity=".22"/></linearGradient></defs>
+    <circle cx="200" cy="200" r="150" fill="url(#lg)"/>
+    <g stroke="#344B3D" stroke-opacity=".42" fill="none" stroke-width="1.3" stroke-linecap="round">
+      <path d="M200 400V150"/>
+      <path d="M200 300c-46-6-70-34-76-72 40 4 68 26 76 72Z"/>
+      <path d="M200 300c46-6 70-34 76-72-40 4-68 26-76 72Z"/>
+      <path d="M200 230c-38-5-58-28-63-60 33 4 56 22 63 60Z"/>
+      <path d="M200 230c38-5 58-28 63-60-33 4-56 22-63 60Z"/>
+      <path d="M200 150c-16-14-22-32-18-52 18 8 28 22 30 42"/>
+      <path d="M200 150c16-14 22-32 18-52-18 8-28 22-30 42"/>
+    </g>
+    <g fill="#344B3D" fill-opacity=".5">
+      <circle cx="200" cy="92" r="7"/><circle cx="176" cy="120" r="4"/><circle cx="224" cy="120" r="4"/>
+      <circle cx="148" cy="164" r="3.4"/><circle cx="252" cy="164" r="3.4"/>
+    </g>
+    <g stroke="#B98F9D" stroke-opacity=".55" fill="none" stroke-width="1.1">
+      <circle cx="200" cy="200" r="188" stroke-dasharray="2 9"/>
+    </g>
+  </svg>`;
+}
+function cardArt(variant=""){
+  return `<div class="art-block ${variant}"><svg viewBox="0 0 300 130" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="#344B3D" stroke-opacity=".35" fill="none" stroke-width="1.1">
+      <path d="M30 130c0-46 16-72 54-88"/><path d="M110 130c0-38 14-58 44-72"/>
+      <path d="M196 130c0-52 18-78 60-96"/><path d="M260 130c0-30 10-46 32-58"/>
+    </g>
+    <g fill="#B98F9D" fill-opacity=".45"><circle cx="84" cy="42" r="5"/><circle cx="154" cy="58" r="4"/><circle cx="256" cy="34" r="5"/></g>
+  </svg></div>`;
+}
+function providerCard(p){
+  return `<article class="prov">
+    <div class="prov-top">
+      <div class="avatar ${p.tint}" aria-hidden="true">${initials(p)}</div>
+      <div>
+        <h3><a href="#/provider/${p.id}" style="text-decoration:none;color:inherit">${p.first} ${p.last}</a></h3>
+        <span class="cred">${p.cred} · ${p.type}</span>
+        <span class="spec">${p.specialty}</span>
+      </div>
+    </div>
+    <p class="loc">${p.practice} · ${p.city}, ${p.state} ${p.zip}</p>
+    <p class="bio">${p.bio.length>150?p.bio.slice(0,150).trim()+"…":p.bio}</p>
+    <div class="pills">${p.services.slice(0,3).map(s=>`<span class="pill">${s}</span>`).join("")}${p.services.length>3?`<span class="pill">+${p.services.length-3}</span>`:""}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:auto">
+      ${p.verified?`<span class="badge">✓ Verified ${fmtDate(p.vdate)}</span>`:`<span class="badge" style="background:#F2EEE5;color:#7A7362">Listing</span>`}
+      <a class="btn sm ghost" href="#/provider/${p.id}">View Profile</a>
+    </div>
+  </article>`;
+}
+function eventRow(e, i){
+  return `<article class="ev">
+    <div class="date-chip"><b>${dayNum(e.date)}</b><span>${monShort(e.date)}</span></div>
+    <div class="ev-body">
+      <span class="tag">${e.cat}</span>
+      <h3>${e.title}</h3>
+      <p>${e.desc}</p>
+      <div class="ev-meta"><span>${e.speaker}</span><span>${fmtDate(e.date)} · ${e.time}</span></div>
+    </div>
+    <div class="ev-actions">
+      ${e.upcoming?`<a class="btn sm" href="#/register/${e.id}">Register</a><a class="link" href="#/register/${e.id}" style="font-size:.8rem">Details</a>`
+        :`<button class="btn sm ghost" type="button" onclick="toast('Replay access is requested by email in this demo.')">${e.replay?"Request replay":"View recap"}</button>`}
+    </div>
+  </article>`;
+}
+
+/* ---------- pages ---------- */
+function home(){
+  const featured = PROVIDERS.filter(p=>p.featured).slice(0,3);
+  const upcoming = EVENTS.filter(e=>e.upcoming).slice(0,3);
+  return `
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Chicago · Women's Health Nonprofit</p>
+        <h1>Your Midlife Health Journey Deserves Trusted Support.</h1>
+        <p class="lede">Explore trusted healthcare providers, practical education, and community resources designed to help you navigate midlife and menopause with confidence.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#/directory">Find a Provider</a>
+          <a class="btn ghost" href="#/events">Explore Events</a>
+        </div>
+        <div class="trust-row">
+          <div><b>14</b><span>Verified listings (demo)</span></div>
+          <div><b>12</b><span>Month webinar series</span></div>
+          <div><b>40+</b><span>Free resources</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="arch">
+          ${botanical()}
+          <div class="arch-note">"I finally understood what was happening in my body — and what to do next."<br><span style="font-size:.76rem;font-family:var(--sans);opacity:.78;letter-spacing:.05em">— FICTIONAL COMPOSITE, DEMO CONTENT</span></div>
+        </div>
+        <div class="float-card">
+          <b>Provider Directory</b>
+          <span>Search by specialty, city, service, and provider type. Every listing shows its verification date.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Start here</p><h2>Find care that fits your life</h2>
+        <p>Every provider in the directory is reviewed before publication, and each profile displays the date it was last verified.</p></div>
+        <a class="link" href="#/directory">Browse all providers →</a>
+      </div>
+      <div class="grid g3">${featured.map(providerCard).join("")}</div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Education library</p><h2>Practical, evidence-informed reading</h2>
+        <p>Written for the moments between appointments — when you need a straight answer, not a sales pitch.</p></div>
+        <a class="link" href="#/resources">All resources →</a>
+      </div>
+      <div class="grid g3">
+        ${RESOURCES.slice(0,3).map(r=>`
+          <article class="card">
+            ${cardArt("")}
+            <span class="tag">${r.cat}</span>
+            <h3>${r.title}</h3>
+            <p>${r.desc}</p>
+            <div class="meta"><span>${r.type}</span><span>${r.len}</span></div>
+            <a class="link" href="#/resources">Read or download →</a>
+          </article>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section class="band tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">2026–2027 series</p><h2>Upcoming webinars</h2>
+        <p>Free, live, and recorded. Each session includes time for questions and a follow-up resource list.</p></div>
+        <a class="link" href="#/events">Full calendar →</a>
+      </div>
+      ${upcoming.map(eventRow).join("")}
+    </div>
+  </section>
+
+  <section class="band deep">
+    <div class="wrap grid g2" style="gap:3rem;align-items:center">
+      <div>
+        <p class="eyebrow">Community</p>
+        <h2>No one should navigate this alone.</h2>
+        <p style="color:#D3DBD1;max-width:48ch">Monthly peer circles, a moderated discussion space, and a newsletter that never sells your attention. Facilitated by trained volunteers and reviewed by our clinical advisory group.</p>
+        <a class="btn" href="#/contact" style="background:#F7F3ED;color:#344B3D;border-color:#F7F3ED;margin-top:.6rem">Join the community</a>
+      </div>
+      <div class="grid" style="gap:1rem">
+        <div class="card" style="background:rgba(247,243,237,.07);border-color:rgba(247,243,237,.18);color:#E8EDE6">
+          <h4 style="color:#F7F3ED;margin-bottom:.3rem">Peer circles</h4>
+          <p style="color:#C9D3C7;font-size:.9rem;margin:0">Small groups, twice monthly, in person and online.</p>
+        </div>
+        <div class="card" style="background:rgba(247,243,237,.07);border-color:rgba(247,243,237,.18)">
+          <h4 style="color:#F7F3ED;margin-bottom:.3rem">Clinical review</h4>
+          <p style="color:#C9D3C7;font-size:.9rem;margin:0">Every educational piece is reviewed by a licensed clinician before publication.</p>
+        </div>
+        <div class="card" style="background:rgba(247,243,237,.07);border-color:rgba(247,243,237,.18)">
+          <h4 style="color:#F7F3ED;margin-bottom:.3rem">Plain language</h4>
+          <p style="color:#C9D3C7;font-size:.9rem;margin:0">No jargon without a definition. Reading level checked on every guide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">Thank you</p><h2>Our sponsors</h2><p>Program support from organizations that share our commitment to evidence-informed midlife care.</p></div><a class="link" href="#/sponsors">Sponsorship →</a></div>
+      <div class="grid g4">
+        ${["Northlight Health System","Cedar & Vine Pharmacy","Lakeview Community Foundation","Harborline Diagnostics"].map((s,i)=>`
+          <div class="card" style="text-align:center;padding:1.5rem 1rem">
+            <div style="width:52px;height:52px;border-radius:14px;margin:0 auto .8rem;display:grid;place-items:center;font-family:var(--serif);font-size:1.2rem;background:${i%2?"var(--blush)":"var(--sage-soft)"};color:var(--forest)">${s.split(" ").map(w=>w[0]).slice(0,2).join("")}</div>
+            <b style="font-size:.86rem;color:var(--forest);display:block">${s}</b>
+            <span style="font-size:.74rem;color:var(--muted)">${["Anchor sponsor","Program partner","Community funder","Webinar series partner"][i]}</span>
+          </div>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section class="band blush">
+    <div class="wrap" style="max-width:760px;text-align:center">
+      <p class="eyebrow">Newsletter</p>
+      <h2 style="margin-bottom:.6rem">One useful email a month</h2>
+      <p style="max-width:52ch;margin:0 auto 1.6rem">Webinar invitations, new resources, and plain-language explainers. Unsubscribe in one click.</p>
+      <form class="news" id="homeNews" style="margin:0 auto;justify-content:center" novalidate>
+        <label class="sr" for="hn-email">Email address</label>
+        <input id="hn-email" type="email" placeholder="you@example.com" required>
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>`;
+}
+
+function directory(){
+  const opts = (arr,sel) => arr.map(v=>`<option value="${esc(v)}"${v===sel?" selected":""}>${esc(v)}</option>`).join("");
+  const specialties=[...new Set(PROVIDERS.map(p=>p.specialty))].sort();
+  const cities=[...new Set(PROVIDERS.map(p=>p.city))].sort();
+  const services=[...new Set(PROVIDERS.flatMap(p=>p.services))].sort();
+  const types=[...new Set(PROVIDERS.map(p=>p.type))].sort();
+  return `
+  <section class="band" style="padding-top:3rem">
+    <div class="wrap">
+      <p class="eyebrow">Provider Directory</p>
+      <h1 style="max-width:22ch;margin-bottom:.5rem">Find a provider who understands midlife.</h1>
+      <p class="lede" style="margin-bottom:1.6rem">Search verified listings across Chicago and nearby communities. Filter by specialty, location, service, or provider type — combine as many as you need.</p>
+      <div class="demo-note"><b>Demo directory.</b> All providers, practices, and contact details on this page are fictional and created for a portfolio demonstration. This prototype uses local sample data structured exactly like the proposed Wix CMS collection.</div>
+
+      <div class="dir-layout">
+        <aside>
+          <button class="btn ghost mobile-filter-btn" id="filterToggle" onclick="document.getElementById('filters').classList.toggle('open');this.textContent=document.getElementById('filters').classList.contains('open')?'Hide filters':'Show filters'" aria-expanded="false" aria-controls="filters">Show filters</button>
+          <form class="filters" id="filters" onsubmit="return false" aria-label="Filter providers">
+            <h3>Filters</h3>
+            <div class="fgroup">
+              <label for="f-q">Keyword</label>
+              <input id="f-q" type="text" placeholder="Name, practice, symptom…" value="${esc(state.q)}">
+            </div>
+            <div class="fgroup">
+              <label for="f-spec">Specialty</label>
+              <select id="f-spec"><option value="">All specialties</option>${opts(specialties,state.specialty)}</select>
+            </div>
+            <div class="fgroup">
+              <label for="f-loc">Location</label>
+              <select id="f-loc"><option value="">All locations</option>${opts(cities,state.location)}</select>
+            </div>
+            <div class="fgroup">
+              <label for="f-serv">Service</label>
+              <select id="f-serv"><option value="">All services</option>${opts(services,state.service)}</select>
+            </div>
+            <div class="fgroup">
+              <label for="f-type">Provider type</label>
+              <select id="f-type"><option value="">All types</option>${opts(types,state.type)}</select>
+            </div>
+            <button class="btn ghost block sm" type="button" onclick="resetFilters()">Clear all filters</button>
+            <p style="font-size:.74rem;color:var(--muted);margin:1rem 0 0;line-height:1.5">Listings are reviewed before publication. Verification dates appear on every profile.</p>
+          </form>
+        </aside>
+        <div>
+          <div class="results-bar">
+            <p id="resultCount" aria-live="polite"></p>
+            <a class="link" href="#/contact" style="font-size:.84rem">Suggest a provider →</a>
+          </div>
+          <div class="prov-grid" id="provGrid"></div>
+          <div id="loadWrap" style="text-align:center;margin-top:2rem"></div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function filtered(){
+  const q = state.q.trim().toLowerCase();
+  return PROVIDERS.filter(p=>{
+    if(state.specialty && p.specialty!==state.specialty) return false;
+    if(state.location && p.city!==state.location) return false;
+    if(state.type && p.type!==state.type) return false;
+    if(state.service && !p.services.includes(state.service)) return false;
+    if(q){
+      const hay = [p.first,p.last,p.cred,p.specialty,p.practice,p.city,p.bio,p.services.join(" "),p.langs.join(" ")].join(" ").toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function paintDirectory(){
+  const grid=$("#provGrid"); if(!grid) return;
+  const list=filtered();
+  $("#resultCount").innerHTML = list.length
+    ? `Showing <b>${Math.min(state.visible,list.length)}</b> of <b>${list.length}</b> provider${list.length===1?"":"s"}${state.q?` for “${esc(state.q)}”`:""}`
+    : `No providers match these filters`;
+  if(!list.length){
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
+      <h3>No providers match those filters</h3>
+      <p>Try removing one filter, or search a broader term such as “menopause” or “Chicago”. New listings are added monthly.</p>
+      <button class="btn" type="button" onclick="resetFilters()">Clear all filters</button>
+    </div>`;
+    $("#loadWrap").innerHTML="";
+    return;
+  }
+  grid.innerHTML = list.slice(0,state.visible).map(providerCard).join("");
+  $("#loadWrap").innerHTML = list.length>state.visible
+    ? `<button class="btn ghost" type="button" onclick="state.visible+=6;paintDirectory()">Load more providers</button>`
+    : `<p style="font-size:.82rem;color:var(--muted)">All matching providers are shown.</p>`;
+}
+
+function resetFilters(){
+  state.q="";state.specialty="";state.location="";state.service="";state.type="";state.visible=6;
+  const ids={q:"f-q",specialty:"f-spec",location:"f-loc",service:"f-serv",type:"f-type"};
+  Object.entries(ids).forEach(([k,id])=>{const el=document.getElementById(id); if(el) el.value="";});
+  paintDirectory();
+}
+window.resetFilters=resetFilters;
+
+function bindDirectory(){
+  const map={q:"f-q",specialty:"f-spec",location:"f-loc",service:"f-serv",type:"f-type"};
+  Object.entries(map).forEach(([key,id])=>{
+    const el=document.getElementById(id); if(!el) return;
+    el.addEventListener(el.tagName==="SELECT"?"change":"input",()=>{state[key]=el.value;state.visible=6;paintDirectory();});
+  });
+  paintDirectory();
+}
+
+function profile(id){
+  const p=PROVIDERS.find(x=>x.id===id);
+  if(!p) return `<section class="band"><div class="wrap"><h1>Provider not found</h1><p><a class="link" href="#/directory">Return to the directory</a></p></div></section>`;
+  return `
+  <section class="band" style="padding-top:2.4rem">
+    <div class="wrap">
+      <p style="font-size:.82rem;margin-bottom:1.6rem"><a class="link" href="#/directory">← Provider Directory</a></p>
+      <div class="profile-grid">
+        <div>
+          <div class="side-card">
+            <div class="portrait ${p.tint}" aria-hidden="true">${initials(p)}</div>
+            <p style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem">Last verified</p>
+            <p style="font-family:var(--serif);font-size:1.1rem;color:var(--forest);margin-bottom:1rem">${fmtDate(p.vdate)}</p>
+            ${p.verified?`<span class="badge">✓ Verified listing</span>`:""}
+            <div style="margin-top:1.2rem">
+              <a class="btn block sm" href="${p.appt==='Online booking'?"#/contact":"#/contact"}" onclick="toast('In a production build this opens the provider\\'s booking link.');return false;">Request an appointment</a>
+            </div>
+          </div>
+          <div class="side-card">
+            <h4>Contact</h4>
+            <p style="font-size:.88rem;margin-bottom:.4rem"><b style="display:block;color:var(--forest)">${p.practice}</b>${p.city}, ${p.state} ${p.zip}</p>
+            <p style="font-size:.88rem;margin-bottom:.3rem">${p.phone}</p>
+            <p style="font-size:.88rem;margin-bottom:.8rem;word-break:break-word">${p.email}</p>
+            <p style="font-size:.84rem;color:var(--muted);margin:0">${p.website} <span style="font-size:.74rem">(fictional)</span></p>
+          </div>
+          <div class="side-card">
+            <h4>Good to know</h4>
+            <div class="kv"><span>Appointments</span><b>${p.appt}</b></div>
+            <div class="kv"><span>Insurance</span><b style="max-width:62%">${p.ins}</b></div>
+            <div class="kv"><span>Languages</span><b>${p.langs.join(", ")}</b></div>
+            <div class="kv"><span>Record updated</span><b>${fmtDate(p.updated)}</b></div>
+          </div>
+        </div>
+        <div class="profile-body">
+          <p class="eyebrow" style="margin-bottom:.6rem">${p.specialty} · ${p.type}</p>
+          <h1>${p.first} ${p.last}, ${p.cred}</h1>
+          <p class="sub">${p.practice} · ${p.city}, ${p.state}</p>
+          <div class="pills" style="margin-bottom:1.8rem">${p.services.map(s=>`<span class="pill">${s}</span>`).join("")}</div>
+
+          <h3 style="margin-bottom:.6rem">About</h3>
+          <p>${p.bio}</p>
+          <p>${p.first} sees patients at ${p.practice} in ${p.city}. Appointments are available ${p.appt.toLowerCase()}, and the practice offers care in ${p.langs.join(" and ")}.</p>
+
+          <h3 style="margin-top:2rem;margin-bottom:.6rem">Professional experience</h3>
+          <p>${p.exp}</p>
+
+          <h3 style="margin-top:2rem;margin-bottom:.6rem">Services offered</h3>
+          <ul style="padding-left:1.2rem;font-size:.96rem;color:#46504A">
+            ${p.services.map(s=>`<li style="margin-bottom:.35rem">${s}</li>`).join("")}
+          </ul>
+
+          <h3 style="margin-top:2rem;margin-bottom:.6rem">Appointment information</h3>
+          <p>Booking: ${p.appt}. Insurance accepted includes ${p.ins}. Please confirm coverage directly with the practice before scheduling — insurance networks change.</p>
+
+          <h3 style="margin-top:2rem;margin-bottom:.6rem">Website</h3>
+          <p><a class="link" href="#/contact" onclick="toast('External links are disabled in this demo prototype.');return false;">${p.website}</a></p>
+
+          <div class="disclaimer" style="margin-top:2rem">
+            <b>Directory disclaimer.</b> Midlife Wellness Alliance lists providers as a community service and does not endorse, employ, or guarantee the care provided by any listed practitioner. This demonstration profile contains fictional information. Always confirm credentials, insurance coverage, and availability directly with the practice. To report an error, use the <a class="link" href="#/contact">contact form</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function events(){
+  const up=EVENTS.filter(e=>e.upcoming), past=EVENTS.filter(e=>!e.upcoming);
+  return `
+  <section class="band" style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">Webinars &amp; Events</p>
+      <h1 style="max-width:24ch">A twelve-month series on midlife health.</h1>
+      <p class="lede">Live sessions run on the second Thursday of each month, alternating between noon and 6:00 PM Central. Registration is free, recordings are sent to everyone who registers, and each session ends with open questions.</p>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin:1.8rem 0 2.4rem">
+        <span class="pill" style="padding:.4rem .9rem">Free to attend</span>
+        <span class="pill" style="padding:.4rem .9rem">Live captions</span>
+        <span class="pill" style="padding:.4rem .9rem">Recording included</span>
+        <span class="pill" style="padding:.4rem .9rem">Q&amp;A with clinicians</span>
+      </div>
+    </div>
+  </section>
+  <section class="band" style="padding-top:1rem">
+    <div class="wrap">
+      <h2 style="margin-bottom:1.4rem">Upcoming</h2>
+      ${up.map(eventRow).join("")}
+    </div>
+  </section>
+  <section class="band tint">
+    <div class="wrap">
+      <h2 style="margin-bottom:.5rem">Past events</h2>
+      <p style="color:#4C554C;margin-bottom:1.6rem">Recordings are available for registered attendees and members of the community list.</p>
+      ${past.map(eventRow).join("")}
+    </div>
+  </section>`;
+}
+
+function register(id){
+  const e=EVENTS.find(x=>x.id===id)||EVENTS[0];
+  return `
+  <section class="band" style="padding-top:2.6rem">
+    <div class="wrap">
+      <p style="font-size:.82rem;margin-bottom:1.6rem"><a class="link" href="#/events">← All events</a></p>
+      <div class="profile-grid" style="grid-template-columns:1fr 420px">
+        <div>
+          <span class="tag" style="display:inline-block;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--sage);background:var(--sage-soft);padding:.3rem .7rem;border-radius:999px;margin-bottom:1rem">${e.cat}</span>
+          <h1 style="font-size:clamp(2rem,3.4vw,2.8rem)">${e.title}</h1>
+          <p class="sub" style="font-size:1rem;color:var(--muted);margin-bottom:1.6rem">${fmtDate(e.date)} · ${e.time} · Live on Zoom · Free</p>
+          <p class="lede" style="font-size:1.06rem">${e.desc}</p>
+
+          <div class="side-card" style="margin-top:1.8rem">
+            <h4>Speaker</h4>
+            <div style="display:flex;gap:1rem;align-items:center">
+              <div class="avatar t-sage" style="width:56px;height:56px;flex:0 0 56px;font-size:1.1rem">${e.speaker.split(" ").filter(w=>/^[A-Z]/.test(w)).slice(0,2).map(w=>w[0]).join("")}</div>
+              <div><b style="color:var(--forest);display:block">${e.speaker}</b><span style="font-size:.84rem;color:var(--muted)">Faculty, Midlife Wellness Alliance education series</span></div>
+            </div>
+          </div>
+
+          <h3 style="margin-top:2rem;margin-bottom:.7rem">What you'll learn</h3>
+          <ul style="padding-left:1.2rem;color:#46504A">
+            <li style="margin-bottom:.4rem">How to describe your symptoms clearly enough to get useful help</li>
+            <li style="margin-bottom:.4rem">Which questions are worth asking in a short appointment</li>
+            <li style="margin-bottom:.4rem">What the current evidence does — and does not — support</li>
+            <li>A practical next step you can take the same week</li>
+          </ul>
+
+          <h3 style="margin-top:2rem;margin-bottom:.7rem">How it works</h3>
+          <p style="font-size:.95rem;color:#46504A">Register below and you will receive a confirmation email with your Zoom link. Reminders arrive 24 hours and 1 hour before the session. Everyone who registers receives the recording and the resource list within two business days, whether or not they attend live.</p>
+        </div>
+
+        <div>
+          <div class="form-card" id="regCard">
+            <h3 style="margin-bottom:.3rem">Register free</h3>
+            <p style="font-size:.86rem;color:var(--muted);margin-bottom:1.4rem">${fmtDate(e.date)} · ${e.time}</p>
+            <form id="regForm" novalidate>
+              <div class="field"><label for="rg-first">First name</label><input id="rg-first" type="text" autocomplete="given-name" required><span class="err">Please enter your first name.</span></div>
+              <div class="field"><label for="rg-last">Last name</label><input id="rg-last" type="text" autocomplete="family-name" required><span class="err">Please enter your last name.</span></div>
+              <div class="field"><label for="rg-email">Email address</label><input id="rg-email" type="email" autocomplete="email" required><span class="err">Please enter a valid email address.</span></div>
+              <div class="field"><label for="rg-zip">ZIP code <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="rg-zip" type="text" inputmode="numeric" autocomplete="postal-code"><span class="hint">Used only for regional program reporting.</span></div>
+              <div class="field"><label for="rg-role">I'm joining as</label>
+                <select id="rg-role"><option>Community member</option><option>Patient or caregiver</option><option>Healthcare provider</option><option>Sponsor or partner</option><option>Press</option></select>
+              </div>
+              <div class="field"><label class="check" for="rg-consent"><input id="rg-consent" type="checkbox"><span>I agree to receive event emails from Midlife Wellness Alliance. I can unsubscribe at any time.</span></label><span class="err" id="rg-consent-err">Please confirm to continue.</span></div>
+              <p style="font-size:.74rem;color:var(--muted);line-height:1.55;margin-bottom:1rem">We store your name and email to send event logistics and follow-up resources. We do not sell or share contact data. This is a demonstration form and does not transmit information.</p>
+              <button class="btn block" type="submit">Complete registration</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function resources(){
+  const rcats=[...new Set(RESOURCES.map(r=>r.cat))];
+  return `
+  <section class="band" style="padding-bottom:2rem">
+    <div class="wrap">
+      <p class="eyebrow">Resource Library</p>
+      <h1 style="max-width:24ch">Everything we wish someone had handed us sooner.</h1>
+      <p class="lede">Guides, checklists, and explainers — reviewed by clinicians, written in plain language, free to download.</p>
+      <div class="searchbar" style="margin-top:1.8rem;max-width:640px">
+        <label class="sr" for="rq">Search resources</label>
+        <input id="rq" type="text" placeholder="Search resources…" oninput="paintResources()">
+      </div>
+      <div id="rcats" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem">
+        <button class="btn sm ghost rcat active" data-cat="" onclick="setRCat(this)">All</button>
+        ${rcats.map(c=>`<button class="btn sm ghost rcat" data-cat="${esc(c)}" onclick="setRCat(this)">${c}</button>`).join("")}
+      </div>
+      <div class="grid g3" id="resGrid"></div>
+    </div>
+  </section>`;
+}
+
+let rcat="";
+function setRCat(btn){
+  rcat=btn.dataset.cat;
+  $$(".rcat").forEach(b=>{b.style.background="transparent";b.style.color="var(--forest)";b.style.borderColor="#C9C1B3";});
+  btn.style.background="var(--forest)";btn.style.color="#fff";btn.style.borderColor="var(--forest)";
+  paintResources();
+}
+window.setRCat=setRCat;
+
+function paintResources(){
+  const grid=$("#resGrid"); if(!grid) return;
+  const q=($("#rq")?.value||"").toLowerCase();
+  const list=RESOURCES.filter(r=>(!rcat||r.cat===rcat) && (!q||(r.title+" "+r.desc+" "+r.cat).toLowerCase().includes(q)));
+  if(!list.length){grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><h3>No resources match that search</h3><p>Try a broader term such as “sleep”, “hormones”, or “provider”.</p></div>`;return;}
+  grid.innerHTML=list.map(r=>`
+    <article class="card">
+      ${cardArt(list.indexOf(r)%3===1?"b":list.indexOf(r)%3===2?"c":"")}
+      <span class="tag">${r.cat}</span>
+      <h3>${r.title}</h3>
+      <p>${r.desc}</p>
+      <div class="meta"><span>${r.type}</span><span>${r.len}</span></div>
+      <button class="btn sm ghost" type="button" onclick="toast('Demo only — no file is downloaded.')">Open resource</button>
+    </article>`).join("");
+}
+window.paintResources=paintResources;
+
+function blog(){
+  const f=POSTS[0];
+  return `
+  <section class="band" style="padding-bottom:1.6rem">
+    <div class="wrap">
+      <p class="eyebrow">The Journal</p>
+      <h1 style="max-width:22ch">Long-form reading for the middle years.</h1>
+      <p class="lede">Reported pieces, clinician-written explainers, and first-person accounts — edited for accuracy and tone.</p>
+    </div>
+  </section>
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <article class="card" style="display:grid;grid-template-columns:1.1fr 1fr;gap:0;padding:0;overflow:hidden">
+        <div style="background:linear-gradient(150deg,#DCE5DC,#E9D9D8);min-height:300px;position:relative">${botanical()}</div>
+        <div style="padding:2.4rem">
+          <span class="tag">Featured · ${f.cat}</span>
+          <h2 style="font-size:clamp(1.5rem,2.4vw,2rem);margin-bottom:.7rem">${f.title}</h2>
+          <p style="color:#4C554C">${f.excerpt}</p>
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.2rem">${f.author} · ${f.date} · ${f.read}</p>
+          <a class="btn" href="#/article/${f.id}">Read the piece</a>
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="band tint">
+    <div class="wrap">
+      <div class="grid g3">
+        ${POSTS.slice(1).map(p=>`
+          <article class="card">
+            <span class="tag">${p.cat}</span>
+            <h3><a href="#/article/${p.id}" style="text-decoration:none;color:inherit">${p.title}</a></h3>
+            <p>${p.excerpt}</p>
+            <div class="meta"><span>${p.author}</span><span>${p.date}</span><span>${p.read}</span></div>
+            <a class="link" href="#/article/${p.id}">Continue reading →</a>
+          </article>`).join("")}
+      </div>
+    </div>
+  </section>`;
+}
+
+function article(id){
+  const p=POSTS.find(x=>x.id===id)||POSTS[0];
+  return `
+  <section class="band" style="padding-top:2.4rem">
+    <div class="wrap" style="max-width:760px">
+      <p style="font-size:.82rem;margin-bottom:1.6rem"><a class="link" href="#/blog">← The Journal</a></p>
+      <span class="tag" style="display:inline-block;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--sage);background:var(--sage-soft);padding:.3rem .7rem;border-radius:999px;margin-bottom:1rem">${p.cat}</span>
+      <h1 style="font-size:clamp(2rem,3.6vw,3rem)">${p.title}</h1>
+      <p style="font-size:.86rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:1.4rem;margin-bottom:2rem">${p.author} · ${p.date} · ${p.read}</p>
+      <div style="font-size:1.06rem;line-height:1.75">
+        ${p.body.map((para,i)=>`<p${i===0?' style="font-size:1.2rem;color:#3D473F"':''}>${para}</p>`).join("")}
+      </div>
+      <div class="disclaimer" style="margin-top:2.4rem">This article is educational and is not a substitute for individual medical advice. It is fictional demonstration content created for a portfolio project.</div>
+    </div>
+  </section>`;
+}
+
+function about(){
+  const team=[
+    ["Maren Holloway","Executive Director","Fifteen years in nonprofit program leadership, most recently in community health navigation."],
+    ["Dr. Amara Whitfield","Clinical Advisory Chair","Board-certified gynecologist and menopause clinician; reviews all education content."],
+    ["Josephine Adeyemi","Community Director","Builds and trains the volunteer peer-circle facilitators across Chicagoland."],
+    ["Claire Bennington","Operations & Partnerships","Manages sponsor relationships, grants, and program reporting."],
+    ["Dr. Ruth Kessler","Mental Health Advisor","Clinical psychologist specializing in midlife transitions."],
+    ["Tomas Reyes","Communications Lead","Editorial, web, and member communications."]
+  ];
+  return `
+  <section class="band">
+    <div class="wrap grid g2" style="gap:3.5rem;align-items:center">
+      <div>
+        <p class="eyebrow">Our mission</p>
+        <h1 style="max-width:18ch">Midlife care, without the guesswork.</h1>
+        <p class="lede">Midlife Wellness Alliance exists so that no woman has to assemble her own care team from scratch while also managing symptoms, work, and family.</p>
+        <p>We publish evidence-informed education, maintain a verified provider directory, run free webinars, and convene peer circles across Chicago and nearby communities. Everything we publish is reviewed by a licensed clinician before it goes live.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:200px 200px 20px 20px;padding:3rem 2rem;text-align:center;background-image:linear-gradient(160deg,#EAF0E9,#F1E4E2)">
+        <div style="font-family:var(--serif);font-size:3.2rem;color:var(--forest);line-height:1">1 in 3</div>
+        <p style="max-width:26ch;margin:.8rem auto 0;font-size:.92rem;color:#4C554C">women describe at least one severe menopause symptom — and many never discuss it with a clinician.</p>
+        <p style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:1rem">Illustrative framing for this demonstration</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tint">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">Our story</p><h2>Founded by patients who got tired of being told it was stress.</h2></div></div>
+      <div class="grid g2" style="gap:3rem">
+        <div>
+          <p>The organization began in 2019 as a monthly meetup in a Rogers Park community room. Twelve women, one facilitator, and a shared frustration: every one of them had been told their symptoms were stress, or age, or nothing.</p>
+          <p>What started as peer support became something more structured. Members kept asking the same question — <em>who do I actually see for this?</em> — and the answers were inconsistent, outdated, or simply absent.</p>
+        </div>
+        <div>
+          <p>That question became the provider directory. A small clinical advisory group set the review standard, and a volunteer built the first version in a spreadsheet. It worked, for about a year.</p>
+          <p>Today the Alliance runs a monthly education series, a resource library, and a directory that is checked on a six-month cycle. The next phase is making all of it maintainable by a two-person staff.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">Team</p><h2>Small staff, deep bench</h2><p>Fictional team profiles created for this demonstration.</p></div></div>
+      <div class="grid g3">
+        ${team.map((t,i)=>`
+          <div class="card">
+            <div class="avatar ${["t-sage","t-mauve","t-forest","t-clay","t-plum","t-slate"][i]}" style="width:56px;height:56px;flex:0 0 56px;font-size:1.05rem;margin-bottom:1rem">${t[0].split(" ").map(w=>w[0]).join("")}</div>
+            <h3 style="font-size:1.05rem;margin-bottom:.15rem">${t[0]}</h3>
+            <p style="font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:.6rem">${t[1]}</p>
+            <p style="font-size:.88rem;margin:0">${t[2]}</p>
+          </div>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section class="band deep">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:1.8rem"><div><p class="eyebrow">Community impact</p><h2>What the last year looked like</h2></div></div>
+      <div class="grid g4">
+        ${[["1,240","Webinar attendees"],["68","Peer circle sessions"],["14","Verified providers"],["40+","Free resources"]].map(([n,l])=>`
+          <div><div style="font-family:var(--serif);font-size:2.4rem;color:#F7F3ED;line-height:1">${n}</div><div style="font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#A9BBA9;margin-top:.5rem">${l}</div></div>`).join("")}
+      </div>
+      <p style="font-size:.76rem;color:#A9BBA9;margin-top:2rem;max-width:70ch">Figures are illustrative for this demonstration and do not represent a real organization's performance.</p>
+    </div>
+  </section>`;
+}
+
+function sponsors(){
+  const list=[
+    ["Northlight Health System","Anchor sponsor","Funds the twelve-month webinar series, including speaker honoraria and live captioning.","NH"],
+    ["Cedar & Vine Pharmacy","Program partner","Supports the printed resource library distributed at community clinics across Cook County.","CV"],
+    ["Lakeview Community Foundation","Community funder","Provides general operating support for peer circles and volunteer training.","LC"],
+    ["Harborline Diagnostics","Webinar series partner","Underwrites the recording and captioning of every session in the 2026–2027 series.","HD"],
+    ["Ridgeway Benefits Group","Community supporter","Sponsors the employer midlife wellness toolkit pilot.","RB"]
+  ];
+  return `
+  <section class="band">
+    <div class="wrap">
+      <p class="eyebrow">Sponsors &amp; Partners</p>
+      <h1 style="max-width:22ch">Program support that stays out of the exam room.</h1>
+      <p class="lede">Sponsors fund programs. They do not influence directory listings, search ranking, or clinical content. All sponsorships are disclosed on this page.</p>
+      <div class="grid g2" style="margin-top:2.6rem">
+        ${list.map(([n,tier,desc,mono])=>`
+          <div class="card" style="display:flex;gap:1.3rem;align-items:flex-start">
+            <div style="width:68px;height:68px;flex:0 0 68px;border-radius:16px;background:var(--sage-soft);display:grid;place-items:center;font-family:var(--serif);font-size:1.25rem;color:var(--forest);border:1px solid #D5DFD6">${mono}</div>
+            <div>
+              <h3 style="font-size:1.1rem;margin-bottom:.2rem">${n}</h3>
+              <p style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:.5rem">${tier}</p>
+              <p style="font-size:.9rem;margin:0">${desc}</p>
+            </div>
+          </div>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section class="band tint">
+    <div class="wrap grid g2" style="gap:3rem;align-items:start">
+      <div>
+        <p class="eyebrow">Partnership</p>
+        <h2>Sponsorship inquiry</h2>
+        <p>We work with a small number of sponsors each year. Tell us what you have in mind and we will send the current sponsorship prospectus, including audience data and program details.</p>
+        <div class="side-card" style="margin-top:1.4rem">
+          <h4>What sponsors receive</h4>
+          <p style="font-size:.9rem;margin-bottom:.6rem">Recognition on the sponsor page and in webinar materials, program impact reporting twice a year, and an invitation to the annual community briefing.</p>
+          <p style="font-size:.88rem;color:var(--muted);margin:0">We do not offer sponsored directory placement or sponsored search results.</p>
+        </div>
+      </div>
+      <div class="form-card">
+        <form id="sponsorForm" novalidate>
+          <div class="frow">
+            <div class="field"><label for="sp-name">Name</label><input id="sp-name" type="text" required><span class="err">Required.</span></div>
+            <div class="field"><label for="sp-org">Organization</label><input id="sp-org" type="text" required><span class="err">Required.</span></div>
+          </div>
+          <div class="field"><label for="sp-email">Email</label><input id="sp-email" type="email" required><span class="err">Enter a valid email.</span></div>
+          <div class="field"><label for="sp-interest">Area of interest</label>
+            <select id="sp-interest"><option>Webinar series</option><option>Resource library</option><option>Peer circles</option><option>General operating support</option><option>Something else</option></select></div>
+          <div class="field"><label for="sp-msg">Message</label><textarea id="sp-msg" placeholder="A sentence or two about your organization and what you'd like to support."></textarea></div>
+          <button class="btn block" type="submit">Send inquiry</button>
+          <p style="font-size:.74rem;color:var(--muted);margin:1rem 0 0">Demo form. No data is transmitted.</p>
+        </form>
+      </div>
+    </div>
+  </section>`;
+}
+
+function contact(){
+  return `
+  <section class="band">
+    <div class="wrap grid g2" style="gap:3.4rem;align-items:start">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 style="max-width:16ch">We read every message.</h1>
+        <p class="lede">Questions about the directory, a correction to a listing, a speaking request, or a note about something we got wrong — all of it reaches a person.</p>
+        <div class="side-card" style="margin-top:2rem">
+          <h4>Organization details</h4>
+          <div class="kv"><span>General</span><b>hello@midlifewellnessalliance.example.org</b></div>
+          <div class="kv"><span>Directory</span><b>directory@midlifewellnessalliance.example.org</b></div>
+          <div class="kv"><span>Phone</span><b>(312) 555-0100</b></div>
+          <div class="kv"><span>Office</span><b>Chicago, IL · By appointment</b></div>
+          <div class="kv"><span>Hours</span><b>Mon–Thu, 9am–4pm CT</b></div>
+        </div>
+        <div class="card" style="margin-top:1.2rem;background:var(--sage-soft);border-color:#D5DFD6">
+          <h4 style="margin-bottom:.4rem">Newsletter</h4>
+          <p style="font-size:.88rem;margin-bottom:1rem">One email a month. Event invitations, new resources, no noise.</p>
+          <form class="news" id="contactNews" novalidate>
+            <label class="sr" for="cn-email">Email address</label>
+            <input id="cn-email" type="email" placeholder="you@example.com" required>
+            <button class="btn sm" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3 style="margin-bottom:1.2rem">Send a message</h3>
+        <form id="contactForm" novalidate>
+          <div class="frow">
+            <div class="field"><label for="c-name">Name</label><input id="c-name" type="text" required><span class="err">Please enter your name.</span></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" required><span class="err">Enter a valid email address.</span></div>
+          </div>
+          <div class="field"><label for="c-topic">Topic</label>
+            <select id="c-topic"><option>General inquiry</option><option>Provider directory correction</option><option>Apply to be listed</option><option>Sponsorship</option><option>Press &amp; media</option><option>Accessibility feedback</option></select></div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea><span class="err">Please add a short message.</span></div>
+          <div class="field"><label class="check" for="c-consent"><input id="c-consent" type="checkbox" required><span>I understand this is a demonstration form and no message will be sent.</span></label><span class="err" id="c-consent-err">Please confirm.</span></div>
+          <button class="btn block" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ---------- router ---------- */
+function parse(){
+  const h=(location.hash||"#/home").replace(/^#\/?/,"");
+  const [route,param]=h.split("/");
+  return {route:route||"home",param};
+}
+
+function render(){
+  const {route,param}=parse();
+  const app=$("#app");
+  let html="";
+  switch(route){
+    case "directory": html=directory(); break;
+    case "provider": html=profile(param); break;
+    case "events": html=events(); break;
+    case "register": html=register(param); break;
+    case "resources": html=resources(); break;
+    case "blog": html=blog(); break;
+    case "article": html=article(param); break;
+    case "about": html=about(); break;
+    case "sponsors": html=sponsors(); break;
+    case "contact": html=contact(); break;
+    default: html=home();
+  }
+  app.innerHTML=html;
+  window.scrollTo({top:0,behavior:"instant"});
+  $$(".nav-links a").forEach(a=>a.classList.toggle("active",a.dataset.nav===route));
+  $("#drawer").classList.remove("open");
+  $("#burger").setAttribute("aria-expanded","false");
+
+  if(route==="directory") bindDirectory();
+  if(route==="resources"){ rcat=""; paintResources(); }
+  bindForms(route);
+}
+
+/* ---------- forms ---------- */
+function invalid(field,on){ if(field) field.closest(".field")?.classList.toggle("invalid",on); }
+function emailOk(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+function bindForms(route){
+  const news = ["homeNews","footerNews","contactNews"];
+  news.forEach(id=>{
+    const f=document.getElementById(id); if(!f) return;
+    f.addEventListener("submit",ev=>{
+      ev.preventDefault();
+      const input=f.querySelector("input");
+      if(!emailOk(input.value)){ input.style.borderColor="#B05757"; toast("Please enter a valid email address."); input.focus(); return; }
+      input.value=""; input.style.borderColor="";
+      toast("You're on the list — this demo does not store your address.");
+    });
+  });
+
+  const reg=document.getElementById("regForm");
+  if(reg){
+    reg.addEventListener("submit",ev=>{
+      ev.preventDefault();
+      const first=$("#rg-first"),last=$("#rg-last"),mail=$("#rg-email"),cons=$("#rg-consent");
+      let ok=true;
+      invalid(first,!first.value.trim()); if(!first.value.trim()) ok=false;
+      invalid(last,!last.value.trim()); if(!last.value.trim()) ok=false;
+      invalid(mail,!emailOk(mail.value)); if(!emailOk(mail.value)) ok=false;
+      cons.closest(".field").classList.toggle("invalid",!cons.checked); if(!cons.checked) ok=false;
+      if(!ok){ (document.querySelector(".field.invalid input")||first).focus(); return; }
+      const e=EVENTS.find(x=>x.id===parse().param)||EVENTS[0];
+      $("#regCard").innerHTML=`
+        <div class="confirm">
+          <div class="tick" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6.5" stroke="#344B3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>You're registered</h3>
+          <p style="font-size:.92rem;color:#4C554C">A confirmation email would be sent to <b>${esc(mail.value)}</b> with your Zoom link and calendar file.</p>
+          <div style="background:#F7F4EE;border:1px solid var(--line);border-radius:12px;padding:1rem;text-align:left;margin:1.2rem 0">
+            <div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Your session</div>
+            <b style="display:block;color:var(--forest);font-size:.95rem;margin-bottom:.2rem">${e.title}</b>
+            <span style="font-size:.85rem;color:#4C554C">${fmtDate(e.date)} · ${e.time}</span>
+          </div>
+          <p style="font-size:.8rem;color:var(--muted)">Reminders: 24 hours and 1 hour before. Recording and resources follow within two business days.</p>
+          <a class="btn block sm" href="#/events" style="margin-top:.8rem">Back to all events</a>
+        </div>`;
+      toast("Registration complete (demo).");
+    });
+  }
+
+  const cf=document.getElementById("contactForm");
+  if(cf){
+    cf.addEventListener("submit",ev=>{
+      ev.preventDefault();
+      const n=$("#c-name"),m=$("#c-email"),msg=$("#c-msg"),cons=$("#c-consent");
+      let ok=true;
+      invalid(n,!n.value.trim()); if(!n.value.trim()) ok=false;
+      invalid(m,!emailOk(m.value)); if(!emailOk(m.value)) ok=false;
+      invalid(msg,!msg.value.trim()); if(!msg.value.trim()) ok=false;
+      cons.closest(".field").classList.toggle("invalid",!cons.checked); if(!cons.checked) ok=false;
+      if(!ok){ (document.querySelector(".field.invalid input, .field.invalid textarea")||n).focus(); return; }
+      cf.innerHTML=`
+        <div class="confirm">
+          <div class="tick" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6.5" stroke="#344B3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Message received</h3>
+          <p style="font-size:.92rem;color:#4C554C">In a production site this would create a Wix Forms submission and trigger an auto-reply. Nothing was actually sent.</p>
+        </div>`;
+      toast("Message sent (demo).");
+    });
+  }
+
+  const sf=document.getElementById("sponsorForm");
+  if(sf){
+    sf.addEventListener("submit",ev=>{
+      ev.preventDefault();
+      const n=$("#sp-name"),o=$("#sp-org"),m=$("#sp-email");
+      let ok=true;
+      invalid(n,!n.value.trim()); if(!n.value.trim()) ok=false;
+      invalid(o,!o.value.trim()); if(!o.value.trim()) ok=false;
+      invalid(m,!emailOk(m.value)); if(!emailOk(m.value)) ok=false;
+      if(!ok) return;
+      sf.innerHTML=`<div class="confirm"><div class="tick" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6.5" stroke="#344B3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Inquiry received</h3><p style="font-size:.92rem;color:#4C554C">Thank you — the sponsorship prospectus would arrive within two business days. Demo only.</p></div>`;
+      toast("Inquiry sent (demo).");
+    });
+  }
+}
+
+/* ---------- init ---------- */
+$("#burger").addEventListener("click",()=>{
+  const d=$("#drawer"), b=$("#burger");
+  const open=d.classList.toggle("open");
+  b.setAttribute("aria-expanded",String(open));
+});
+window.addEventListener("hashchange",render);
+try{ render(); }
+catch(err){
+  const a=document.getElementById("app");
+  if(a) a.innerHTML='<section class="band"><div class="wrap"><h2>Prototype error</h2><pre style="white-space:pre-wrap;font-size:.78rem;color:#8a3b3b">'+(err&&err.message?err.message:String(err))+'</pre></div></section>';
+}
+</script>
+</body>
+</html>

@@ -65,6 +65,14 @@
   margin: 0 0 28px;
 }
 
+.mlw-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
 .mlw-note {
   font-family: var(--v2-mono);
   font-size: 11px;
