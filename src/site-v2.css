@@ -1337,6 +1337,22 @@
   align-self: flex-start;
 }
 
+/* ---------- closing cta booking link ---------- */
+
+.closing-booking-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--v2-gold);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.closing-booking-link:hover {
+  color: var(--v2-gold-soft);
+}
+
 /* ---------- mobile action bar ---------- */
 
 .v2-mobile-cta,

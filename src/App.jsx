@@ -19,6 +19,7 @@ import {
   Mail,
   MapPin,
   MessageCircle,
+  CalendarDays,
   CheckCircle2,
   Layers3,
   Workflow,
@@ -862,6 +863,18 @@ function MobileActionBar() {
   );
 }
 
+function SiteActionBar() {
+  const { pathname } = useLocation();
+  if (pathname === "/contact") return null;
+
+  return (
+    <>
+      <div className="v2-cta-spacer" />
+      <MobileActionBar />
+    </>
+  );
+}
+
 function FaqSection({ industry }) {
   return (
     <section className="v2-section" id="chapter-questions">
@@ -1549,8 +1562,6 @@ function Home() {
 
       <FaqSection industry={industry} />
       <ContactBanner />
-      <div className="v2-cta-spacer" />
-      <MobileActionBar />
     </>
   );
 }
@@ -2675,6 +2686,16 @@ function ContactBanner() {
             </Link>
 
             <a
+              className="closing-booking-link"
+              href={bookingUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <CalendarDays size={17} />
+              Book a 30-minute call
+            </a>
+
+            <a
               className="closing-whatsapp-link"
               href={`https://wa.me/${whatsapp}`}
               target="_blank"
@@ -2756,6 +2777,7 @@ function App() {
         <AnimatedRoutes />
         <Footer />
       </div>
+      <SiteActionBar />
     </BrowserRouter>
   );
 }
