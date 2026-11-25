@@ -36,6 +36,7 @@ import "./App.css";
 import "./creative-portfolio.css";
 import "./site-v2.css";
 import { industries, getIndustry } from "./industries";
+import MidlifeCaseStudy from "./MidlifeCaseStudy";
 import logo from "./assets/beakon-lockup-dark.svg";
 import portrait from "./assets/my image.png";
 import aboutPortrait from "./assets/2nd image.jpg";
@@ -249,6 +250,26 @@ const websiteProjects = [
       "Website redesign",
       "Visual presentation and page layout",
       "Digital experience refinement",
+    ],
+  },
+  {
+    slug: "midlife-wellness-alliance",
+    title: "Midlife Wellness Alliance",
+    category: "Website Design & Redesign",
+    description:
+      "A verified provider directory and webinar system for a women's health nonprofit — ten templates, a 25-field CMS collection, and an automated registration sequence.",
+    tools: ["Wix Studio", "CMS Architecture", "Velo", "Automation"],
+    caseStudy: true,
+    previewOverline: "SELF-INITIATED DEMONSTRATION",
+    previewLabel: "MIDLIFE WELLNESS ALLIANCE",
+    previewDescription: "Website · Directory · Automation",
+    overview:
+      "A self-initiated demonstration project: a ten-template website, a searchable verified provider directory backed by a 25-field CMS collection, and a webinar registration system with a human review gate before anything sends.",
+    work: [
+      "Website design and responsive page system",
+      "CMS collection and dynamic provider profiles",
+      "Webinar registration automation and email sequence",
+      "Staff documentation and an 18-case QA pass",
     ],
   },
   {
@@ -716,11 +737,21 @@ function IndustryWork({ industry, limit = 3, id = "chapter-work" }) {
                 }`}
               >
                 <span className="v2-work-tag">{project.category}</span>
-                <img
-                  src={project.cover}
-                  alt={`${project.title} preview`}
-                  loading="lazy"
-                />
+                {project.cover ? (
+                  <img
+                    src={project.cover}
+                    alt={`${project.title} preview`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="website-project-preview">
+                    <span className="website-preview-overline">
+                      {project.previewOverline || "THE BEAKON / WEBSITE REDESIGN"}
+                    </span>
+                    <strong>{project.previewLabel || project.title}</strong>
+                    <span>{project.previewDescription || "Website redesign"}</span>
+                  </div>
+                )}
               </div>
               <div className="v2-work-body">
                 <h3>{project.title}</h3>
@@ -1402,7 +1433,9 @@ function ProjectCard({ project, index = 0 }) {
 
           {(!project.cover || coverFailed) && !project.kind && (
             <div className="website-project-preview">
-              <span className="website-preview-overline">THE BEAKON / WEBSITE REDESIGN</span>
+              <span className="website-preview-overline">
+                {project.previewOverline || "THE BEAKON / WEBSITE REDESIGN"}
+              </span>
               <strong>{project.previewLabel || project.title}</strong>
               <span>{project.previewDescription || "Website redesign"}</span>
             </div>
@@ -1859,6 +1892,15 @@ function ProjectDetails() {
     );
   }
 
+  if (project.caseStudy) {
+    return (
+      <>
+        <MidlifeCaseStudy />
+        <ContactBanner />
+      </>
+    );
+  }
+
   const isWebsite = Boolean(project.liveUrl);
   const gallery = project.images?.length
     ? project.images
@@ -1939,7 +1981,9 @@ function ProjectDetails() {
             <img src={project.cover} alt={`${project.title} project preview`} />
           ) : (
             <div className="website-project-preview detail-website-preview">
-              <span className="website-preview-overline">THE BEAKON / WEBSITE REDESIGN</span>
+              <span className="website-preview-overline">
+                {project.previewOverline || "THE BEAKON / WEBSITE REDESIGN"}
+              </span>
               <strong>{project.previewLabel || project.title}</strong>
               <span>{project.previewDescription || project.description}</span>
             </div>
