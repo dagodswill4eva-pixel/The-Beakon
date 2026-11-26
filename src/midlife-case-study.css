@@ -458,10 +458,10 @@
 
 .mlw-frame {
   background: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--mlw-border);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 30px 70px -50px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 18px 40px -34px rgba(23, 33, 29, 0.3);
 }
 
 .mlw-bar {
@@ -511,7 +511,7 @@
   gap: 10px;
   font-size: 0.79rem;
   line-height: 1.6;
-  color: var(--v2-muted);
+  color: var(--mlw-ink-light);
   margin-top: 12px;
 }
 

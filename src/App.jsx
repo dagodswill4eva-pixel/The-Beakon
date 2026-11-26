@@ -37,6 +37,7 @@ import "./creative-portfolio.css";
 import "./site-v2.css";
 import { industries, getIndustry } from "./industries";
 import MidlifeCaseStudy from "./MidlifeCaseStudy";
+import FlowPilotCaseStudy from "./FlowPilotCaseStudy";
 import logo from "./assets/beakon-lockup-dark.svg";
 import portrait from "./assets/my image.png";
 import aboutPortrait from "./assets/2nd image.jpg";
@@ -270,6 +271,27 @@ const websiteProjects = [
       "CMS collection and dynamic provider profiles",
       "Webinar registration automation and email sequence",
       "Staff documentation and an 18-case QA pass",
+    ],
+  },
+  {
+    slug: "flowpilot-ai",
+    title: "FlowPilot AI",
+    category: "CRM & Automation",
+    description:
+      "An AI CRM workspace concept for a home-services business — ten views, six workflows and a voice receptionist that books appointments and writes them back to the record.",
+    tools: ["GoHighLevel Concept", "Interface Design", "Workflow Logic", "AI Voice"],
+    caseStudy: true,
+    previewOverline: "SELF-INITIATED DEMONSTRATION",
+    previewLabel: "FLOWPILOT AI",
+    previewDescription: "CRM · Automations · Voice AI",
+    overview:
+      "A self-initiated demonstration project: a ten-view CRM workspace with a drag-and-drop pipeline, six lead-handling workflows, an AI receptionist and an agency provisioning console. Every figure is simulated and every integration is designed rather than connected.",
+    work: [
+      "Workspace interface across ten views",
+      "Contact, pipeline and activity data model",
+      "Six workflows with retry and review states",
+      "Voice agent configuration and call simulation",
+      "Provisioning console with idempotency keys",
     ],
   },
   {
@@ -771,26 +793,72 @@ function IndustryWork({ industry, limit = 3, id = "chapter-work" }) {
   );
 }
 
-const caseStudyPoints = [
+const caseStudies = [
   {
-    title: "A directory people can actually search",
-    body: "Five filters that stack, a live result count, and a verification date on every card instead of a stale spreadsheet.",
+    slug: "midlife-wellness-alliance",
+    mark: "MW",
+    tag: "Self-initiated demo",
+    name: "Midlife Wellness Alliance",
+    line: "A verified provider directory and webinar system, built so two staff can run it without a developer.",
+    stats: [
+      ["10", "templates"],
+      ["25", "CMS fields"],
+      ["18", "QA cases · 0 fails"],
+      ["6", "views built"],
+    ],
+    preview: (
+      <>
+        <span className="v2-case-eb">PERIMENOPAUSE · MENOPAUSE</span>
+        <h4>Answers, and the right provider.</h4>
+        <p>
+          Verified clinicians, free webinars and plain-language resources — no
+          jargon, no sales pitch.
+        </p>
+        <div className="v2-case-pills">
+          <span className="is-solid">Find a Provider</span>
+          <span>See events</span>
+        </div>
+        <div className="v2-case-rows">
+          <div><span>Verified listings</span><b>14</b></div>
+          <div><span>Specialties</span><b>9</b></div>
+          <div><span>This month&rsquo;s webinar</span><b>Free</b></div>
+        </div>
+      </>
+    ),
   },
   {
-    title: "A site two people can run",
-    body: "Twenty-five fields per record, and a review queue driven by the verification date — no developer on call for every update.",
+    slug: "flowpilot-ai",
+    mark: "FP",
+    tag: "Self-initiated demo",
+    name: "FlowPilot AI",
+    line: "An AI CRM workspace where six lead sources land in one record and a voice agent books the job.",
+    stats: [
+      ["10", "views"],
+      ["6", "workflows"],
+      ["2,847", "contacts"],
+      ["1,842", "runs a day"],
+    ],
+    preview: (
+      <>
+        <span className="v2-case-eb">WORKSPACE · GROWTH PLAN</span>
+        <h4>Every lead answered, none dropped.</h4>
+        <div className="v2-case-kpis">
+          <div><span>Leads</span><b>412</b></div>
+          <div><span>Capture</span><b>68.4%</b></div>
+          <div><span>Reply</span><b>38s</b></div>
+        </div>
+        <div className="v2-case-wave">
+          {[38, 52, 44, 66, 58, 78, 92].map((height, index) => (
+            <span key={index} style={{ height: `${height}%` }} />
+          ))}
+        </div>
+        <div className="v2-case-rows">
+          <div><span>Ava · calls today</span><b>34</b></div>
+          <div><span>Booked on the call</span><b>9</b></div>
+        </div>
+      </>
+    ),
   },
-  {
-    title: "Automation with a brake",
-    body: "Registration through to follow-up, with a human review gate so nothing sends without a person approving it.",
-  },
-];
-
-const caseStudyStats = [
-  ["10", "responsive templates"],
-  ["25", "CMS fields"],
-  ["18", "QA cases · 0 fails"],
-  ["6", "views built"],
 ];
 
 function FeaturedCaseStudy() {
@@ -800,82 +868,62 @@ function FeaturedCaseStudy() {
         <div className="v2-casehead">
           <span className="v2-casebadge">
             <span className="v2-casedot" />
-            Case study
+            Case studies
           </span>
           <h2 className="v2-casetitle">
             The full <em>build</em>
           </h2>
           <p>
-            One project, end to end. Website, directory and automation working
-            together — so you can see how the pieces fit rather than as separate
-            services.
+            Each project runs end to end rather than as a slice of one service,
+            so you can see how the pieces fit together before we start.
           </p>
         </div>
 
         <div className="v2-ccards">
-          <Link to="/work/midlife-wellness-alliance" className="v2-ccard">
-            <div className="v2-ccard-media">
-              <div className="v2-case-frame">
-                <div className="v2-case-bar">
-                  <i /><i /><i />
-                  <span>midlifewellness.example.org</span>
-                </div>
-                <div className="v2-case-screen">
-                  <span className="v2-case-eb">PERIMENOPAUSE · MENOPAUSE</span>
-                  <h4>Answers, and the right provider.</h4>
-                  <p>
-                    Verified clinicians, free webinars and plain-language
-                    resources — no jargon, no sales pitch.
-                  </p>
-                  <div className="v2-case-pills">
-                    <span className="is-solid">Find a Provider</span>
-                    <span>See events</span>
+          {caseStudies.map((study) => (
+            <Link
+              to={`/work/${study.slug}`}
+              className={`v2-ccard ${study.slug === "flowpilot-ai" ? "is-dash" : ""}`}
+              key={study.slug}
+            >
+              <div className="v2-ccard-media">
+                <div className="v2-case-frame">
+                  <div className="v2-case-bar">
+                    <i /><i /><i />
+                    <span>
+                      {study.slug === "flowpilot-ai"
+                        ? "app.flowpilot.ai/overview"
+                        : "midlifewellness.example.org"}
+                    </span>
                   </div>
-                  <div className="v2-case-rows">
-                    <div><span>Verified listings</span><b>14</b></div>
-                    <div><span>Specialties</span><b>9</b></div>
-                    <div><span>This month&rsquo;s webinar</span><b>Free</b></div>
-                  </div>
+                  <div className="v2-case-screen">{study.preview}</div>
                 </div>
               </div>
-            </div>
 
-            <div className="v2-ccard-body">
-              <div className="v2-ccard-top">
-                <span className="v2-cmark">MW</span>
-                <span className="v2-ccard-tag">Self-initiated demonstration</span>
+              <div className="v2-ccard-body">
+                <div className="v2-ccard-top">
+                  <span className="v2-cmark">{study.mark}</span>
+                  <span className="v2-ccard-tag">{study.tag}</span>
+                </div>
+
+                <strong className="v2-ccard-name">{study.name}</strong>
+                <span className="v2-ccard-line">{study.line}</span>
+
+                <div className="v2-ccard-stats">
+                  {study.stats.map(([value, label]) => (
+                    <div key={label}>
+                      <b>{value}</b>
+                      <span>{label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <span className="v2-ccard-btn">
+                  View case study <ArrowRight size={15} />
+                </span>
               </div>
-
-              <strong className="v2-ccard-name">Midlife Wellness Alliance</strong>
-              <span className="v2-ccard-line">
-                A women&rsquo;s health nonprofit needed patients to find the
-                right provider in under two minutes, and two staff to keep 40+
-                listings current without a developer.
-              </span>
-
-              <ul className="v2-ccard-points">
-                {caseStudyPoints.map((point) => (
-                  <li key={point.title}>
-                    <strong>{point.title}</strong>
-                    <span>{point.body}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="v2-ccard-stats">
-                {caseStudyStats.map(([value, label]) => (
-                  <div key={label}>
-                    <b>{value}</b>
-                    <span>{label}</span>
-                  </div>
-                ))}
-              </div>
-
-              <span className="v2-ccard-btn">
-                View case study <ArrowRight size={15} />
-              </span>
-            </div>
-          </Link>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
@@ -2005,9 +2053,14 @@ function ProjectDetails() {
   }
 
   if (project.caseStudy) {
+    const CaseStudy =
+      project.slug === "flowpilot-ai"
+        ? FlowPilotCaseStudy
+        : MidlifeCaseStudy;
+
     return (
       <>
-        <MidlifeCaseStudy />
+        <CaseStudy />
         <ContactBanner />
       </>
     );

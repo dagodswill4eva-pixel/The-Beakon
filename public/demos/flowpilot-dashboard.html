@@ -1,0 +1,2280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowPilot AI — Workspace</title>
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#060B14;
+    --bg-soft:#0A1220;
+    --panel:#0D1626;
+    --panel-2:#111C30;
+    --panel-3:#16233A;
+    --line:#1B2940;
+    --line-soft:rgba(141,160,189,.14);
+    --ink:#EAF1FB;
+    --muted:#8DA0BD;
+    --faint:#5F7395;
+    --blue:#3B82F6;
+    --cyan:#22D3EE;
+    --mint:#34D399;
+    --amber:#F5B851;
+    --rose:#FB7185;
+    --violet:#A78BFA;
+    --r-sm:10px;
+    --r-md:14px;
+    --r-lg:20px;
+    --shadow:0 24px 60px -32px rgba(0,0,0,.85);
+    --font:"Inter","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+    font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(900px 500px at 12% -10%, rgba(59,130,246,.13), transparent 60%),
+      radial-gradient(760px 420px at 96% -6%, rgba(34,211,238,.08), transparent 60%),
+      linear-gradient(180deg,#060B14 0%,#060B14 100%);
+    background-attachment:fixed;
+  }
+  h1,h2,h3,h4,p{margin:0}
+  button,input,select,textarea{font:inherit;color:inherit}
+  button{cursor:pointer;background:none;border:0}
+  a{color:inherit}
+  ::selection{background:rgba(34,211,238,.28)}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:#1D2C45;border-radius:20px;border:2px solid transparent;background-clip:content-box}
+  ::-webkit-scrollbar-track{background:transparent}
+  .icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .icon-sm{width:15px;height:15px}
+
+  .app{display:flex;min-height:100vh}
+  /* ---------- sidebar ---------- */
+  .sidebar{
+    width:248px;flex:0 0 248px;height:100vh;position:sticky;top:0;z-index:60;
+    display:flex;flex-direction:column;gap:14px;padding:18px 14px 16px;
+    background:linear-gradient(180deg,#091120 0%,#070D18 65%);
+    border-right:1px solid var(--line-soft);
+  }
+  .brand{display:flex;align-items:center;gap:10px;padding:2px 6px 6px}
+  .brand-mark{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+    background:linear-gradient(145deg,#2563EB,#22D3EE);box-shadow:0 8px 22px -8px rgba(37,99,235,.9);flex:none}
+  .brand-mark svg{width:20px;height:20px;stroke:#04121F;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .brand-name{font-size:15px;font-weight:650;letter-spacing:-.015em;line-height:1.2}
+  .brand-name span{color:var(--cyan)}
+  .brand-sub{font-size:10.5px;color:var(--faint);letter-spacing:.07em;font-weight:500;margin-top:2px}
+  .workspace{
+    display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;
+    background:linear-gradient(180deg,rgba(22,35,58,.85),rgba(17,28,48,.7));
+    border:1px solid var(--line);cursor:pointer;transition:border-color .18s;
+  }
+  .workspace:hover{border-color:#2A3D5C}
+  .ws-avatar{width:28px;height:28px;border-radius:8px;flex:none;display:grid;place-items:center;
+    background:linear-gradient(150deg,#1E3A8A,#0E7490);font-size:10.5px;font-weight:700;color:#CFFAFE;letter-spacing:.02em}
+  .ws-meta{min-width:0;flex:1}
+  .ws-name{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ws-plan{font-size:10.5px;color:var(--faint)}
+  .ws-plan b{color:var(--cyan);font-weight:600}
+  .ws-chev{color:var(--faint)}
+  .nav{display:flex;flex-direction:column;gap:2px;overflow-y:auto;padding-right:2px;flex:1}
+  .nav-group{font-size:10.5px;font-weight:600;color:var(--faint);padding:14px 12px 5px;letter-spacing:.04em}
+  .nav-link{
+    display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:9px;
+    color:#93A5C3;font-size:12.8px;font-weight:500;text-align:left;width:100%;
+    transition:background .15s,color .15s;position:relative;
+  }
+  .nav-link:hover{background:rgba(148,178,230,.06);color:var(--ink)}
+  .nav-link.active{
+    background:linear-gradient(90deg,rgba(59,130,246,.22),rgba(34,211,238,.05));
+    color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(80,150,255,.22);
+  }
+  .nav-link.active::before{content:"";position:absolute;left:-14px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(180deg,var(--cyan),var(--blue))}
+  .nav-link .icon{width:16.5px;height:16.5px;opacity:.9}
+  .nav-badge{margin-left:auto;font-size:10px;font-weight:700;padding:1px 6px;border-radius:20px;background:rgba(34,211,238,.14);color:var(--cyan);border:1px solid rgba(34,211,238,.2)}
+  .nav-badge.warn{background:rgba(245,184,81,.13);color:var(--amber);border-color:rgba(245,184,81,.22)}
+  .side-foot{border-top:1px solid var(--line-soft);padding-top:12px;display:flex;flex-direction:column;gap:10px}
+  .proto-note{display:flex;gap:8px;padding:9px 10px;border-radius:10px;background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.14);font-size:10.8px;color:#8FB6C9;line-height:1.45}
+  .proto-note .icon{width:14px;height:14px;color:var(--cyan);margin-top:1px}
+  .user{display:flex;align-items:center;gap:9px;padding:4px 6px;border-radius:10px;cursor:pointer}
+  .user:hover{background:rgba(148,178,230,.05)}
+  .avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:10.5px;font-weight:700;flex:none;background:#1E3A8A;color:#DBEAFE;border:1px solid rgba(255,255,255,.1)}
+  .user-meta{flex:1;min-width:0}
+  .user-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .user-role{font-size:10.5px;color:var(--faint)}
+  .side-backdrop{display:none}
+
+  /* ---------- main / topbar ---------- */
+  .main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .topbar{
+    position:sticky;top:0;z-index:50;height:62px;display:flex;align-items:center;gap:14px;
+    padding:0 24px;border-bottom:1px solid var(--line-soft);
+    background:rgba(6,11,20,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .menu-btn{display:none}
+  .crumb{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--faint);min-width:0}
+  .crumb b{color:var(--muted);font-weight:500}
+  .crumb .sep{opacity:.5}
+  .crumb .here{color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .search{
+    display:flex;align-items:center;gap:8px;height:34px;padding:0 10px 0 11px;width:250px;
+    border-radius:9px;border:1px solid var(--line);background:rgba(13,22,38,.85);color:var(--faint);
+    transition:border-color .18s, box-shadow .18s;
+  }
+  .search:focus-within{border-color:#2F6BD8;box-shadow:0 0 0 3px rgba(59,130,246,.14)}
+  .search input{border:0;background:none;outline:none;flex:1;min-width:0;font-size:12.5px;color:var(--ink)}
+  .search input::placeholder{color:var(--faint)}
+  .search kbd{font-family:var(--font);font-size:10px;color:var(--faint);border:1px solid var(--line);border-radius:4px;padding:0 4px;line-height:15px}
+  .env-pill{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:#9FD9E6;
+    background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.18);padding:4px 9px;border-radius:20px;white-space:nowrap}
+  .env-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+  .icon-btn{width:33px;height:33px;border-radius:9px;display:grid;place-items:center;color:var(--muted);border:1px solid transparent;position:relative}
+  .icon-btn:hover{background:rgba(148,178,230,.07);color:var(--ink);border-color:var(--line)}
+  .icon-btn .dot{position:absolute;top:7px;right:7px;width:5px;height:5px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 2px #0A1220}
+  .avatar-btn{width:31px;height:31px;border-radius:50%;background:linear-gradient(150deg,#2563EB,#0891B2);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18)}
+
+  .content{padding:22px 26px 70px;max-width:1560px;width:100%;margin:0 auto}
+  .view{display:none}
+  .view.active{display:block;animation:viewIn .28s ease}
+  @keyframes viewIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .page-head h1{font-size:22px;font-weight:650;letter-spacing:-.025em;line-height:1.15}
+  .page-head p{color:var(--muted);font-size:12.5px;margin-top:4px}
+  .head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+  .notice{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:11px;margin-bottom:16px;
+    background:linear-gradient(90deg,rgba(59,130,246,.09),rgba(34,211,238,.04));
+    border:1px solid rgba(59,130,246,.2);font-size:12px;color:#A9C3DE}
+  .notice b{color:#E3F0FF;font-weight:600}
+  .notice .icon{color:var(--cyan);margin-top:2px}
+  .notice button{margin-left:auto;color:var(--faint);font-size:16px;line-height:1;padding:2px 4px;border-radius:4px}
+  .notice button:hover{color:var(--ink)}
+
+  /* ---------- generic ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 13px;
+    border-radius:8px;border:1px solid var(--line);background:rgba(17,28,48,.7);color:#C7D6EC;
+    font-size:12.5px;font-weight:550;white-space:nowrap;transition:background .16s,border-color .16s,transform .12s;
+  }
+  .btn:hover{background:rgba(29,44,69,.85);border-color:#2B3F5E;color:#fff}
+  .btn:active{transform:translateY(1px)}
+  .btn .icon{width:15px;height:15px}
+  .btn-primary{background:linear-gradient(135deg,#2F6FE4,#1AA7C4);border-color:rgba(80,180,255,.5);color:#fff;box-shadow:0 8px 22px -12px rgba(47,111,228,.9)}
+  .btn-primary:hover{background:linear-gradient(135deg,#3B7DF0,#22BBD8);border-color:rgba(110,200,255,.7);color:#fff}
+  .btn-sm{height:29px;padding:0 10px;font-size:11.8px;border-radius:7px}
+  .btn-ghost{background:transparent;border-color:transparent;color:var(--muted)}
+  .btn-ghost:hover{background:rgba(148,178,230,.07);border-color:var(--line);color:var(--ink)}
+  .btn-danger{color:#FFB4BE;border-color:rgba(251,113,133,.25);background:rgba(251,113,133,.08)}
+  .btn-danger:hover{background:rgba(251,113,133,.16);border-color:rgba(251,113,133,.4)}
+
+  .card{background:linear-gradient(180deg,#101A2C 0%,#0C1424 100%);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow)}
+  .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 17px;border-bottom:1px solid var(--line-soft)}
+  .card-head h2{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+  .card-head p{font-size:11.5px;color:var(--faint);margin-top:1px}
+  .card-body{padding:16px 17px}
+  .link-btn{display:inline-flex;align-items:center;gap:5px;font-size:11.8px;font-weight:550;color:#7FB0E8;padding:3px 2px;border-radius:5px}
+  .link-btn:hover{color:var(--cyan)}
+  .link-btn .icon{width:13px;height:13px}
+
+  .tag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:5px;
+    background:rgba(148,178,230,.08);color:#9FB3D1;border:1px solid rgba(148,178,230,.12);white-space:nowrap}
+  .tag.blue{background:rgba(59,130,246,.12);color:#8DBBF7;border-color:rgba(59,130,246,.24)}
+  .tag.cyan{background:rgba(34,211,238,.1);color:#67E0EF;border-color:rgba(34,211,238,.2)}
+  .tag.mint{background:rgba(52,211,153,.1);color:#6EE7B7;border-color:rgba(52,211,153,.2)}
+  .tag.amber{background:rgba(245,184,81,.1);color:#F7C877;border-color:rgba(245,184,81,.22)}
+  .tag.rose{background:rgba(251,113,133,.1);color:#FDA4AF;border-color:rgba(251,113,133,.22)}
+  .tag.violet{background:rgba(167,139,250,.1);color:#C4B5FD;border-color:rgba(167,139,250,.22)}
+  .status-pill{display:inline-flex;align-items:center;gap:5px;font-size:10.8px;font-weight:600;padding:3px 8px;border-radius:20px;
+    background:rgba(52,211,153,.1);color:#6EE7B7;border:1px solid rgba(52,211,153,.2)}
+  .status-pill .d{width:5px;height:5px;border-radius:50%;background:currentColor}
+  .status-pill.paused{background:rgba(148,178,230,.08);color:#94A9C8;border-color:rgba(148,178,230,.16)}
+  .status-pill.error{background:rgba(251,113,133,.1);color:#FDA4AF;border-color:rgba(251,113,133,.24)}
+  .status-pill.draft{background:rgba(167,139,250,.1);color:#C4B5FD;border-color:rgba(167,139,250,.2)}
+  .status-pill.provisioning{background:rgba(245,184,81,.1);color:#F7C877;border-color:rgba(245,184,81,.22)}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}
+  .kpi{padding:14px 15px 12px;border-radius:12px;background:linear-gradient(180deg,#0F1929,#0C1423);border:1px solid var(--line);position:relative;overflow:hidden}
+  .kpi::after{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent)}
+  .kpi-label{font-size:11px;color:var(--muted);font-weight:500;display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .kpi-label .icon{width:14px;height:14px;color:var(--faint)}
+  .kpi-val{font-size:25px;font-weight:650;letter-spacing:-.03em;margin-top:6px;font-variant-numeric:tabular-nums;line-height:1.1}
+  .kpi-val small{font-size:12px;color:var(--faint);font-weight:500;letter-spacing:0}
+  .kpi-meta{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:10.8px;color:var(--faint)}
+  .delta{font-weight:600;font-size:10.5px;display:inline-flex;align-items:center;gap:2px;color:var(--mint)}
+  .delta.down{color:var(--rose)}
+  .spark{width:100%;height:26px;margin-top:8px;display:block;opacity:.85}
+
+  .overview-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;margin-bottom:14px}
+  .chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px 17px 8px;flex-wrap:wrap}
+  .chart-head h2{font-size:13.5px;font-weight:600}
+  .chart-head p{font-size:11.5px;color:var(--faint);margin-top:2px}
+  .seg{display:inline-flex;padding:2px;border-radius:8px;background:#0A1322;border:1px solid var(--line);gap:2px}
+  .seg button{font-size:10.8px;font-weight:600;color:var(--faint);padding:3px 9px;border-radius:6px}
+  .seg button.active{background:#1A2B45;color:#DDEBFF;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+  .chart-wrap{padding:6px 17px 16px}
+  .legend{display:flex;gap:14px;padding:0 2px 10px;font-size:10.8px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:8px;height:8px;border-radius:2px;display:inline-block}
+  .bars{display:flex;align-items:flex-end;gap:0;height:172px;position:relative;padding-top:6px;
+    background-image:linear-gradient(180deg,rgba(148,178,230,.09) 1px,transparent 1px);background-size:100% 43px}
+  .bar-group{flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center;gap:3px;position:relative}
+  .bar-group:hover .bar{filter:brightness(1.25)}
+  .bar{width:7px;border-radius:3px 3px 1px 1px;min-height:3px;transition:height .45s cubic-bezier(.2,.8,.2,1),filter .15s}
+  .bar.leads{background:linear-gradient(180deg,#3B82F6,#1D4ED8)}
+  .bar.booked{background:linear-gradient(180deg,#22D3EE,#0891B2)}
+  .axis{display:flex;justify-content:space-between;margin-top:8px;font-size:10px;color:var(--faint);padding:0 2px}
+  .chart-foot{display:flex;gap:18px;padding:12px 17px 15px;border-top:1px solid var(--line-soft);margin-top:2px}
+  .cf-item{font-size:11px;color:var(--faint)}
+  .cf-item b{display:block;font-size:13.5px;color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600;margin-top:1px}
+
+  .ava-card{position:relative;overflow:hidden;background:
+    radial-gradient(520px 240px at 100% 0%, rgba(34,211,238,.16), transparent 62%),
+    radial-gradient(380px 300px at -10% 110%, rgba(59,130,246,.18), transparent 60%),
+    linear-gradient(180deg,#101C31,#0B1525);border:1px solid #1E3352;border-radius:var(--r-md);display:flex;flex-direction:column}
+  .ava-top{display:flex;align-items:center;justify-content:space-between;padding:16px 17px 0;gap:10px}
+  .ava-title{display:flex;align-items:center;gap:9px}
+  .ava-orb{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:radial-gradient(circle at 34% 30%,#67E8F9,#0E7490 62%,#082F49);
+    box-shadow:0 0 0 1px rgba(34,211,238,.4),0 0 22px -2px rgba(34,211,238,.55)}
+  .ava-orb svg{width:15px;height:15px;stroke:#04222B;stroke-width:2;fill:none}
+  .ava-title h2{font-size:13.5px;font-weight:600}
+  .ava-title p{font-size:10.5px;color:#7FA8BF}
+  .live-pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:#6EE7B7;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.22);padding:3px 8px;border-radius:20px}
+  .live-pill .pulse{width:5px;height:5px;border-radius:50%;background:#34D399;animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 5px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  .wave{display:flex;align-items:center;gap:2.5px;height:26px;padding:12px 17px 0}
+  .wave i{width:2.5px;border-radius:2px;background:linear-gradient(180deg,#22D3EE,#2563EB);opacity:.55;animation:wave 1.6s ease-in-out infinite}
+  @keyframes wave{0%,100%{height:5px;opacity:.35}50%{height:20px;opacity:.9}}
+  .ava-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);margin:14px 17px 0;border-radius:10px;overflow:hidden;border:1px solid var(--line-soft)}
+  .ava-stat{background:rgba(9,17,30,.72);padding:10px 12px}
+  .ava-stat span{font-size:10.5px;color:#7FA0BC;display:block}
+  .ava-stat b{font-size:19px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.3}
+  .ava-stat b em{font-style:normal;font-size:10.5px;color:#5F7F9C;font-weight:500;letter-spacing:0;margin-left:2px}
+  .ava-foot{margin-top:auto;display:flex;align-items:center;gap:8px;padding:14px 17px 16px}
+  .ava-foot .btn{flex:1}
+  .mini-link{font-size:11px;color:#7FA8BF;padding:4px 6px;border-radius:5px;white-space:nowrap}
+  .mini-link:hover{color:var(--cyan)}
+
+  .bottom-grid{display:grid;grid-template-columns:1.05fr 1.1fr .85fr;gap:14px}
+  .stage-row{display:grid;grid-template-columns:118px 1fr 64px;align-items:center;gap:10px;padding:5px 0}
+  .stage-row .s-name{font-size:11.5px;color:#A9BAD4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+  .stage-row .s-name i{width:5px;height:5px;border-radius:50%;flex:none}
+  .s-track{height:6px;border-radius:4px;background:#132038;overflow:hidden}
+  .s-fill{height:100%;border-radius:4px}
+  .s-val{font-size:10.8px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .feed{display:flex;flex-direction:column;gap:0}
+  .feed-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid rgba(141,160,189,.07);position:relative}
+  .feed-item:last-child{border-bottom:0;padding-bottom:0}
+  .feed-ic{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:none;margin-top:1px;background:rgba(59,130,246,.1);color:#7FB0E8}
+  .feed-ic .icon{width:13px;height:13px}
+  .feed-ic.mint{background:rgba(52,211,153,.1);color:#6EE7B7}
+  .feed-ic.cyan{background:rgba(34,211,238,.1);color:#67E0EF}
+  .feed-ic.amber{background:rgba(245,184,81,.1);color:#F7C877}
+  .feed-txt{font-size:11.8px;color:#B9C8DD;line-height:1.45}
+  .feed-txt b{color:#EAF1FB;font-weight:600}
+  .feed-time{font-size:10.2px;color:var(--faint);margin-top:1px}
+  .health{display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);margin-bottom:12px}
+  .ring{width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:conic-gradient(var(--mint) 0 98.6%, #1A2A42 98.6% 100%);position:relative}
+  .ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:#0C1524}
+  .ring b{position:relative;font-size:13px;font-weight:650;letter-spacing:-.02em}
+  .health-meta b{display:block;font-size:12.5px;font-weight:600}
+  .health-meta span{font-size:10.8px;color:var(--faint)}
+  .health-list{display:flex;flex-direction:column;gap:7px}
+  .health-list div{display:flex;justify-content:space-between;gap:8px;font-size:11.3px;color:var(--muted)}
+  .health-list b{font-weight:600;color:#D5E3F7;font-variant-numeric:tabular-nums}
+  .health-list .warn{color:var(--amber)}
+  .next-up{margin-top:13px;padding-top:12px;border-top:1px solid var(--line-soft)}
+  .next-up h4{font-size:10.5px;color:var(--faint);font-weight:600;margin-bottom:7px}
+  .next-item{display:flex;gap:9px;align-items:center;padding:5px 0}
+  .next-time{font-size:10.5px;color:var(--cyan);font-variant-numeric:tabular-nums;width:46px;flex:none}
+  .next-item p{font-size:11.3px;color:#B9C8DD;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* ---------- contacts ---------- */
+  .toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line-soft)}
+  .field{display:flex;align-items:center;gap:7px;height:32px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:#0A1322;color:var(--faint);min-width:0}
+  .field:focus-within{border-color:#2F6BD8;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+  .field input{border:0;background:none;outline:none;font-size:12px;color:var(--ink);width:190px;min-width:0}
+  .field input::placeholder{color:var(--faint)}
+  .field .icon{width:14px;height:14px}
+  .select{height:32px;border-radius:8px;border:1px solid var(--line);background:#0A1322;color:#B9C8DD;font-size:11.8px;padding:0 8px;outline:none}
+  .select:focus{border-color:#2F6BD8}
+  .chips{display:flex;gap:5px;flex-wrap:wrap}
+  .chip{font-size:11px;font-weight:550;color:var(--muted);padding:4px 9px;border-radius:20px;border:1px solid transparent;white-space:nowrap}
+  .chip:hover{background:rgba(148,178,230,.06);color:var(--ink)}
+  .chip.active{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.3);color:#BFDBFE}
+  .toolbar .spacer{flex:1}
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:820px}
+  thead th{font-size:10.5px;font-weight:600;color:var(--faint);text-align:left;padding:9px 14px;border-bottom:1px solid var(--line-soft);white-space:nowrap;letter-spacing:.02em}
+  thead th.num{text-align:right}
+  tbody td{padding:10px 14px;border-bottom:1px solid rgba(141,160,189,.06);font-size:12px;color:#C3D1E4;vertical-align:middle}
+  tbody tr{cursor:pointer;transition:background .12s}
+  tbody tr:hover{background:rgba(59,130,246,.05)}
+  tbody tr:last-child td{border-bottom:0}
+  .c-name{display:flex;align-items:center;gap:9px;min-width:190px}
+  .c-name .avatar{width:29px;height:29px;font-size:10px}
+  .c-name b{display:block;font-size:12.2px;font-weight:600;color:var(--ink);line-height:1.3}
+  .c-name span{display:block;font-size:10.5px;color:var(--faint);line-height:1.35}
+  .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .table-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-top:1px solid var(--line-soft);font-size:11px;color:var(--faint);flex-wrap:wrap}
+  .empty{padding:36px 18px;text-align:center;color:var(--faint);font-size:12.5px}
+
+  /* ---------- pipeline ---------- */
+  .board{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 12px;align-items:flex-start}
+  .col{flex:0 0 258px;background:linear-gradient(180deg,#0C1525,#0A121F);border:1px solid var(--line);border-radius:12px;max-height:calc(100vh - 230px);display:flex;flex-direction:column}
+  .col.drop{border-color:rgba(34,211,238,.6);background:rgba(34,211,238,.05)}
+  .col-head{display:flex;align-items:center;gap:7px;padding:10px 11px;border-bottom:1px solid var(--line-soft);position:sticky;top:0;background:#0C1525;border-radius:12px 12px 0 0;z-index:2}
+  .col-dot{width:6px;height:6px;border-radius:50%;flex:none}
+  .col-head h3{font-size:11.5px;font-weight:600;color:#C9D7EA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .col-count{font-size:10px;color:var(--faint);background:rgba(148,178,230,.08);padding:0 5px;border-radius:4px;margin-left:auto}
+  .col-sum{font-size:10px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap;margin-left:2px}
+  .col-body{padding:8px;display:flex;flex-direction:column;gap:7px;overflow-y:auto;min-height:80px}
+  .deal{background:linear-gradient(180deg,#121E32,#0F1929);border:1px solid #1E2E48;border-radius:9px;padding:9px 10px;cursor:grab;transition:border-color .15s,transform .12s,box-shadow .15s}
+  .deal:hover{border-color:#2D4B78;box-shadow:0 6px 18px -12px rgba(0,0,0,.9)}
+  .deal:active{cursor:grabbing}
+  .deal.dragging{opacity:.45;border-style:dashed}
+  .deal-top{display:flex;justify-content:space-between;gap:6px;align-items:baseline}
+  .deal-top b{font-size:11.8px;font-weight:600;color:#E3ECF9;line-height:1.35}
+  .deal-val{font-size:11.2px;font-weight:650;color:#8FE1F0;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .deal-sub{font-size:10.3px;color:var(--faint);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .deal-foot{display:flex;align-items:center;gap:6px;margin-top:8px}
+  .deal-foot .avatar{width:18px;height:18px;font-size:8px}
+  .deal-age{font-size:9.8px;color:#5F7395;margin-left:auto;white-space:nowrap}
+  .pipe-summary{display:flex;gap:20px;flex-wrap:wrap;padding:12px 15px;border-radius:12px;margin-bottom:14px;
+    background:linear-gradient(90deg,rgba(59,130,246,.08),rgba(34,211,238,.04));border:1px solid rgba(59,130,246,.16)}
+  .ps-item span{font-size:10.5px;color:#7F9BB8;display:block}
+  .ps-item b{font-size:16px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+  /* ---------- voice ---------- */
+  .split{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:14px;align-items:start}
+  .agent-head{display:flex;gap:12px;align-items:center;padding:16px 17px;border-bottom:1px solid var(--line-soft)}
+  .orb-lg{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:radial-gradient(circle at 34% 30%,#67E8F9,#0E7490 60%,#082F49);
+    box-shadow:0 0 0 1px rgba(34,211,238,.35),0 0 30px -4px rgba(34,211,238,.5)}
+  .orb-lg svg{width:21px;height:21px;stroke:#04222B;stroke-width:2;fill:none;stroke-linecap:round}
+  .agent-head h2{font-size:15px;font-weight:650;letter-spacing:-.01em}
+  .agent-head p{font-size:11.5px;color:var(--faint)}
+  .agent-head .status-pill{margin-left:auto}
+  .toggle{width:34px;height:19px;border-radius:20px;background:#22334E;position:relative;transition:background .18s;flex:none;border:1px solid rgba(255,255,255,.07)}
+  .toggle::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#8DA0BD;transition:transform .18s,background .18s}
+  .toggle.on{background:rgba(52,211,153,.35);border-color:rgba(52,211,153,.4)}
+  .toggle.on::after{transform:translateX(15px);background:#6EE7B7}
+  .toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .set-field label{display:block;font-size:10.8px;color:var(--faint);font-weight:550;margin-bottom:4px}
+  .input,textarea.input,select.input{width:100%;background:#0A1322;border:1px solid var(--line);border-radius:8px;height:34px;padding:0 10px;font-size:12px;color:#DCE7F7;outline:none}
+  textarea.input{height:auto;padding:9px 10px;line-height:1.6;resize:vertical}
+  .input:focus,textarea.input:focus{border-color:#2F6BD8;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+  .prompt-box{font-family:ui-monospace,"Cascadia Code","SFMono-Regular",Menlo,monospace;font-size:11px;line-height:1.7;color:#C6D6EB;min-height:210px}
+  .kb{display:flex;flex-wrap:wrap;gap:5px}
+  .kb .tag{font-weight:500}
+  .voice-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);border-radius:10px;overflow:hidden;border:1px solid var(--line-soft)}
+  .vs{background:#0B1422;padding:11px 13px}
+  .vs span{font-size:10.5px;color:var(--faint);display:block}
+  .vs b{font-size:19px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .call-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(141,160,189,.07);cursor:pointer}
+  .call-row:last-child{border-bottom:0}
+  .call-row:hover .call-name{color:#fff}
+  .call-av{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:9.5px;font-weight:700;background:#1C2E49;color:#B9D3F3}
+  .call-meta{min-width:0;flex:1}
+  .call-name{font-size:11.6px;font-weight:600;color:#D3E0F1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
+  .call-sub{font-size:10px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .call-dur{font-size:10px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .route{margin-top:2px}
+  .route-node{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:#0B1422;font-size:11px;color:#B9C8DD}
+  .route-node .icon{width:14px;height:14px;color:var(--cyan)}
+  .route-node b{font-weight:600;color:#E3ECF9}
+  .route-arrow{width:1px;height:12px;background:linear-gradient(180deg,var(--cyan),transparent);margin-left:20px}
+  .route-branch{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+  .route-branch .route-node{padding:7px 8px;font-size:10.3px}
+
+  /* ---------- automations ---------- */
+  .wf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+  .wf{position:relative;padding:13px 14px;cursor:pointer;transition:border-color .16s,transform .14s}
+  .wf:hover{border-color:#2B4166;transform:translateY(-1px)}
+  .wf.selected{border-color:rgba(34,211,238,.45);box-shadow:0 0 0 1px rgba(34,211,238,.15)}
+  .wf-top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .wf-ic{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;background:rgba(59,130,246,.1);color:#7FB0E8;flex:none}
+  .wf-ic .icon{width:14px;height:14px}
+  .wf-ic.warn{background:rgba(245,184,81,.1);color:#F7C877}
+  .wf-top h3{font-size:12.2px;font-weight:600;line-height:1.3;flex:1}
+  .wf-trigger{font-size:10.5px;color:var(--faint);margin-bottom:10px;display:flex;align-items:center;gap:4px}
+  .wf-trigger .icon{width:11px;height:11px}
+  .wf-stats{display:flex;gap:14px;padding-top:9px;border-top:1px solid var(--line-soft)}
+  .wf-stats div span{display:block;font-size:9.8px;color:var(--faint)}
+  .wf-stats div b{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+  .wf-stats div b.ok{color:var(--mint)}
+  .wf-stats div b.bad{color:var(--rose)}
+  .wf-detail .steps{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:4px 0 14px}
+  .step{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:8px;background:#0B1422;border:1px solid var(--line);font-size:10.5px;color:#B9C8DD;white-space:nowrap}
+  .step i{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex:none}
+  .step-arrow{color:#31496B;font-size:12px;flex:none}
+  .run-row{display:grid;grid-template-columns:86px 1fr 78px 70px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(141,160,189,.07);font-size:11px}
+  .run-row:last-child{border-bottom:0}
+  .run-row .ok{color:var(--mint)}
+  .run-row .bad{color:var(--rose)}
+  .run-status{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:10.3px}
+
+  /* ---------- calendar ---------- */
+  .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+  .day{background:linear-gradient(180deg,#0D1727,#0A1321);border:1px solid var(--line);border-radius:10px;min-height:360px;display:flex;flex-direction:column}
+  .day.today{border-color:rgba(59,130,246,.4);background:linear-gradient(180deg,rgba(59,130,246,.09),#0A1321)}
+  .day-head{padding:9px 9px 7px;border-bottom:1px solid var(--line-soft);text-align:center}
+  .day-head span{font-size:9.8px;color:var(--faint);display:block}
+  .day-head b{font-size:12.5px;font-weight:600}
+  .day.today .day-head b{color:var(--cyan)}
+  .day-body{padding:7px;display:flex;flex-direction:column;gap:6px}
+  .event{padding:7px 8px;border-radius:7px;background:rgba(59,130,246,.1);border-left:2px solid #3B82F6;font-size:10px;line-height:1.4}
+  .event b{display:block;font-size:10.5px;font-weight:600;color:#DCE8F8}
+  .event span{color:#7E9BB9;font-size:9.5px}
+  .event.cyan{background:rgba(34,211,238,.08);border-left-color:var(--cyan)}
+  .event.mint{background:rgba(52,211,153,.08);border-left-color:var(--mint)}
+  .event.amber{background:rgba(245,184,81,.08);border-left-color:var(--amber)}
+
+  /* ---------- reports / billing / provision / settings ---------- */
+  .stats4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+  .plan-hero{display:flex;align-items:center;gap:14px;padding:16px 17px;flex-wrap:wrap}
+  .plan-badge{padding:5px 10px;border-radius:7px;font-size:10.5px;font-weight:700;background:linear-gradient(135deg,#2563EB,#0891B2);color:#fff;letter-spacing:.02em}
+  .usage{margin-top:10px}
+  .usage-row{margin-bottom:10px}
+  .usage-row .ur-top{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px}
+  .usage-row .ur-top b{color:#DCE7F7;font-weight:550;font-variant-numeric:tabular-nums}
+  .ur-track{height:5px;border-radius:3px;background:#15233A;overflow:hidden}
+  .ur-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#3B82F6,#22D3EE)}
+  .plan-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .plan{padding:16px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,#0E1829,#0B1422);position:relative;display:flex;flex-direction:column;gap:8px}
+  .plan.current{border-color:rgba(59,130,246,.5);box-shadow:0 0 0 1px rgba(59,130,246,.15),0 20px 50px -30px rgba(59,130,246,.6)}
+  .plan h3{font-size:13px;font-weight:600}
+  .plan .price{font-size:24px;font-weight:650;letter-spacing:-.03em}
+  .plan .price small{font-size:11px;color:var(--faint);font-weight:500;letter-spacing:0}
+  .plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--muted);flex:1}
+  .plan li{display:flex;gap:6px;align-items:flex-start}
+  .plan li .icon{width:13px;height:13px;color:var(--mint);margin-top:1px}
+  .quote{position:relative;padding:14px 15px 14px 17px;border-radius:10px;background:rgba(34,211,238,.04);border:1px solid rgba(34,211,238,.12);font-size:11.5px;color:#A9C3DE;line-height:1.6}
+  .quote::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:2px;border-radius:2px;background:var(--cyan)}
+  .integration{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(141,160,189,.07)}
+  .integration:last-child{border-bottom:0}
+  .int-logo{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;font-size:10px;font-weight:700;background:#15233A;color:#BFD4EE;border:1px solid var(--line)}
+  .integration .int-meta{flex:1;min-width:0}
+  .integration .int-meta b{display:block;font-size:11.8px;font-weight:600}
+  .integration .int-meta span{font-size:10.3px;color:var(--faint);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .banner{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border-radius:9px;background:rgba(245,184,81,.06);border:1px solid rgba(245,184,81,.18);font-size:11px;color:#D8BE93;line-height:1.5}
+  .banner .icon{width:14px;height:14px;color:var(--amber);margin-top:1px}
+  .domain{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:#0A1322;font-size:11.5px;color:#B9C8DD}
+  .domain .icon{width:13px;height:13px;color:var(--mint)}
+
+  /* ---------- drawer / modal / toast ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(3,7,14,.68);backdrop-filter:blur(3px);z-index:80;opacity:0;pointer-events:none;transition:opacity .22s}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:430px;max-width:92vw;z-index:90;
+    background:linear-gradient(180deg,#0C1524,#091120);border-left:1px solid var(--line);
+    transform:translateX(102%);transition:transform .26s cubic-bezier(.2,.8,.2,1);
+    display:flex;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,.5);
+  }
+  .drawer.open{transform:none}
+  .drawer-head{display:flex;align-items:flex-start;gap:10px;padding:18px;border-bottom:1px solid var(--line-soft)}
+  .drawer-head h2{font-size:16px;font-weight:650;letter-spacing:-.02em;line-height:1.25}
+  .drawer-head p{font-size:11.5px;color:var(--faint);margin-top:2px}
+  .drawer-head .icon-btn{margin-left:auto;flex:none}
+  .drawer-body{overflow-y:auto;padding:16px 18px 26px;flex:1}
+  .drawer-foot{padding:12px 18px;border-top:1px solid var(--line-soft);display:flex;gap:8px;background:#0A1220}
+  .drawer-foot .btn{flex:1}
+  .d-section{margin-bottom:18px}
+  .d-section h4{font-size:10.5px;font-weight:600;color:var(--faint);margin-bottom:7px}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid rgba(141,160,189,.07);font-size:11.8px}
+  .kv:last-child{border-bottom:0}
+  .kv span{color:var(--faint)}
+  .kv b{font-weight:550;color:#D3E0F1;text-align:right;word-break:break-word}
+  .timeline{position:relative;padding-left:16px}
+  .timeline::before{content:"";position:absolute;left:4px;top:5px;bottom:5px;width:1px;background:#1E2E48}
+  .tl-item{position:relative;padding:0 0 12px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:"";position:absolute;left:-15px;top:4px;width:7px;height:7px;border-radius:50%;background:#243854;border:1px solid #3B82F6}
+  .tl-item:first-child::before{background:var(--cyan);border-color:var(--cyan)}
+  .tl-item b{display:block;font-size:11.5px;font-weight:550;color:#D3E0F1}
+  .tl-item span{font-size:10.3px;color:var(--faint)}
+  .call-summary{font-size:11.8px;line-height:1.65;color:#B9C8DD}
+
+  .modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .2s}
+  .modal.open{opacity:1;pointer-events:auto}
+  .modal-card{width:440px;max-width:100%;background:linear-gradient(180deg,#101A2C,#0B1422);border:1px solid var(--line);border-radius:16px;box-shadow:0 40px 100px rgba(0,0,0,.6);transform:translateY(8px) scale(.99);transition:transform .2s}
+  .modal.open .modal-card{transform:none}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;border-bottom:1px solid var(--line-soft)}
+  .modal-head h3{font-size:13.5px;font-weight:600}
+  .modal-body{padding:16px 17px;display:flex;flex-direction:column;gap:11px}
+  .modal-foot{padding:12px 17px;border-top:1px solid var(--line-soft);display:flex;justify-content:flex-end;gap:8px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);z-index:120;
+    display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:10px;
+    background:#122036;border:1px solid #294666;color:#DCE8F8;font-size:12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+    max-width:92vw;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  .toast .icon{width:15px;height:15px;color:var(--mint)}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  .muted{color:var(--muted)}
+  .faint{color:var(--faint)}
+  .fine{font-size:10.8px;color:var(--faint);line-height:1.55}
+
+  /* focus */
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .nav-link:focus-visible,.chip:focus-visible,.seg button:focus-visible{outline-offset:1px}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1240px){
+    .kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .wf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .bottom-grid{grid-template-columns:1fr 1fr}
+    .bottom-grid > :last-child{grid-column:1 / -1}
+  }
+  @media (max-width:1080px){
+    .overview-grid{grid-template-columns:1fr}
+    .split{grid-template-columns:1fr}
+    .stats4{grid-template-columns:1fr 1fr}
+    .week{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .plan-grid{grid-template-columns:1fr}
+    .search{width:200px}
+  }
+  @media (max-width:900px){
+    .sidebar{position:fixed;left:0;top:0;transform:translateX(-102%);transition:transform .26s cubic-bezier(.2,.8,.2,1);box-shadow:30px 0 80px rgba(0,0,0,.55);width:262px;flex-basis:262px}
+    .sidebar.open{transform:none}
+    .side-backdrop{display:block;position:fixed;inset:0;background:rgba(3,7,14,.6);z-index:55;opacity:0;pointer-events:none;transition:opacity .22s}
+    .side-backdrop.open{opacity:1;pointer-events:auto}
+    .menu-btn{display:grid}
+    .content{padding:18px 16px 70px}
+    .topbar{padding:0 16px;gap:10px}
+    .crumb .hide-sm{display:none}
+    .env-pill{display:none}
+    .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .bottom-grid{grid-template-columns:1fr}
+    .week{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .settings-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:680px){
+    .search{display:none}
+    .page-head h1{font-size:20px}
+    .wf-grid{grid-template-columns:1fr}
+    .stats4{grid-template-columns:1fr 1fr}
+    .kpi-val{font-size:22px}
+    .chart-head{padding:14px 14px 4px}
+    .chart-wrap{padding:4px 14px 14px}
+    .card-body{padding:14px}
+    .seg button{padding:3px 7px}
+    .week{grid-template-columns:1fr}
+    .day{min-height:0}
+    .day-body{flex-direction:row;flex-wrap:wrap}
+    .event{flex:1 1 44%}
+    .modal-body .form-row,.form-row{grid-template-columns:1fr}
+    .toolbar{gap:7px}
+    .field{flex:1 1 100%}
+    .field input{width:100%}
+    .col{flex-basis:232px}
+    .chart-foot{gap:12px;flex-wrap:wrap}
+    .plan-grid{gap:10px}
+    .top-right{gap:4px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 19v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V19"/><circle cx="9" cy="7" r="3.2"/><path d="M22 19v-1.5a4 4 0 0 0-3-3.87"/><path d="M16.5 4.2a3.2 3.2 0 0 1 0 5.6"/></symbol>
+    <symbol id="i-kanban" viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="14" rx="1.5"/><rect x="9.5" y="3" width="5" height="18" rx="1.5"/><rect x="16" y="3" width="5" height="9" rx="1.5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.2 3.5h2.2l1.5 4-2 1.6a12 12 0 0 0 5.9 5.9l1.6-2 4 1.5v2.2a2.3 2.3 0 0 1-2.5 2.3A16.5 16.5 0 0 1 3.9 6a2.3 2.3 0 0 1 2.3-2.5Z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-2 8-2 8h16s-2-1-2-8"/><path d="M10.3 20a2 2 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5L20 7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.6 20h18.8L12 3Z"/><path d="M12 9v5M12 17h.01"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 4.5v15l12-7.5-12-7.5Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L3 21l1.4-5.6A8.5 8.5 0 1 1 21 12Z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <div class="side-backdrop" id="sideBackdrop"></div>
+
+  <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 12h5l2.5-6 3 12 2.5-6h5"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">Flow<span>Pilot</span> AI</div>
+        <div class="brand-sub">CRM ON AUTOPILOT</div>
+      </div>
+    </div>
+
+    <button class="workspace" id="wsBtn" aria-label="Switch workspace">
+      <span class="ws-avatar">BH</span>
+      <span class="ws-meta">
+        <span class="ws-name">BrightPath Home Services</span>
+        <span class="ws-plan">Growth plan · <b>live</b></span>
+      </span>
+      <svg class="icon ws-chev" style="width:14px;height:14px"><use href="#i-chev"/></svg>
+    </button>
+
+    <nav class="nav">
+      <div class="nav-group">Workspace</div>
+      <button class="nav-link active" data-view="overview"><svg class="icon"><use href="#i-grid"/></svg>Overview</button>
+      <button class="nav-link" data-view="contacts"><svg class="icon"><use href="#i-users"/></svg>Contacts<span class="nav-badge" id="contactBadge">2,847</span></button>
+      <button class="nav-link" data-view="pipeline"><svg class="icon"><use href="#i-kanban"/></svg>Pipeline</button>
+      <button class="nav-link" data-view="calendar"><svg class="icon"><use href="#i-calendar"/></svg>Calendar</button>
+
+      <div class="nav-group">AI &amp; automation</div>
+      <button class="nav-link" data-view="voice"><svg class="icon"><use href="#i-phone"/></svg>Voice AI<span class="nav-badge">Ava</span></button>
+      <button class="nav-link" data-view="automations"><svg class="icon"><use href="#i-bolt"/></svg>Automations<span class="nav-badge warn" id="wfBadge">1</span></button>
+      <button class="nav-link" data-view="reports"><svg class="icon"><use href="#i-chart"/></svg>Reports</button>
+
+      <div class="nav-group">Account</div>
+      <button class="nav-link" data-view="billing"><svg class="icon"><use href="#i-card"/></svg>Billing</button>
+      <button class="nav-link" data-view="settings"><svg class="icon"><use href="#i-settings"/></svg>Settings</button>
+      <div class="nav-group">Agency ops</div>
+      <button class="nav-link" data-view="provision"><svg class="icon"><use href="#i-server"/></svg>Provisioning</button>
+    </nav>
+
+    <div class="side-foot">
+      <div class="proto-note">
+        <svg class="icon"><use href="#i-info"/></svg>
+        <span>Interactive prototype. Simulated data — no live CRM or voice connection.</span>
+      </div>
+      <button class="user" data-view="settings">
+        <span class="avatar" style="background:linear-gradient(150deg,#312E81,#0E7490)">DW</span>
+        <span class="user-meta">
+          <span class="user-name">Dana Whitfield</span>
+          <span class="user-role">Agency owner</span>
+        </span>
+        <svg class="icon" style="width:14px;height:14px;color:var(--faint)"><use href="#i-chev"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+      <div class="crumb">
+        <span class="hide-sm">BrightPath Home Services</span>
+        <span class="sep hide-sm">/</span>
+        <span class="here" id="crumbHere">Overview</span>
+      </div>
+      <div class="top-right">
+        <label class="search">
+          <svg class="icon icon-sm"><use href="#i-search"/></svg>
+          <input type="search" id="globalSearch" placeholder="Search contacts" aria-label="Search contacts">
+          <kbd>⌘K</kbd>
+        </label>
+        <span class="env-pill"><span class="env-dot"></span>Demo data</span>
+        <button class="icon-btn" id="bellBtn" aria-label="Notifications">
+          <svg class="icon"><use href="#i-bell"/></svg><span class="dot"></span>
+        </button>
+        <button class="avatar-btn" data-view="settings" aria-label="Account settings">DW</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <!-- ============ OVERVIEW ============ -->
+      <section class="view active" id="view-overview" aria-labelledby="h-overview">
+        <div class="notice" id="demoNotice">
+          <svg class="icon"><use href="#i-info"/></svg>
+          <div><b>This is an interactive portfolio prototype.</b> Every number is simulated. GoHighLevel, Stripe and voice provider integrations are designed but not connected. Try the pipeline, Ava's call simulation and the automation toggles.</div>
+          <button data-dismiss="demoNotice" aria-label="Dismiss notice"><svg class="icon icon-sm"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="page-head">
+          <div>
+            <h1 id="h-overview">Overview</h1>
+            <p>BrightPath Home Services · Wednesday, 26 November</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" data-view="calendar"><svg class="icon"><use href="#i-calendar"/></svg>Calendar</button>
+            <button class="btn btn-primary" data-open-modal="contact"><svg class="icon"><use href="#i-plus"/></svg>New contact</button>
+          </div>
+        </div>
+        <div class="kpi-grid" id="kpiRow"></div>
+
+        <div class="overview-grid">
+          <div class="card">
+            <div class="chart-head">
+              <div>
+                <h2>Lead flow</h2>
+                <p>Leads captured against appointments booked</p>
+              </div>
+              <div class="seg" id="rangeSeg" role="group" aria-label="Chart range">
+                <button data-range="7d">7 days</button>
+                <button data-range="30d" class="active">30 days</button>
+                <button data-range="90d">90 days</button>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <div class="legend">
+                <span><i style="background:#3B82F6"></i>Leads captured</span>
+                <span><i style="background:#22D3EE"></i>Appointments booked</span>
+                <span style="margin-left:auto;color:var(--faint)" id="chartTotal">—</span>
+              </div>
+              <div class="bars" id="flowChart" role="img" aria-label="Bar chart of leads captured and appointments booked"></div>
+              <div class="axis" id="flowAxis"></div>
+            </div>
+            <div class="chart-foot">
+              <div class="cf-item">Capture rate<b>68.4%</b></div>
+              <div class="cf-item">Lead → appointment<b>24.8%</b></div>
+              <div class="cf-item">Avg. first response<b>38 sec</b></div>
+              <div class="cf-item">Pipeline created<b>$186.4k</b></div>
+            </div>
+          </div>
+
+          <div class="ava-card">
+            <div class="ava-top">
+              <div class="ava-title">
+                <span class="ava-orb"><svg viewBox="0 0 24 24"><path d="M4 12h3l2-5 3 10 2-5h6"/></svg></span>
+                <div>
+                  <h2>Ava</h2>
+                  <p>AI receptionist · answering now</p>
+                </div>
+              </div>
+              <span class="live-pill"><span class="pulse"></span>On call</span>
+            </div>
+            <div class="wave" id="waveBars" aria-hidden="true"></div>
+            <div class="ava-stats">
+              <div class="ava-stat"><span>Calls today</span><b id="avaCalls">34</b></div>
+              <div class="ava-stat"><span>Booked</span><b id="avaBooked">9</b></div>
+              <div class="ava-stat"><span>Missed recovered</span><b id="avaRecovered">4</b></div>
+              <div class="ava-stat"><span>Avg. handle time</span><b>1:48<em>min</em></b></div>
+            </div>
+            <div class="ava-foot">
+              <button class="btn" data-view="voice"><svg class="icon"><use href="#i-phone"/></svg>Open Voice AI</button>
+              <button class="mini-link" id="simCallBtn">Simulate call</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="card">
+            <div class="card-head">
+              <div><h2>Pipeline snapshot</h2><p>Open opportunities by stage</p></div>
+              <button class="link-btn" data-view="pipeline">Open board<svg class="icon"><use href="#i-arrow"/></svg></button>
+            </div>
+            <div class="card-body" id="pipeSnapshot"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div><h2>Recent activity</h2><p>Contact, call and workflow events</p></div>
+              <span class="tag">Live feed</span>
+            </div>
+            <div class="card-body">
+              <div class="feed" id="activityList"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div><h2>Automation health</h2><p>Last 24 hours</p></div>
+              <button class="link-btn" data-view="automations">View<svg class="icon"><use href="#i-arrow"/></svg></button>
+            </div>
+            <div class="card-body">
+              <div class="health">
+                <div class="ring"><b>98.6%</b></div>
+                <div class="health-meta">
+                  <b>Flows are healthy</b>
+                  <span>1,842 executions · 26 failures</span>
+                </div>
+              </div>
+              <div class="health-list">
+                <div><span>Active workflows</span><b id="activeWfCount">6</b></div>
+                <div><span>SMS delivered</span><b>1,204</b></div>
+                <div><span>Errors needing review</span><b class="warn" id="errorWfCount">1</b></div>
+              </div>
+              <div class="next-up">
+                <h4>Next appointments</h4>
+                <div class="next-item"><span class="next-time">9:30</span><p>Maya Chen · AC diagnostic</p></div>
+                <div class="next-item"><span class="next-time">11:00</span><p>Grant Mullins · Roof inspection</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CONTACTS ============ -->
+      <section class="view" id="view-contacts" aria-labelledby="h-contacts">
+        <div class="page-head">
+          <div>
+            <h1 id="h-contacts">Contacts</h1>
+            <p>2,847 contacts synced from forms, calls and campaigns · <span class="fine">simulated dataset</span></p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="exportBtn"><svg class="icon"><use href="#i-download"/></svg>Export</button>
+            <button class="btn btn-primary" data-open-modal="contact"><svg class="icon"><use href="#i-plus"/></svg>New contact</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="toolbar">
+            <label class="field">
+              <svg class="icon"><use href="#i-search"/></svg>
+              <input type="search" id="contactSearch" placeholder="Search name, company or phone" aria-label="Search contacts">
+            </label>
+            <select class="select" id="sourceFilter" aria-label="Filter by lead source">
+              <option value="">All sources</option>
+              <option>Google Ads</option>
+              <option>Facebook Lead</option>
+              <option>Website Form</option>
+              <option>AI Receptionist</option>
+              <option>Referral</option>
+              <option>Missed Call</option>
+            </select>
+            <div class="chips" id="stageChips"></div>
+            <span class="spacer"></span>
+            <span class="fine" id="contactCount">—</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Contact</th>
+                  <th>Stage</th>
+                  <th>Source</th>
+                  <th class="num">Value</th>
+                  <th>Owner</th>
+                  <th>Last activity</th>
+                </tr>
+              </thead>
+              <tbody id="contactRows"></tbody>
+            </table>
+          </div>
+          <div class="table-foot">
+            <span id="tableFoot">Showing 18 featured contacts of 2,847</span>
+            <span>Synced from GoHighLevel contacts API</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PIPELINE ============ -->
+      <section class="view" id="view-pipeline" aria-labelledby="h-pipeline">
+        <div class="page-head">
+          <div>
+            <h1 id="h-pipeline">Sales pipeline</h1>
+            <p>Drag a card between stages to update the opportunity · BrightPath Home Services</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="pipelineFilterBtn"><svg class="icon"><use href="#i-search"/></svg>Filter</button>
+            <button class="btn btn-primary" id="newDealBtn"><svg class="icon"><use href="#i-plus"/></svg>New opportunity</button>
+          </div>
+        </div>
+        <div class="pipe-summary">
+          <div class="ps-item"><span>Open pipeline</span><b id="psOpen">$0</b></div>
+          <div class="ps-item"><span>Weighted forecast</span><b id="psWeighted">$0</b></div>
+          <div class="ps-item"><span>Won this month</span><b id="psWon">$0</b></div>
+          <div class="ps-item"><span>Avg. deal size</span><b id="psAvg">$0</b></div>
+          <div class="ps-item"><span>Win rate</span><b>41%</b></div>
+        </div>
+        <div class="board" id="board" aria-label="Opportunity board"></div>
+      </section>
+
+      <!-- ============ VOICE ============ -->
+      <section class="view" id="view-voice" aria-labelledby="h-voice">
+        <div class="page-head">
+          <div>
+            <h1 id="h-voice">Voice AI</h1>
+            <p>Ava answers, qualifies and books — then writes everything back to the CRM</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="voiceNumbersBtn"><svg class="icon"><use href="#i-phone"/></svg>(415) 555-0142</button>
+            <button class="btn btn-primary" id="simCallBtn2"><svg class="icon"><use href="#i-play"/></svg>Simulate inbound call</button>
+          </div>
+        </div>
+
+        <div class="split">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card">
+              <div class="agent-head">
+                <span class="orb-lg"><svg viewBox="0 0 24 24"><path d="M4 12h3l2-5 3 10 2-5h6"/></svg></span>
+                <div>
+                  <h2>Ava</h2>
+                  <p>Inbound receptionist · BrightPath Home Services</p>
+                </div>
+                <span class="status-pill" id="agentStatus"><span class="d"></span>Active</span>
+                <button class="toggle on" id="agentToggle" role="switch" aria-checked="true" aria-label="Toggle Ava"></button>
+              </div>
+              <div class="card-body">
+                <div class="settings-grid">
+                  <div class="set-field">
+                    <label for="voiceSel">Voice</label>
+                    <select class="input" id="voiceSel">
+                      <option>Aria — warm, west coast</option>
+                      <option>Clay — calm, neutral</option>
+                      <option>Nova — bright, precise</option>
+                    </select>
+                  </div>
+                  <div class="set-field">
+                    <label for="langSel">Language</label>
+                    <select class="input" id="langSel">
+                      <option>English (US)</option>
+                      <option>English (US) + Spanish</option>
+                    </select>
+                  </div>
+                  <div class="set-field">
+                    <label for="hoursSel">Answering hours</label>
+                    <select class="input" id="hoursSel">
+                      <option>24/7 with after-hours triage</option>
+                      <option>Mon–Sat, 7:00–19:00</option>
+                      <option>Business hours only</option>
+                    </select>
+                  </div>
+                  <div class="set-field">
+                    <label for="transferSel">Human transfer</label>
+                    <select class="input" id="transferSel">
+                      <option>On-call tech · (415) 555-0177</option>
+                      <option>Front desk · (415) 555-0142</option>
+                    </select>
+                  </div>
+                </div>
+                <div style="margin-top:13px">
+                  <label class="fine" style="display:block;margin-bottom:5px">Knowledge base</label>
+                  <div class="kb">
+                    <span class="tag cyan">Services &amp; pricing ranges</span>
+                    <span class="tag">Service area · 25 mi</span>
+                    <span class="tag">Warranty policy</span>
+                    <span class="tag">Emergency triage</span>
+                    <span class="tag">Financing options</span>
+                    <button class="tag" style="cursor:pointer">+ Add source</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <div><h2>Agent prompt</h2><p>Editable in prototype · production version stored server-side</p></div>
+                <span class="tag violet">v3.2</span>
+              </div>
+              <div class="card-body">
+                <textarea class="input prompt-box" id="promptBox" aria-label="Voice agent prompt" spellcheck="false">You are Ava, the virtual receptionist for BrightPath Home Services, a licensed HVAC, plumbing and roofing company serving the San Francisco Bay Area.
+
+Open every call with: "Thanks for calling BrightPath Home Services, this is Ava. Are you calling about a repair, a new installation, or something else?"
+
+Your goals, in order:
+1. Find out what service the caller needs and how urgent it is.
+2. Capture the property address, caller name and best callback number.
+3. If it is an emergency — gas smell, carbon monoxide alarm, active flooding or no heat with an infant or elderly resident — read the safety script and transfer immediately to the on-call technician.
+4. Otherwise offer two appointment windows within the next 72 hours and confirm one.
+
+Qualify with at most four questions: service needed, property type (house, condo, rental), whether the caller is the owner, and preferred time. Never quote a final price; give ranges only and note that a technician confirms on site. Never collect card numbers. Read the callback number back to confirm. If the caller asks for a person, transfer to the front desk. End with a one-sentence summary and log the outcome to the CRM.</textarea>
+                <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
+                  <button class="btn btn-primary btn-sm" id="savePromptBtn"><svg class="icon"><use href="#i-check"/></svg>Save prompt</button>
+                  <button class="btn btn-sm" id="resetPromptBtn">Reset</button>
+                  <span class="fine" style="margin-left:auto">Changes are simulated</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><div><h2>Call routing</h2><p>How Ava decides where a call goes</p></div></div>
+              <div class="card-body route">
+                <div class="route-node"><svg class="icon"><use href="#i-phone"/></svg><b>Inbound call</b><span style="margin-left:auto;color:var(--faint)">(415) 555-0142</span></div>
+                <div class="route-arrow"></div>
+                <div class="route-node"><svg class="icon"><use href="#i-spark"/></svg><b>Ava answers</b><span style="margin-left:auto;color:var(--faint)">intent + urgency</span></div>
+                <div class="route-branch">
+                  <div class="route-node"><svg class="icon"><use href="#i-calendar"/></svg>Books appointment</div>
+                  <div class="route-node"><svg class="icon"><use href="#i-alert"/></svg>Emergency → transfer</div>
+                  <div class="route-node"><svg class="icon"><use href="#i-msg"/></svg>Takes a message</div>
+                  <div class="route-node"><svg class="icon"><use href="#i-users"/></svg>Human handoff</div>
+                </div>
+                <div class="route-arrow"></div>
+                <div class="route-node"><svg class="icon"><use href="#i-check"/></svg><b>Outcome written to CRM</b><span style="margin-left:auto;color:var(--faint)">contact + opportunity + task</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card">
+              <div class="card-head"><div><h2>Performance</h2><p>Last 7 days</p></div><span class="tag cyan">Simulated</span></div>
+              <div class="card-body">
+                <div class="voice-stats">
+                  <div class="vs"><span>Calls handled</span><b>412</b></div>
+                  <div class="vs"><span>Qualified leads</span><b>168</b></div>
+                  <div class="vs"><span>Appointments booked</span><b>74</b></div>
+                  <div class="vs"><span>Avg. handle time</span><b>1:48</b></div>
+                </div>
+                <div style="margin-top:13px">
+                  <div class="usage-row">
+                    <div class="ur-top"><span>Containment without handoff</span><b>82%</b></div>
+                    <div class="ur-track"><div class="ur-fill" style="width:82%"></div></div>
+                  </div>
+                  <div class="usage-row" style="margin-bottom:0">
+                    <div class="ur-top"><span>Booking rate on qualified calls</span><b>44%</b></div>
+                    <div class="ur-track"><div class="ur-fill" style="width:44%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><div><h2>Recent calls</h2><p>Click a call for the summary</p></div><button class="link-btn" id="allCallsBtn">View all</button></div>
+              <div class="card-body" id="callList" style="padding-top:6px;padding-bottom:8px"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><div><h2>Integration path</h2><p>Designed, not connected in this prototype</p></div></div>
+              <div class="card-body" style="display:flex;flex-direction:column;gap:9px">
+                <div class="integration" style="padding-top:0">
+                  <span class="int-logo" style="background:rgba(34,211,238,.1);color:#67E0EF">V</span>
+                  <div class="int-meta"><b>Voice provider</b><span>Webhook → call outcome → CRM sync</span></div>
+                  <span class="tag amber">Not connected</span>
+                </div>
+                <div class="integration" style="border-bottom:0;padding-bottom:0">
+                  <span class="int-logo" style="background:rgba(59,130,246,.12);color:#93C5FD">G</span>
+                  <div class="int-meta"><b>GoHighLevel</b><span>Contacts, opportunities, tasks, calendars</span></div>
+                  <span class="tag amber">Not connected</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ AUTOMATIONS ============ -->
+      <section class="view" id="view-automations" aria-labelledby="h-automations">
+        <div class="page-head">
+          <div>
+            <h1 id="h-automations">Automations</h1>
+            <p>Six workflows run this workspace’s lead handling end to end</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="wfFilterBtn">All workflows</button>
+            <button class="btn btn-primary" id="newWorkflowBtn"><svg class="icon"><use href="#i-plus"/></svg>New workflow</button>
+          </div>
+        </div>
+
+        <div class="stats4">
+          <div class="kpi"><div class="kpi-label">Runs today <svg class="icon"><use href="#i-bolt"/></svg></div><div class="kpi-val">1,842</div><div class="kpi-meta"><span class="delta">↑ 9.4%</span> vs. yesterday</div></div>
+          <div class="kpi"><div class="kpi-label">Success rate <svg class="icon"><use href="#i-check"/></svg></div><div class="kpi-val">98.6<small>%</small></div><div class="kpi-meta">26 failures auto-retried</div></div>
+          <div class="kpi"><div class="kpi-label">Avg. run time <svg class="icon"><use href="#i-chart"/></svg></div><div class="kpi-val">1.4<small>s</small></div><div class="kpi-meta">P95 3.8s</div></div>
+          <div class="kpi"><div class="kpi-label">Needs review <svg class="icon"><use href="#i-alert"/></svg></div><div class="kpi-val">1</div><div class="kpi-meta"><span style="color:var(--amber)">Webhook auth expired</span></div></div>
+        </div>
+
+        <div class="wf-grid" id="wfGrid"></div>
+        <div class="card wf-detail" id="wfDetail"></div>
+      </section>
+
+      <!-- ============ CALENDAR ============ -->
+      <section class="view" id="view-calendar" aria-labelledby="h-calendar">
+        <div class="page-head">
+          <div>
+            <h1 id="h-calendar">Calendar</h1>
+            <p>Week of 24–30 November · appointments booked by Ava and the team</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="calTodayBtn">Today</button>
+            <button class="btn btn-primary" id="calNewBtn"><svg class="icon"><use href="#i-plus"/></svg>New appointment</button>
+          </div>
+        </div>
+        <div class="week" id="weekGrid"></div>
+      </section>
+
+      <!-- ============ REPORTS ============ -->
+      <section class="view" id="view-reports" aria-labelledby="h-reports">
+        <div class="page-head">
+          <div>
+            <h1 id="h-reports">Reports</h1>
+            <p>Illustrative performance targets for the first 90 days of a launch</p>
+          </div>
+          <div class="head-actions"><span class="tag amber">Simulated data</span></div>
+        </div>
+        <div class="stats4">
+          <div class="kpi"><div class="kpi-label">Monthly recurring revenue</div><div class="kpi-val">$28,960</div><div class="kpi-meta"><span class="delta">↑ 14.2%</span> month over month</div></div>
+          <div class="kpi"><div class="kpi-label">Active subscriptions</div><div class="kpi-val">164</div><div class="kpi-meta">12 trials · 4 past due</div></div>
+          <div class="kpi"><div class="kpi-label">Provisioning success</div><div class="kpi-val">96.4<small>%</small></div><div class="kpi-meta">of 1,120 simulated runs</div></div>
+          <div class="kpi"><div class="kpi-label">Customer activation</div><div class="kpi-val">81<small>%</small></div><div class="kpi-meta">first workflow live in 7 days</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><div><h2>Before and after</h2><p>Design targets, not verified outcomes</p></div></div>
+            <div class="table-wrap">
+              <table style="min-width:0">
+                <thead><tr><th>Measure</th><th class="num">Before</th><th class="num">Target</th><th class="num">Change</th></tr></thead>
+                <tbody>
+                  <tr><td>Manual sub-account setup</td><td class="num">3.5 hrs</td><td class="num">18 min</td><td class="num" style="color:var(--mint)">−91%</td></tr>
+                  <tr><td>Time to first live workflow</td><td class="num">6 days</td><td class="num">1 day</td><td class="num" style="color:var(--mint)">−83%</td></tr>
+                  <tr><td>Missed-call follow-up</td><td class="num">4.2 hrs</td><td class="num">45 sec</td><td class="num" style="color:var(--mint)">−99%</td></tr>
+                  <tr><td>After-hours capture</td><td class="num">0%</td><td class="num">100%</td><td class="num" style="color:var(--mint)">+100 pts</td></tr>
+                  <tr><td>Onboarding support tickets</td><td class="num">14 / account</td><td class="num">4 / account</td><td class="num" style="color:var(--mint)">−71%</td></tr>
+                  <tr><td>Subscription activation rate</td><td class="num">54%</td><td class="num">81%</td><td class="num" style="color:var(--mint)">+27 pts</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>Where accounts get stuck</h2><p>Provisioning drop-off in simulated runs</p></div></div>
+            <div class="card-body">
+              <div class="stage-row"><span class="s-name"><i style="background:#3B82F6"></i>Checkout completed</span><div class="s-track"><div class="s-fill" style="width:100%;background:linear-gradient(90deg,#3B82F6,#2563EB)"></div></div><span class="s-val">1,120</span></div>
+              <div class="stage-row"><span class="s-name"><i style="background:#3B82F6"></i>Business profile</span><div class="s-track"><div class="s-fill" style="width:93%;background:linear-gradient(90deg,#3B82F6,#2563EB)"></div></div><span class="s-val">1,041</span></div>
+              <div class="stage-row"><span class="s-name"><i style="background:#22D3EE"></i>Sub-account created</span><div class="s-track"><div class="s-fill" style="width:89%;background:linear-gradient(90deg,#22D3EE,#0891B2)"></div></div><span class="s-val">997</span></div>
+              <div class="stage-row"><span class="s-name"><i style="background:#22D3EE"></i>Snapshot applied</span><div class="s-track"><div class="s-fill" style="width:86%;background:linear-gradient(90deg,#22D3EE,#0891B2)"></div></div><span class="s-val">964</span></div>
+              <div class="stage-row"><span class="s-name"><i style="background:#34D399"></i>Number connected</span><div class="s-track"><div class="s-fill" style="width:82%;background:linear-gradient(90deg,#34D399,#059669)"></div></div><span class="s-val">918</span></div>
+              <div class="stage-row"><span class="s-name"><i style="background:#34D399"></i>Activated</span><div class="s-track"><div class="s-fill" style="width:81%;background:linear-gradient(90deg,#34D399,#059669)"></div></div><span class="s-val">908</span></div>
+              <div class="banner" style="margin-top:12px">
+                <svg class="icon"><use href="#i-info"/></svg>
+                <span>In production these figures would come from provisioning logs, Stripe events and GHL webhook delivery — not from static numbers.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BILLING ============ -->
+      <section class="view" id="view-billing" aria-labelledby="h-billing">
+        <div class="page-head">
+          <div>
+            <h1 id="h-billing">Billing</h1>
+            <p>Subscription, usage and invoices for this workspace</p>
+          </div>
+          <div class="head-actions"><span class="tag cyan">Stripe test mode · simulated</span></div>
+        </div>
+        <div class="grid-2" style="margin-bottom:14px">
+          <div class="card">
+            <div class="plan-hero">
+              <div>
+                <div class="fine">Current plan</div>
+                <div style="display:flex;align-items:center;gap:9px;margin-top:3px">
+                  <span class="plan-badge" id="planBadge">GROWTH</span>
+                  <b style="font-size:20px;letter-spacing:-.02em"><span id="planPrice">$197</span><span class="fine"> / month</span></b>
+                </div>
+                <div class="fine" style="margin-top:2px">Renews 14 December · Visa ending 4242</div>
+              </div>
+              <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn" id="managePlanBtn">Manage plan</button>
+                <button class="btn btn-danger" id="cancelBtn">Cancel</button>
+              </div>
+            </div>
+            <div class="card-body" style="border-top:1px solid var(--line-soft)">
+              <div class="usage">
+                <div class="usage-row"><div class="ur-top"><span>Contacts</span><b>2,847 / 5,000</b></div><div class="ur-track"><div class="ur-fill" style="width:57%"></div></div></div>
+                <div class="usage-row"><div class="ur-top"><span>AI voice minutes</span><b>1,240 / 2,000</b></div><div class="ur-track"><div class="ur-fill" style="width:62%"></div></div></div>
+                <div class="usage-row" style="margin-bottom:0"><div class="ur-top"><span>Sub-accounts</span><b id="usageLocations">1 / 3</b></div><div class="ur-track"><div class="ur-fill" style="width:33%"></div></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>Invoices</h2><p>Last three months</p></div></div>
+            <div class="table-wrap">
+              <table style="min-width:0">
+                <thead><tr><th>Date</th><th>Plan</th><th class="num">Amount</th><th class="num">Status</th></tr></thead>
+                <tbody>
+                  <tr><td>14 Nov 2026</td><td>Growth</td><td class="num">$197.00</td><td class="num"><span class="status-pill">Paid</span></td></tr>
+                  <tr><td>14 Oct 2026</td><td>Growth</td><td class="num">$197.00</td><td class="num"><span class="status-pill">Paid</span></td></tr>
+                  <tr><td>14 Sep 2026</td><td>Starter</td><td class="num">$97.00</td><td class="num"><span class="status-pill">Paid</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-body" style="border-top:1px solid var(--line-soft)">
+              <div class="banner"><svg class="icon"><use href="#i-info"/></svg><span>Plan changes in this prototype only update the interface. Subscription events would be handled by Stripe webhooks and mirrored to the GHL sub-account.</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="plan-grid" id="planGrid"></div>
+      </section>
+
+      <!-- ============ PROVISIONING ============ -->
+      <section class="view" id="view-provision" aria-labelledby="h-provision">
+        <div class="page-head">
+          <div>
+            <h1 id="h-provision">Provisioning</h1>
+            <p>Agency operations · sub-account creation, snapshot deployment and retries</p>
+          </div>
+          <div class="head-actions">
+            <button class="btn" id="retryAllBtn"><svg class="icon"><use href="#i-bolt"/></svg>Retry failed</button>
+            <button class="btn btn-primary" id="newSubBtn"><svg class="icon"><use href="#i-plus"/></svg>New sub-account</button>
+          </div>
+        </div>
+        <div class="stats4">
+          <div class="kpi"><div class="kpi-label">Sub-accounts</div><div class="kpi-val">128</div><div class="kpi-meta">6 provisioned this week</div></div>
+          <div class="kpi"><div class="kpi-label">Provisioning success</div><div class="kpi-val">96.4<small>%</small></div><div class="kpi-meta">last 30 days</div></div>
+          <div class="kpi"><div class="kpi-label">Median time to live</div><div class="kpi-val">7<small>m 42s</small></div><div class="kpi-meta">target under 10 minutes</div></div>
+          <div class="kpi"><div class="kpi-label">Needs attention</div><div class="kpi-val" id="provAttention">2</div><div class="kpi-meta">1 failed · 1 awaiting number</div></div>
+        </div>
+        <div class="card">
+          <div class="toolbar">
+            <label class="field"><svg class="icon"><use href="#i-search"/></svg><input type="search" placeholder="Search sub-accounts" id="provSearch" aria-label="Search sub-accounts"></label>
+            <span class="spacer"></span>
+            <span class="fine">Idempotent provisioning · keyed on checkout session</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Sub-account</th><th>Plan</th><th>Status</th><th>Progress</th><th>Idempotency key</th><th class="num">Elapsed</th><th></th></tr></thead>
+              <tbody id="provRows"></tbody>
+            </table>
+          </div>
+          <div class="table-foot"><span>Snapshot: FlowPilot AI Business Starter v1.4</span><span>Retries are exponential, capped at 5 attempts</span></div>
+        </div>
+      </section>
+
+      <!-- ============ SETTINGS ============ -->
+      <section class="view" id="view-settings" aria-labelledby="h-settings">
+        <div class="page-head">
+          <div>
+            <h1 id="h-settings">Settings</h1>
+            <p>Business profile, team access and connected accounts</p>
+          </div>
+          <div class="head-actions"><button class="btn btn-primary" id="saveSettingsBtn">Save changes</button></div>
+        </div>
+        <div class="grid-2">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card">
+              <div class="card-head"><div><h2>Business profile</h2><p>Shown on booking pages and in Ava’s answers</p></div></div>
+              <div class="card-body">
+                <div class="settings-grid">
+                  <div class="set-field"><label for="bizName">Business name</label><input class="input" id="bizName" value="BrightPath Home Services"></div>
+                  <div class="set-field"><label for="bizIndustry">Industry</label>
+                    <select class="input" id="bizIndustry"><option>Home services</option><option>Dental</option><option>Consulting</option></select>
+                  </div>
+                  <div class="set-field"><label for="bizEmail">Business email</label><input class="input" id="bizEmail" value="hello@brightpath.example"></div>
+                  <div class="set-field"><label for="bizPhone">Phone</label><input class="input" id="bizPhone" value="(415) 555-0142"></div>
+                  <div class="set-field"><label for="bizTz">Time zone</label>
+                    <select class="input" id="bizTz"><option>America/Los_Angeles</option><option>America/New_York</option></select>
+                  </div>
+                  <div class="set-field"><label for="bizDomain">Custom domain</label><input class="input" id="bizDomain" value="app.brightpath.example"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><div><h2>Team</h2><p>Role-based access inside the sub-account</p></div><button class="link-btn" id="inviteBtn">Invite</button></div>
+              <div class="card-body" style="padding-top:6px">
+                <div class="integration">
+                  <span class="avatar" style="background:linear-gradient(150deg,#312E81,#0E7490)">DW</span>
+                  <div class="int-meta"><b>Dana Whitfield</b><span>dana@brightpath.example</span></div>
+                  <span class="tag blue">Owner</span>
+                </div>
+                <div class="integration">
+                  <span class="avatar" style="background:#1E3A8A">ML</span>
+                  <div class="int-meta"><b>Marcus Lee</b><span>marcus@brightpath.example</span></div>
+                  <span class="tag">Sales</span>
+                </div>
+                <div class="integration">
+                  <span class="avatar" style="background:#134E4A">PR</span>
+                  <div class="int-meta"><b>Priya Raman</b><span>priya@brightpath.example</span></div>
+                  <span class="tag">Coordinator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div class="card">
+              <div class="card-head"><div><h2>Integrations</h2><p>Connection state is honest about this prototype</p></div></div>
+              <div class="card-body" style="padding-top:6px">
+                <div class="integration">
+                  <span class="int-logo" style="background:rgba(59,130,246,.14);color:#93C5FD">G</span>
+                  <div class="int-meta"><b>GoHighLevel</b><span>Sub-account · locationId ****8f2a</span></div>
+                  <span class="tag amber">Not connected</span>
+                </div>
+                <div class="integration">
+                  <span class="int-logo" style="background:rgba(99,91,255,.14);color:#C4B5FD">S</span>
+                  <div class="int-meta"><b>Stripe</b><span>Subscriptions and usage billing</span></div>
+                  <span class="tag amber">Not connected</span>
+                </div>
+                <div class="integration">
+                  <span class="int-logo" style="background:rgba(34,211,238,.12);color:#67E0EF">V</span>
+                  <div class="int-meta"><b>Voice provider</b><span>Ava · inbound and outbound calls</span></div>
+                  <span class="tag amber">Not connected</span>
+                </div>
+                <div class="integration" style="border-bottom:0">
+                  <span class="int-logo" style="background:rgba(52,211,153,.1);color:#6EE7B7">T</span>
+                  <div class="int-meta"><b>Twilio</b><span>SMS and number provisioning</span></div>
+                  <span class="tag amber">Not connected</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><div><h2>White-label</h2><p>Customer-facing branding</p></div><span class="tag cyan">Prototype</span></div>
+              <div class="card-body">
+                <div class="kv"><span>Portal domain</span><b>app.flowpilot.ai</b></div>
+                <div class="kv"><span>Custom domain</span><b>app.brightpath.example</b></div>
+                <div class="kv"><span>SSL</span><b style="color:var(--mint)">Issued · auto-renew</b></div>
+                <div class="kv"><span>Email sender</span><b>no-reply@flowpilot.ai</b></div>
+                <div class="kv"><span>Brand colors</span><b>#3B82F6 · #22D3EE</b></div>
+                <div class="domain" style="margin-top:12px"><svg class="icon"><use href="#i-check"/></svg>DNS verified · CNAME → white-label endpoint</div>
+                <div class="banner" style="margin-top:10px"><svg class="icon"><use href="#i-info"/></svg><span>Production would apply agency branding and the customer’s custom domain through white-label settings, sub-account branding and rebranded email.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog">
+  <div class="drawer-head">
+    <div style="min-width:0">
+      <h2 id="drawerTitle">Contact</h2>
+      <p id="drawerSub">—</p>
+    </div>
+    <button class="icon-btn" id="drawerClose" aria-label="Close panel"><svg class="icon"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</aside>
+
+<div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="modalTitle">New contact</h3>
+      <button class="icon-btn" data-close-modal aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+    </div>
+    <form id="contactForm">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="set-field"><label for="ncName">Full name</label><input class="input" id="ncName" required placeholder="Jordan Alvarez"></div>
+          <div class="set-field"><label for="ncPhone">Phone</label><input class="input" id="ncPhone" placeholder="(415) 555-0199"></div>
+        </div>
+        <div class="set-field"><label for="ncEmail">Email</label><input class="input" id="ncEmail" type="email" placeholder="jordan@example.com"></div>
+        <div class="form-row">
+          <div class="set-field"><label for="ncSource">Source</label>
+            <select class="input" id="ncSource"><option>Website Form</option><option>Google Ads</option><option>Facebook Lead</option><option>Referral</option><option>AI Receptionist</option></select>
+          </div>
+          <div class="set-field"><label for="ncValue">Estimated value</label><input class="input" id="ncValue" type="number" placeholder="4200"></div>
+        </div>
+        <div class="set-field"><label for="ncCompany">Company or property</label><input class="input" id="ncCompany" placeholder="Alvarez Residence"></div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary">Create contact</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="icon"><use href="#i-check"/></svg><span id="toastText">Saved</span></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     Simulated workspace data. Nothing here talks to a network.
+     ============================================================ */
+  const money = n => "$" + Number(n).toLocaleString("en-US");
+  const moneyK = n => n >= 1000 ? "$" + (n/1000).toFixed(n % 1000 === 0 ? 0 : 1) + "k" : "$" + n;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  const STAGES = ["New Lead","Contacted","Qualified","Appointment Booked","Estimate Sent","Won","Lost"];
+  const STAGE_META = {
+    "New Lead":           {color:"#3B82F6", tag:"blue"},
+    "Contacted":          {color:"#A78BFA", tag:"violet"},
+    "Qualified":          {color:"#22D3EE", tag:"cyan"},
+    "Appointment Booked": {color:"#34D399", tag:"mint"},
+    "Estimate Sent":      {color:"#F5B851", tag:"amber"},
+    "Won":                {color:"#10B981", tag:"mint"},
+    "Lost":               {color:"#FB7185", tag:"rose"}
+  };
+
+  const DB = {
+    contacts: [
+      {id:"c1", name:"Maya Chen", company:"Chen Family Residence", phone:"(415) 802-3391", email:"maya.chen@example.com", source:"Google Ads", stage:"Appointment Booked", value:8400, owner:"Dana Whitfield", last:"12 min ago", tags:["HVAC","Priority"], notes:"Repeat customer. Wants the upstairs unit replaced before the holiday. Prefers SMS."},
+      {id:"c2", name:"Andre Silva", company:"Silva Property Group", phone:"(415) 555-0183", email:"andre@silvapg.example", source:"Facebook Lead", stage:"Qualified", value:12900, owner:"Marcus Lee", last:"48 min ago", tags:["Commercial"], notes:"Manages six rental units. Interested in a maintenance retainer."},
+      {id:"c3", name:"Tanya Brooks", company:"44 Oakridge Lane", phone:"(628) 555-0117", email:"tanya.b@example.com", source:"Website Form", stage:"New Lead", value:3200, owner:"Priya Raman", last:"1 hr ago", tags:["Plumbing"], notes:"Slow drain in the main bathroom. Submitted the form at 07:12."},
+      {id:"c4", name:"Derek Okafor", company:"Okafor Holdings", phone:"(415) 555-0164", email:"derek@okafor.example", source:"AI Receptionist", stage:"Appointment Booked", value:6750, owner:"Dana Whitfield", last:"1 hr ago", tags:["AI booked","Roofing"], notes:"Ava booked a roof inspection for Thursday 14:00."},
+      {id:"c5", name:"Lena Petrova", company:"Petrova Duplex", phone:"(510) 555-0198", email:"lena.p@example.com", source:"Referral", stage:"Estimate Sent", value:18400, owner:"Marcus Lee", last:"2 hrs ago", tags:["HVAC","Estimate"], notes:"Full ducted system replacement. Estimate sent Monday; follow-up scheduled."},
+      {id:"c6", name:"Sam Whitaker", company:"Whitaker Residence", phone:"(415) 555-0132", email:"sam.whitaker@example.com", source:"Google Ads", stage:"Contacted", value:2850, owner:"Priya Raman", last:"3 hrs ago", tags:["Plumbing"], notes:"Water heater pilot keeps going out. Called twice, no answer yet."},
+      {id:"c7", name:"Priya Nair", company:"Nair Family Home", phone:"(650) 555-0145", email:"priya.nair@example.com", source:"AI Receptionist", stage:"New Lead", value:4150, owner:"Dana Whitfield", last:"4 hrs ago", tags:["AI booked"], notes:"Wants a quote for gutter cleaning and a roof check."},
+      {id:"c8", name:"Grant Mullins", company:"Mullins & Sons", phone:"(415) 555-0191", email:"grant@mullins.example", source:"Website Form", stage:"Qualified", value:9600, owner:"Marcus Lee", last:"Yesterday", tags:["Roofing","Priority"], notes:"Storm damage on two buildings. Insurance claim in progress."},
+      {id:"c9", name:"Sofia Reyes", company:"Reyes Bungalow", phone:"(415) 555-0110", email:"sofia.reyes@example.com", source:"Facebook Lead", stage:"Won", value:7200, owner:"Dana Whitfield", last:"Yesterday", tags:["HVAC"], notes:"Signed the AC replacement estimate. Install scheduled 3 December."},
+      {id:"c10", name:"Ben Carter", company:"Carter Rental #4", phone:"(510) 555-0129", email:"ben.carter@example.com", source:"Missed Call", stage:"Contacted", value:1980, owner:"Priya Raman", last:"Yesterday", tags:["Missed call","Text back"], notes:"Called after hours. Text-back delivered in 41 seconds."},
+      {id:"c11", name:"Hana Kim", company:"Kim Residence", phone:"(415) 555-0173", email:"hana.kim@example.com", source:"Referral", stage:"Estimate Sent", value:14300, owner:"Marcus Lee", last:"2 days ago", tags:["Roofing"], notes:"Estimate for a full tear-off. Wants financing options."},
+      {id:"c12", name:"Omar Haddad", company:"Haddad Group", phone:"(415) 555-0156", email:"omar@haddad.example", source:"Google Ads", stage:"Lost", value:5400, owner:"Priya Raman", last:"2 days ago", tags:["Plumbing"], notes:"Went with a lower bid. Keep on the reactivation list for spring."},
+      {id:"c13", name:"Rachel Adeyemi", company:"Adeyemi Home", phone:"(628) 555-0188", email:"rachel.a@example.com", source:"AI Receptionist", stage:"Appointment Booked", value:6100, owner:"Dana Whitfield", last:"2 days ago", tags:["AI booked","HVAC"], notes:"No-heat call at 21:40. Ava triaged and booked the first slot."},
+      {id:"c14", name:"Tom Reilly", company:"Reilly Property Management", phone:"(415) 555-0121", email:"tom@reillypm.example", source:"Website Form", stage:"New Lead", value:22000, owner:"Marcus Lee", last:"3 days ago", tags:["Commercial","Priority"], notes:"Twelve-unit building. Requested a maintenance proposal."},
+      {id:"c15", name:"Elena Duarte", company:"Duarte Residence", phone:"(650) 555-0166", email:"elena.duarte@example.com", source:"Google Ads", stage:"Contacted", value:3650, owner:"Priya Raman", last:"3 days ago", tags:["Plumbing"], notes:"Leak under the kitchen sink. Sent availability for Friday."},
+      {id:"c16", name:"Marcus Webb", company:"Webb Family Trust", phone:"(415) 555-0102", email:"m.webb@example.com", source:"Referral", stage:"Qualified", value:11250, owner:"Dana Whitfield", last:"4 days ago", tags:["HVAC"], notes:"Two-property maintenance contract. Needs board approval."},
+      {id:"c17", name:"Aisha Bello", company:"Bello Residence", phone:"(628) 555-0140", email:"aisha.bello@example.com", source:"Facebook Lead", stage:"New Lead", value:2400, owner:"Priya Raman", last:"4 days ago", tags:["Roofing"], notes:"Small repair after a fallen branch. Waiting on photos."},
+      {id:"c18", name:"Josh Kimura", company:"Kimura Roofing Co.", phone:"(415) 555-0179", email:"josh@kimura.example", source:"AI Receptionist", stage:"Won", value:16800, owner:"Marcus Lee", last:"5 days ago", tags:["Roofing"], notes:"Commercial re-roof. Deposit received."}
+    ],
+    deals: [
+      {id:"d1", name:"Maya Chen", company:"Chen Family Residence", value:8400, stage:"Appointment Booked", tag:"HVAC", age:"2d", owner:"DW"},
+      {id:"d2", name:"Andre Silva", company:"Silva Property Group", value:12900, stage:"Qualified", tag:"Commercial", age:"4d", owner:"ML"},
+      {id:"d3", name:"Tanya Brooks", company:"44 Oakridge Lane", value:3200, stage:"New Lead", tag:"Plumbing", age:"1h", owner:"PR"},
+      {id:"d4", name:"Derek Okafor", company:"Okafor Holdings", value:6750, stage:"Appointment Booked", tag:"Roofing", age:"1d", owner:"DW"},
+      {id:"d5", name:"Lena Petrova", company:"Petrova Duplex", value:18400, stage:"Estimate Sent", tag:"HVAC", age:"6d", owner:"ML"},
+      {id:"d6", name:"Sam Whitaker", company:"Whitaker Residence", value:2850, stage:"Contacted", tag:"Plumbing", age:"3d", owner:"PR"},
+      {id:"d7", name:"Priya Nair", company:"Nair Family Home", value:4150, stage:"New Lead", tag:"Roofing", age:"4h", owner:"DW"},
+      {id:"d8", name:"Grant Mullins", company:"Mullins & Sons", value:9600, stage:"Qualified", tag:"Roofing", age:"5d", owner:"ML"},
+      {id:"d9", name:"Sofia Reyes", company:"Reyes Bungalow", value:7200, stage:"Won", tag:"HVAC", age:"8d", owner:"DW"},
+      {id:"d10", name:"Ben Carter", company:"Carter Rental #4", value:1980, stage:"Contacted", tag:"Plumbing", age:"2d", owner:"PR"},
+      {id:"d11", name:"Hana Kim", company:"Kim Residence", value:14300, stage:"Estimate Sent", tag:"Roofing", age:"9d", owner:"ML"},
+      {id:"d12", name:"Omar Haddad", company:"Haddad Group", value:5400, stage:"Lost", tag:"Plumbing", age:"12d", owner:"PR"},
+      {id:"d13", name:"Rachel Adeyemi", company:"Adeyemi Home", value:6100, stage:"Appointment Booked", tag:"HVAC", age:"2d", owner:"DW"},
+      {id:"d14", name:"Tom Reilly", company:"Reilly Property Mgmt", value:22000, stage:"New Lead", tag:"Commercial", age:"3d", owner:"ML"},
+      {id:"d15", name:"Elena Duarte", company:"Duarte Residence", value:3650, stage:"Contacted", tag:"Plumbing", age:"4d", owner:"PR"},
+      {id:"d16", name:"Marcus Webb", company:"Webb Family Trust", value:11250, stage:"Qualified", tag:"HVAC", age:"6d", owner:"DW"},
+      {id:"d17", name:"Aisha Bello", company:"Bello Residence", value:2400, stage:"New Lead", tag:"Roofing", age:"4d", owner:"PR"},
+      {id:"d18", name:"Josh Kimura", company:"Kimura Roofing Co.", value:16800, stage:"Won", tag:"Roofing", age:"14d", owner:"ML"}
+    ],
+    calls: [
+      {id:"k1", name:"Rachel Adeyemi", phone:"(628) 555-0188", time:"Today, 08:42", dur:"2:14", outcome:"Booked", sentiment:"Positive", summary:"No-heat call. Ava confirmed the property is owner-occupied, triaged as urgent because of an infant in the home, and booked Wednesday 13:00 with the on-call technician. Contact and opportunity updated automatically."},
+      {id:"k2", name:"Derek Okafor", phone:"(415) 555-0164", time:"Today, 08:15", dur:"1:37", outcome:"Booked", sentiment:"Positive", summary:"Roof leak above the garage after weekend rain. Ava captured two photos by SMS request, offered Thursday 14:00 and booked it. Estimate range $600–$1,400 flagged for review."},
+      {id:"k3", name:"Unknown caller", phone:"(415) 555-0193", time:"Today, 07:58", dur:"0:38", outcome:"Message", sentiment:"Neutral", summary:"Caller asked about commercial maintenance but would not leave a name. Ava took the number and created a task for the front desk. No opportunity created."},
+      {id:"k4", name:"Priya Nair", phone:"(650) 555-0145", time:"Today, 07:31", dur:"1:52", outcome:"Booked", sentiment:"Positive", summary:"Requested gutter cleaning plus a roof inspection. Ava booked Friday 10:30 and added the gutter service to the opportunity notes."},
+      {id:"k5", name:"Alan Bryce", phone:"(510) 555-0155", time:"Yesterday, 21:12", dur:"0:54", outcome:"Transferred", sentiment:"Urgent", summary:"Reported a gas smell near the water heater. Ava read the safety script, told the caller to leave the building and call 911, then transferred to the on-call technician. Marked as emergency in the CRM."},
+      {id:"k6", name:"Nadia Osman", phone:"(415) 555-0126", time:"Yesterday, 18:47", dur:"1:21", outcome:"Qualified", sentiment:"Neutral", summary:"Asked for a quote on a full re-roof. Ava qualified the property type and square footage, noted insurance involvement and set a callback for this morning."},
+      {id:"k7", name:"Ben Carter", phone:"(510) 555-0129", time:"Yesterday, 17:04", dur:"0:42", outcome:"Message", sentiment:"Neutral", summary:"After-hours missed call recovered by text. Caller replied asking for Friday availability. Task created and assigned to Priya."},
+      {id:"k8", name:"Sofia Reyes", phone:"(415) 555-0110", time:"Yesterday, 15:22", dur:"2:06", outcome:"Booked", sentiment:"Positive", summary:"AC replacement install coordination. Confirmed access details and parking, then booked 3 December 08:00–12:00."},
+      {id:"k9", name:"Grant Mullins", phone:"(415) 555-0191", time:"Mon, 11:38", dur:"1:44", outcome:"Qualified", sentiment:"Positive", summary:"Storm damage across two buildings. Ava captured the claim number and transferred to Marcus for a site visit."},
+      {id:"k10", name:"Voicemail", phone:"(628) 555-0170", time:"Mon, 09:05", dur:"0:26", outcome:"Missed", sentiment:"Neutral", summary:"Caller hung up during the greeting. Missed-call workflow sent a text-back within 41 seconds; no reply yet."}
+    ],
+    workflows: [
+      {id:"w1", name:"New lead capture and routing", trigger:"Form submitted", status:"active", runs:1284, success:"99.2%", icon:"bolt",
+       steps:["Form submitted","Create or update contact","Apply lead-source tag","Create opportunity","Assign owner","Notify team","Start follow-up"],
+       runs24:412},
+      {id:"w2", name:"Missed-call text back", trigger:"Call missed", status:"active", runs:96, success:"100%", icon:"phone",
+       steps:["Call missed","Find or create contact","Tag missed call","Send SMS","Notify team","Create task"],
+       runs24:31},
+      {id:"w3", name:"AI call outcome sync", trigger:"Voice agent call ended", status:"active", runs:412, success:"98.8%", icon:"spark",
+       steps:["Call ends","Receive outcome webhook","Update contact","Update opportunity","Save summary","Trigger next flow"],
+       runs24:88},
+      {id:"w4", name:"Appointment confirmation", trigger:"Appointment booked", status:"active", runs:318, success:"99.6%", icon:"calendar",
+       steps:["Appointment booked","Update CRM","Send confirmation","Schedule reminder","Notify rep"],
+       runs24:46},
+      {id:"w5", name:"Estimate follow-up", trigger:"Estimate sent", status:"active", runs:142, success:"97.1%", icon:"msg",
+       steps:["Estimate marked sent","Wait 2 days","Send follow-up SMS","Create callback task","Notify owner"],
+       runs24:19},
+      {id:"w6", name:"Webhook auth failing", trigger:"Call outcome received", status:"error", runs:58, success:"91.4%", icon:"alert",
+       steps:["Webhook received","Verify signature","Map call outcome","Update contact","Log run"],
+       runs24:6}
+    ],
+    week: [
+      {day:0, time:"09:30", title:"Maya Chen · AC diagnostic", type:"blue"},
+      {day:0, time:"13:00", title:"Team stand-up", type:"cyan"},
+      {day:1, time:"10:00", title:"Andre Silva · walkthrough", type:"blue"},
+      {day:1, time:"15:30", title:"Hana Kim · estimate review", type:"amber"},
+      {day:2, time:"09:30", title:"Maya Chen · install prep", type:"blue"},
+      {day:2, time:"11:00", title:"Grant Mullins · roof inspection", type:"mint"},
+      {day:2, time:"13:00", title:"Rachel Adeyemi · no-heat call", type:"amber"},
+      {day:3, time:"08:00", title:"Sofia Reyes · install", type:"mint"},
+      {day:3, time:"14:00", title:"Derek Okafor · roof inspection", type:"blue"},
+      {day:4, time:"10:30", title:"Priya Nair · gutter + roof", type:"cyan"},
+      {day:4, time:"16:00", title:"Estimate follow-ups", type:"amber"},
+      {day:5, time:"09:00", title:"Saturday service window", type:"blue"}
+    ],
+    provisioning: [
+      {id:"p1", name:"BrightPath Home Services", plan:"Growth", status:"live", steps:"8/8", key:"cs_live_9f2a…c41", elapsed:"7m 42s"},
+      {id:"p2", name:"Harbor Dental Studio", plan:"Agency", status:"live", steps:"8/8", key:"cs_live_71be…8d0", elapsed:"9m 05s"},
+      {id:"p3", name:"Northline Roofing", plan:"Growth", status:"provisioning", steps:"6/8", key:"cs_live_a30c…2f7", elapsed:"4m 18s"},
+      {id:"p4", name:"Cedar & Co Interiors", plan:"Starter", status:"failed", steps:"5/8", key:"cs_live_5db1…9a2", elapsed:"3m 51s"},
+      {id:"p5", name:"Atlas Fitness Collective", plan:"Growth", status:"awaiting", steps:"7/8", key:"cs_live_c84e…11b", elapsed:"6m 22s"},
+      {id:"p6", name:"Marlow Legal Group", plan:"Agency", status:"live", steps:"8/8", key:"cs_live_2ae7…4c9", elapsed:"11m 12s"}
+    ],
+    plans: [
+      {name:"Starter", price:97, blurb:"A clean CRM and calendar for a single owner-operator.",
+       features:["CRM, contacts and tasks","One pipeline and calendar","Forms and missed-call text back","Standard automations","Email support"]},
+      {name:"Growth", price:197, blurb:"The full lead-handling engine, including Ava.",
+       features:["Everything in Starter","AI receptionist with booking","Advanced workflows","Lead follow-up sequences","Reporting and call analytics","Priority email support"]},
+      {name:"Agency", price:397, blurb:"For operators running several locations.",
+       features:["Everything in Growth","Up to 3 sub-accounts","Advanced configuration","Priority support","Expanded automation volume","Quarterly strategy review"]}
+    ]
+  };
+
+  const CHART = {
+    "7d":  {labels:["Thu","Fri","Sat","Sun","Mon","Tue","Wed"], leads:[18,24,31,27,42,38,22], booked:[4,6,9,7,11,10,5]},
+    "30d": {labels:["1","3","5","7","9","11","13","15","17","19","21","23","25","27"], leads:[22,31,26,38,34,47,41,52,44,58,49,63,55,68], booked:[5,8,6,10,9,13,11,15,12,17,14,19,16,21]},
+    "90d": {labels:["W1","W2","W3","W4","W5","W6","W7","W8","W9","W10","W11","W12"], leads:[118,132,126,148,161,154,172,168,186,179,196,204], booked:[24,29,27,33,36,34,41,39,44,42,48,51]}
+  };
+
+  const state = {view:"overview", range:"30d", plan:"Growth", agentActive:true, selectedWf:"w1",
+    filters:{q:"", stage:"All", source:""}, provExtra:{}};
+
+  /* ---------------- toast ---------------- */
+  let toastTimer;
+  function toast(msg, ok = true){
+    const el = $("#toast");
+    $("#toastText").textContent = msg;
+    el.querySelector("svg").style.color = ok ? "var(--mint)" : "var(--amber)";
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("show"), 2800);
+  }
+
+  /* ---------------- navigation ---------------- */
+  const TITLES = {overview:"Overview", contacts:"Contacts", pipeline:"Pipeline", calendar:"Calendar", voice:"Voice AI", automations:"Automations", reports:"Reports", billing:"Billing", settings:"Settings", provision:"Provisioning"};
+  function go(view){
+    if(!TITLES[view]) return;
+    state.view = view;
+    $$(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + view));
+    $$(".nav-link").forEach(b => b.classList.toggle("active", b.dataset.view === view));
+    $("#crumbHere").textContent = TITLES[view];
+    closeSidebar();
+    if(view === "overview"){ drawFlow(); renderOverview(); }
+    if(view === "contacts") renderContacts();
+    if(view === "pipeline") renderPipeline();
+    if(view === "voice") renderCalls();
+    if(view === "automations") renderWorkflows();
+    if(view === "billing") renderPlans();
+    if(view === "provision") renderProvisioning();
+    window.scrollTo({top:0, behavior:"instant"});
+  }
+  document.addEventListener("click", e => {
+    const nav = e.target.closest("[data-view]");
+    if(nav){ go(nav.dataset.view); }
+    const dis = e.target.closest("[data-dismiss]");
+    if(dis){ const el = document.getElementById(dis.dataset.dismiss); if(el) el.style.display = "none"; }
+  });
+
+  /* ---------------- sidebar / mobile ---------------- */
+  function openSidebar(){ $("#sidebar").classList.add("open"); $("#sideBackdrop").classList.add("open"); $("#menuBtn").setAttribute("aria-expanded","true"); }
+  function closeSidebar(){ $("#sidebar").classList.remove("open"); $("#sideBackdrop").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded","false"); }
+  $("#menuBtn").addEventListener("click", () => $("#sidebar").classList.contains("open") ? closeSidebar() : openSidebar());
+  $("#sideBackdrop").addEventListener("click", closeSidebar);
+
+  /* ---------------- sparks & KPIs ---------------- */
+  function spark(values, color){
+    const w = 100, h = 26, min = Math.min(...values), max = Math.max(...values);
+    const pts = values.map((v,i) => [i/(values.length-1)*w, h - 3 - ((v-min)/((max-min)||1))*(h-8)]);
+    const d = pts.map((p,i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+    return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" fill="none" stroke="${color}" stroke-width="1.6" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>`;
+  }
+  const KPIS = [
+    {label:"Total contacts", value:"2,847", icon:"users", delta:"12.4%", meta:"214 this month", spark:[12,14,13,18,17,22,24,23,28], color:"#22D3EE"},
+    {label:"New leads", value:"186", icon:"bolt", delta:"8.1%", meta:"14 today", spark:[8,12,9,15,13,18,16,21,19], color:"#3B82F6"},
+    {label:"Open opportunities", value:"73", icon:"kanban", delta:"5.2%", meta:"$186.4k in play", spark:[30,34,32,38,36,41,44,42,47], color:"#A78BFA"},
+    {label:"Appointments", value:"28", icon:"calendar", delta:"6 this week", meta:"19 booked by Ava", spark:[6,8,7,11,10,13,12,15,14], color:"#34D399"},
+    {label:"AI calls handled", value:"412", icon:"phone", delta:"18.2%", meta:"82% contained", spark:[40,52,48,63,58,71,66,80,74], color:"#F5B851"},
+    {label:"Conversion rate", value:'24.8<small>%</small>', icon:"chart", delta:"3.1 pts", meta:"lead to booked", spark:[18,19,18,21,20,23,22,24,25], color:"#FB7185"}
+  ];
+  function renderKpis(){
+    $("#kpiRow").innerHTML = KPIS.map(k => `
+      <div class="kpi">
+        <div class="kpi-label">${k.label}<svg class="icon"><use href="#i-${k.icon}"/></svg></div>
+        <div class="kpi-val">${k.value}</div>
+        <div class="kpi-meta"><span class="delta">↑ ${k.delta}</span><span>${k.meta}</span></div>
+        ${spark(k.spark, k.color)}
+      </div>`).join("");
+  }
+
+  /* ---------------- overview ---------------- */
+  function drawFlow(){
+    const d = CHART[state.range];
+    const max = Math.max(...d.leads);
+    $("#flowChart").innerHTML = d.leads.map((v,i) => `
+      <div class="bar-group" title="${d.labels[i]} — ${v} leads, ${d.booked[i]} booked">
+        <div class="bar leads" style="height:${Math.max(4,(v/max)*100)}%"></div>
+        <div class="bar booked" style="height:${Math.max(3,(d.booked[i]/max)*100)}%"></div>
+      </div>`).join("");
+    const sparse = d.labels.length > 8;
+    $("#flowAxis").innerHTML = d.labels.map((l,i) => `<span style="flex:1;text-align:center;visibility:${sparse && i%2 ? "hidden":"visible"}">${l}</span>`).join("");
+    const sumL = d.leads.reduce((a,b)=>a+b,0), sumB = d.booked.reduce((a,b)=>a+b,0);
+    $("#chartTotal").textContent = `${sumL} leads · ${sumB} booked`;
+  }
+  function renderOverview(){
+    const open = DB.deals.filter(d => d.stage !== "Won" && d.stage !== "Lost");
+    const snapshotStages = STAGES.filter(s => s !== "Won" && s !== "Lost");
+    const totals = {};
+    snapshotStages.forEach(s => totals[s] = DB.deals.filter(d => d.stage === s));
+    const maxCount = Math.max(...snapshotStages.map(s => totals[s].length), 1);
+    $("#pipeSnapshot").innerHTML = snapshotStages.map(s => {
+      const list = totals[s];
+      const val = list.reduce((a,b)=>a+b.value,0);
+      return `<div class="stage-row">
+        <span class="s-name" title="${s}"><i style="background:${STAGE_META[s].color}"></i>${s}</span>
+        <div class="s-track"><div class="s-fill" style="width:${Math.max(6,(list.length/maxCount)*100)}%;background:linear-gradient(90deg,${STAGE_META[s].color},${STAGE_META[s].color}88)"></div></div>
+        <span class="s-val">${list.length} · ${moneyK(val)}</span>
+      </div>`;
+    }).join("") + `<div style="display:flex;justify-content:space-between;margin-top:11px;padding-top:10px;border-top:1px solid var(--line-soft);font-size:11px;color:var(--faint)"><span>Open pipeline</span><b style="color:#E3ECF9;font-weight:600">${money(open.reduce((a,b)=>a+b.value,0))}</b></div>`;
+
+    const feed = [
+      {ic:"phone", cls:"cyan", txt:"<b>Ava</b> booked an appointment for <b>Rachel Adeyemi</b>", t:"12 minutes ago"},
+      {ic:"bolt", cls:"", txt:"<b>New lead capture</b> created an opportunity for <b>Tanya Brooks</b>", t:"1 hour ago"},
+      {ic:"msg", cls:"mint", txt:"<b>Missed-call text back</b> delivered to <b>Ben Carter</b> in 41 seconds", t:"Yesterday, 17:04"},
+      {ic:"card", cls:"", txt:"<b>Sofia Reyes</b> moved to <b>Won</b> · $7,200", t:"Yesterday, 16:20"},
+      {ic:"alert", cls:"amber", txt:"<b>Webhook auth</b> for the call-outcome flow needs reconnecting", t:"Yesterday, 14:02"},
+      {ic:"calendar", cls:"mint", txt:"<b>Grant Mullins</b> roof inspection confirmed for Wednesday 11:00", t:"Mon, 11:52"}
+    ];
+    $("#activityList").innerHTML = feed.map(f => `
+      <div class="feed-item">
+        <span class="feed-ic ${f.cls}"><svg class="icon"><use href="#i-${f.ic}"/></svg></span>
+        <div><div class="feed-txt">${f.txt}</div><div class="feed-time">${f.t}</div></div>
+      </div>`).join("");
+
+    $("#activeWfCount").textContent = DB.workflows.filter(w => w.status === "active").length;
+    $("#errorWfCount").textContent = DB.workflows.filter(w => w.status === "error").length;
+  }
+  function renderWave(){
+    const el = $("#waveBars");
+    if(!el) return;
+    let html = "";
+    for(let i=0;i<46;i++){
+      const h = 5 + Math.round(Math.abs(Math.sin(i*0.7))*16);
+      html += `<i style="height:${h}px;animation-delay:${(i%9)*0.11}s"></i>`;
+    }
+    el.innerHTML = html;
+  }
+
+  /* ---------------- contacts ---------------- */
+  function stageTag(stage){
+    const m = STAGE_META[stage] || {tag:""};
+    return `<span class="tag ${m.tag}">${stage}</span>`;
+  }
+  function renderStageChips(){
+    const stages = ["All", ...STAGES];
+    $("#stageChips").innerHTML = stages.map(s => `<button class="chip ${state.filters.stage === s ? "active":""}" data-stage="${s}">${s}</button>`).join("");
+  }
+  function filteredContacts(){
+    const q = state.filters.q.trim().toLowerCase();
+    return DB.contacts.filter(c => {
+      const okStage = state.filters.stage === "All" || c.stage === state.filters.stage;
+      const okSource = !state.filters.source || c.source === state.filters.source;
+      const okQ = !q || (c.name + " " + c.company + " " + c.phone).toLowerCase().includes(q);
+      return okStage && okSource && okQ;
+    });
+  }
+  function renderContacts(){
+    renderStageChips();
+    const rows = filteredContacts();
+    $("#contactRows").innerHTML = rows.length ? rows.map(c => `
+      <tr data-contact="${c.id}" tabindex="0">
+        <td>
+          <div class="c-name">
+            <span class="avatar" style="background:${avatarBg(c.name)}">${initials(c.name)}</span>
+            <span><b>${esc(c.name)}</b><span>${esc(c.company)}</span></span>
+          </div>
+        </td>
+        <td>${stageTag(c.stage)}</td>
+        <td><span style="font-size:11.5px;color:#9FB3D1">${esc(c.source)}</span></td>
+        <td class="num">${money(c.value)}</td>
+        <td><span style="font-size:11.5px;color:#9FB3D1">${c.owner.split(" ")[0]}</span></td>
+        <td><span style="font-size:11.5px;color:var(--faint);white-space:nowrap">${c.last}</span></td>
+      </tr>`).join("") : `<tr><td colspan="6"><div class="empty">No contacts match this filter. Try a different stage or clear the search.</div></td></tr>`;
+    $("#contactCount").textContent = `${rows.length} shown`;
+    $("#tableFoot").textContent = `Showing ${rows.length} featured contacts of 2,847`;
+  }
+  function initials(name){
+    return name.split(/\s+/).slice(0,2).map(w => w[0]).join("").toUpperCase();
+  }
+  function avatarBg(name){
+    const palettes = ["linear-gradient(150deg,#1E3A8A,#0E7490)","linear-gradient(150deg,#4C1D95,#1D4ED8)","linear-gradient(150deg,#134E4A,#065F46)","linear-gradient(150deg,#78350F,#B45309)","linear-gradient(150deg,#831843,#9D174D)"];
+    let n = 0; for(const ch of name) n += ch.charCodeAt(0);
+    return palettes[n % palettes.length];
+  }
+  $("#contactSearch").addEventListener("input", e => { state.filters.q = e.target.value; renderContacts(); });
+  $("#sourceFilter").addEventListener("change", e => { state.filters.source = e.target.value; renderContacts(); });
+  $("#stageChips").addEventListener("click", e => {
+    const b = e.target.closest("[data-stage]");
+    if(!b) return;
+    state.filters.stage = b.dataset.stage;
+    renderContacts();
+  });
+  $("#exportBtn").addEventListener("click", () => toast("Export queued. A CSV would be generated server-side."));
+  $("#globalSearch").addEventListener("input", e => {
+    const q = e.target.value;
+    if(q.length > 1){
+      state.filters.q = q;
+      if(state.view !== "contacts") go("contacts");
+      const cs = $("#contactSearch"); if(cs) cs.value = q;
+      renderContacts();
+    }
+  });
+  document.addEventListener("keydown", e => {
+    if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){ e.preventDefault(); $("#globalSearch").focus(); }
+    if(e.key === "Escape"){ closeDrawer(); closeModal(); closeSidebar(); }
+  });
+
+  /* ---------------- pipeline ---------------- */
+  function renderPipeline(){
+    const board = $("#board");
+    board.innerHTML = STAGES.map(stage => {
+      const deals = DB.deals.filter(d => d.stage === stage);
+      const sum = deals.reduce((a,b)=>a+b.value,0);
+      return `<div class="col" data-stage="${stage}">
+        <div class="col-head">
+          <span class="col-dot" style="background:${STAGE_META[stage].color}"></span>
+          <h3>${stage}</h3>
+          <span class="col-count">${deals.length}</span>
+          <span class="col-sum">${sum ? moneyK(sum) : "—"}</span>
+        </div>
+        <div class="col-body">${deals.map(d => `
+          <article class="deal" draggable="true" data-deal="${d.id}" tabindex="0" aria-label="${esc(d.name)}, ${money(d.value)}">
+            <div class="deal-top"><b>${esc(d.name)}</b><span class="deal-val">${money(d.value)}</span></div>
+            <div class="deal-sub">${esc(d.company)}</div>
+            <div class="deal-foot">
+              <span class="avatar" style="width:18px;height:18px;font-size:8px;background:${avatarBg(d.owner)}">${d.owner}</span>
+              <span class="tag" style="font-size:9.5px;padding:1px 5px">${d.tag}</span>
+              <span class="deal-age">${d.age}</span>
+            </div>
+          </article>`).join("") || `<div class="empty" style="padding:22px 8px;font-size:11px">Drop a card here</div>`}
+        </div>
+      </div>`;
+    }).join("");
+    const open = DB.deals.filter(d => d.stage !== "Won" && d.stage !== "Lost");
+    const weights = {"New Lead":.1,"Contacted":.2,"Qualified":.35,"Appointment Booked":.55,"Estimate Sent":.7};
+    $("#psOpen").textContent = money(open.reduce((a,b)=>a+b.value,0));
+    $("#psWeighted").textContent = money(Math.round(open.reduce((a,b)=>a+(b.value*(weights[b.stage]||0)),0)));
+    $("#psWon").textContent = money(DB.deals.filter(d=>d.stage==="Won").reduce((a,b)=>a+b.value,0));
+    $("#psAvg").textContent = money(Math.round(open.reduce((a,b)=>a+b.value,0) / Math.max(open.length,1)));
+  }
+  let dragId = null;
+  document.addEventListener("dragstart", e => {
+    const card = e.target.closest(".deal");
+    if(!card) return;
+    dragId = card.dataset.deal;
+    card.classList.add("dragging");
+    try{ e.dataTransfer.setData("text/plain", dragId); e.dataTransfer.effectAllowed = "move"; }catch(_){}
+  });
+  document.addEventListener("dragend", e => {
+    const card = e.target.closest(".deal");
+    if(card) card.classList.remove("dragging");
+    $$(".col.drop").forEach(c => c.classList.remove("drop"));
+  });
+  document.addEventListener("dragover", e => {
+    const col = e.target.closest(".col");
+    if(!col || !dragId) return;
+    e.preventDefault();
+    $$(".col.drop").forEach(c => c !== col && c.classList.remove("drop"));
+    col.classList.add("drop");
+  });
+  document.addEventListener("drop", e => {
+    const col = e.target.closest(".col");
+    if(!col || !dragId) return;
+    e.preventDefault();
+    const deal = DB.deals.find(d => d.id === dragId);
+    const stage = col.dataset.stage;
+    if(deal && deal.stage !== stage){
+      deal.stage = stage;
+      const contact = DB.contacts.find(c => c.name === deal.name);
+      if(contact) contact.stage = stage;
+      toast(`${deal.name} moved to ${stage}`);
+    }
+    dragId = null;
+    $$(".col.drop").forEach(c => c.classList.remove("drop"));
+    renderPipeline();
+  });
+  document.addEventListener("click", e => {
+    const deal = e.target.closest("[data-deal]");
+    if(deal){ openDeal(deal.dataset.deal); }
+  });
+  $("#pipelineFilterBtn").addEventListener("click", () => toast("Owner, source and value filters are stubbed in this prototype.", false));
+  $("#newDealBtn").addEventListener("click", () => toast("Create a contact to add a card — the opportunity form is out of scope here.", false));
+
+  /* ---------------- calls ---------------- */
+  function outcomeClass(o){
+    return o === "Booked" ? "mint" : o === "Qualified" ? "cyan" : o === "Transferred" ? "amber" : o === "Missed" ? "rose" : "";
+  }
+  function renderCalls(){
+    const list = DB.calls.slice(0,6);
+    $("#callList").innerHTML = list.map(c => `
+      <div class="call-row" data-call="${c.id}" tabindex="0" role="button">
+        <span class="call-av">${initials(c.name)}</span>
+        <div class="call-meta">
+          <div class="call-name">${esc(c.name)}</div>
+          <div class="call-sub">${c.time} · ${c.dur}</div>
+        </div>
+        <span class="tag ${outcomeClass(c.outcome)}">${c.outcome}</span>
+      </div>`).join("");
+  }
+  document.addEventListener("click", e => {
+    const row = e.target.closest("[data-call]");
+    if(row) openCall(row.dataset.call);
+  });
+
+  /* ---------------- workflows ---------------- */
+  function wfMeta(status){
+    return status === "active" ? {cls:"", label:"Active"} :
+           status === "paused" ? {cls:"paused", label:"Paused"} :
+           status === "error" ? {cls:"error", label:"Needs attention"} : {cls:"draft", label:"Draft"};
+  }
+  function renderWorkflows(){
+    $("#wfGrid").innerHTML = DB.workflows.map(w => {
+      const m = wfMeta(w.status);
+      return `<article class="card wf ${state.selectedWf === w.id ? "selected":""}" data-wf="${w.id}" tabindex="0">
+        <div class="wf-top">
+          <span class="wf-ic ${w.status === "error" ? "warn":""}"><svg class="icon"><use href="#i-${w.icon}"/></svg></span>
+          <h3>${esc(w.name)}</h3>
+          <button class="toggle ${w.status === "active" ? "on":""}" data-toggle-wf="${w.id}" role="switch" aria-checked="${w.status === "active"}" aria-label="Toggle ${esc(w.name)}"></button>
+        </div>
+        <div class="wf-trigger"><svg class="icon"><use href="#i-bolt"/></svg>${w.trigger}<span class="status-pill ${m.cls}" style="margin-left:auto">${m.label}</span></div>
+        <div class="wf-stats">
+          <div><span>Runs</span><b>${w.runs.toLocaleString("en-US")}</b></div>
+          <div><span>Last 24h</span><b>${w.runs24}</b></div>
+          <div><span>Success</span><b class="${w.status === "error" ? "bad":"ok"}">${w.success}</b></div>
+        </div>
+      </article>`;
+    }).join("");
+    renderWfDetail();
+    $("#wfBadge").textContent = DB.workflows.filter(w => w.status === "error").length || "";
+  }
+  function renderWfDetail(){
+    const w = DB.workflows.find(x => x.id === state.selectedWf) || DB.workflows[0];
+    const m = wfMeta(w.status);
+    const runs = [
+      {time:"08:42:11", detail:"Contact updated · opportunity moved", dur:"1.2s", ok:true},
+      {time:"08:15:04", detail:"SMS delivered · task created", dur:"0.9s", ok:true},
+      {time:"07:58:36", detail:w.status === "error" ? "Webhook verification failed (401)" : "Run completed", dur:w.status === "error" ? "0.3s" : "1.4s", ok:w.status !== "error"},
+      {time:"07:31:52", detail:"Run completed", dur:"1.1s", ok:true}
+    ];
+    $("#wfDetail").innerHTML = `
+      <div class="card-head">
+        <div><h2>${esc(w.name)}</h2><p>${w.steps.length} steps · ${w.trigger.toLowerCase()} · ${m.label.toLowerCase()}</p></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          ${w.status === "error" ? `<button class="btn btn-sm" id="retryWfBtn"><svg class="icon"><use href="#i-bolt"/></svg>Reconnect webhook</button>` : ""}
+          <button class="btn btn-sm" id="wfBuilderBtn">Open builder</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="steps">
+          ${w.steps.map((s,i) => `${i ? '<span class="step-arrow">→</span>' : ""}<span class="step"><i></i>${s}</span>`).join("")}
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:16px;align-items:start">
+          <div>
+            <div class="fine" style="margin-bottom:4px">Recent executions</div>
+            ${runs.map(r => `<div class="run-row">
+              <span style="color:var(--faint)">${r.time}</span>
+              <span style="color:#AFC1D8;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.detail}</span>
+              <span style="color:var(--faint);text-align:right">${r.dur}</span>
+              <span class="run-status ${r.ok ? "ok":"bad"}" style="justify-content:flex-end">${r.ok ? "Success":"Failed"}</span>
+            </div>`).join("")}
+          </div>
+          <div>
+            <div class="fine" style="margin-bottom:6px">Health</div>
+            <div class="kv"><span>Success rate</span><b>${w.success}</b></div>
+            <div class="kv"><span>Total runs</span><b>${w.runs.toLocaleString("en-US")}</b></div>
+            <div class="kv"><span>Avg. duration</span><b>1.2s</b></div>
+            <div class="kv"><span>Retries</span><b>${w.status === "error" ? "4 / 5":"0"}</b></div>
+            <div class="banner" style="margin-top:10px"><svg class="icon"><use href="#i-info"/></svg><span>Execution data is simulated. Production would read run logs from the automation engine.</span></div>
+          </div>
+        </div>
+      </div>`;
+    const retry = $("#retryWfBtn");
+    if(retry) retry.addEventListener("click", () => {
+      w.status = "active"; w.success = "99.1%";
+      renderWorkflows(); renderOverview();
+      toast("Webhook reconnected. The flow is active again.");
+    });
+    const builder = $("#wfBuilderBtn");
+    if(builder) builder.addEventListener("click", () => toast("Visual builder is represented by the step chain above."));
+  }
+  $("#wfGrid").addEventListener("click", e => {
+    const t = e.target.closest("[data-toggle-wf]");
+    if(t){
+      e.stopPropagation();
+      const w = DB.workflows.find(x => x.id === t.dataset.toggleWf);
+      w.status = w.status === "active" ? "paused" : "active";
+      renderWorkflows(); renderOverview();
+      toast(`${w.name} ${w.status === "active" ? "resumed" : "paused"}`);
+      return;
+    }
+    const card = e.target.closest("[data-wf]");
+    if(card){ state.selectedWf = card.dataset.wf; renderWorkflows(); }
+  });
+  $("#newWorkflowBtn").addEventListener("click", () => {
+    if(!DB.workflows.some(w => w.id === "w7")){
+      DB.workflows.push({id:"w7", name:"Speed-to-lead escalation", trigger:"Lead created, no contact in 5 min", status:"draft", runs:0, success:"—", icon:"bolt",
+        steps:["Lead created","Wait 5 minutes","Check contact activity","Notify owner","Create task"], runs24:0});
+      toast("Draft workflow added to the list.");
+    } else {
+      toast("Draft workflow is already in the list.");
+    }
+    renderWorkflows();
+  });
+  $("#wfFilterBtn").addEventListener("click", () => toast("Showing all workflows. Status filters are stubbed here.", false));
+
+  /* ---------------- calendar ---------------- */
+  function renderWeek(){
+    const days = ["Mon 24","Tue 25","Wed 26","Thu 27","Fri 28","Sat 29","Sun 30"];
+    $("#weekGrid").innerHTML = days.map((d,i) => {
+      const evs = DB.week.filter(e => e.day === i);
+      return `<div class="day ${i === 2 ? "today":""}">
+        <div class="day-head"><span>${d.split(" ")[0]}</span><b>${d.split(" ")[1]}</b></div>
+        <div class="day-body">
+          ${evs.map(e => `<div class="event ${e.type === "blue" ? "" : e.type}"><b>${e.time}</b><span>${e.title}</span></div>`).join("") || `<div class="fine" style="padding:8px 2px">No appointments</div>`}
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  /* ---------------- billing ---------------- */
+  function renderPlans(){
+    $("#planBadge").textContent = state.plan.toUpperCase();
+    $("#planPrice").textContent = "$" + DB.plans.find(p => p.name === state.plan).price;
+    $("#usageLocations").textContent = state.plan === "Agency" ? "3 / 3" : state.plan === "Growth" ? "1 / 3" : "1 / 1";
+    $("#planGrid").innerHTML = DB.plans.map(p => {
+      const current = p.name === state.plan;
+      return `<div class="plan ${current ? "current":""}">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h3>${p.name}</h3>
+          ${current ? `<span class="tag cyan">Current</span>` : ""}
+        </div>
+        <div class="price">$${p.price}<small> / month</small></div>
+        <p class="fine" style="margin-top:-3px">${p.blurb}</p>
+        <ul>${p.features.map(f => `<li><svg class="icon"><use href="#i-check"/></svg>${f}</li>`).join("")}</ul>
+        <button class="btn ${current ? "btn-ghost":p.name === "Growth" ? "btn-primary":""}" data-plan="${p.name}" ${current ? "disabled style='opacity:.6;cursor:default'" : ""}>${current ? "Current plan" : p.price > (DB.plans.find(x=>x.name===state.plan)||{price:0}).price ? "Upgrade to " + p.name : "Switch to " + p.name}</button>
+      </div>`;
+    }).join("");
+    $$("[data-plan]").forEach(b => b.addEventListener("click", () => {
+      const name = b.dataset.plan;
+      if(name === state.plan) return;
+      state.plan = name;
+      renderPlans();
+      toast(`Plan changed to ${name}. Billing would confirm via Stripe webhook.`);
+    }));
+  }
+  $("#managePlanBtn").addEventListener("click", () => {
+    document.getElementById("view-billing").scrollIntoView({behavior:"smooth", block:"start"});
+    $$("#planGrid .plan")[1].scrollIntoView({behavior:"smooth", block:"center"});
+  });
+  $("#cancelBtn").addEventListener("click", () => toast("Cancellation flow would collect a reason and schedule end-of-period access.", false));
+
+  /* ---------------- provisioning ---------------- */
+  function provStatus(status){
+    if(status === "live") return `<span class="status-pill"><span class="d"></span>Live</span>`;
+    if(status === "provisioning") return `<span class="status-pill provisioning"><span class="d"></span>Provisioning</span>`;
+    if(status === "failed") return `<span class="status-pill error"><span class="d"></span>Failed · retrying</span>`;
+    return `<span class="status-pill paused"><span class="d"></span>Awaiting number</span>`;
+  }
+  function renderProvisioning(){
+    $("#provRows").innerHTML = DB.provisioning.map(p => {
+      const row = state.provExtra[p.id] || p;
+      return `<tr>
+        <td><div class="c-name" style="min-width:170px"><span class="ws-avatar" style="width:26px;height:26px;border-radius:7px;font-size:9px">${initials(row.name)}</span><span><b>${esc(row.name)}</b><span>loc_${row.id}${row.id}f2a</span></span></div></td>
+        <td><span class="tag">${row.plan}</span></td>
+        <td>${provStatus(row.status)}</td>
+        <td><span style="font-size:11px;color:var(--muted)">${row.steps} steps</span></td>
+        <td><span class="fine" style="font-family:ui-monospace,monospace">${row.key}</span></td>
+        <td class="num"><span style="font-size:11px;color:var(--faint)">${row.elapsed}</span></td>
+        <td class="num">${row.status === "failed" || row.status === "awaiting" ? `<button class="btn btn-sm" data-retry="${row.id}">Retry</button>` : `<button class="btn btn-sm btn-ghost" data-view="settings">Open</button>`}</td>
+      </tr>`;
+    }).join("");
+    $("#provAttention").textContent = DB.provisioning.filter(p => p.status === "failed" || p.status === "awaiting").length;
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-retry]");
+    if(!b) return;
+    const p = DB.provisioning.find(x => x.id === b.dataset.retry);
+    if(!p) return;
+    p.status = "provisioning"; p.steps = "7/8";
+    renderProvisioning();
+    toast(`Retrying ${p.name}. Snapshot deployment resumed from step 6.`);
+    setTimeout(() => {
+      p.status = "live"; p.steps = "8/8"; p.elapsed = "8m 06s";
+      renderProvisioning();
+      toast(`${p.name} is now live.`);
+    }, 2600);
+  });
+  $("#retryAllBtn").addEventListener("click", () => {
+    DB.provisioning.filter(p => p.status === "failed").forEach(p => { p.status = "provisioning"; p.steps = "6/8"; });
+    renderProvisioning();
+    toast("Retry queued for all failed accounts.");
+  });
+  $("#newSubBtn").addEventListener("click", () => {
+    DB.provisioning.unshift({id:"p7", name:"Summit Air & Heat", plan:"Growth", status:"provisioning", steps:"3/8", key:"cs_live_7f3b…d10", elapsed:"1m 04s"});
+    renderProvisioning();
+    toast("Sub-account queued. Snapshot FlowPilot AI Business Starter is being applied.");
+    setTimeout(() => {
+      const p = DB.provisioning.find(x => x.id === "p7");
+      if(p){ p.status = "live"; p.steps = "8/8"; p.elapsed = "6m 58s"; renderProvisioning(); toast("Summit Air & Heat is live."); }
+    }, 3200);
+  });
+  $("#provSearch").addEventListener("input", e => {
+    const q = e.target.value.toLowerCase();
+    $$("#provRows tr").forEach(tr => { tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none"; });
+  });
+
+  /* ---------------- drawer ---------------- */
+  function openDrawer(title, sub, body, foot){
+    $("#drawerTitle").textContent = title;
+    $("#drawerSub").textContent = sub;
+    $("#drawerBody").innerHTML = body;
+    $("#drawerFoot").innerHTML = foot || "";
+    $("#drawer").classList.add("open");
+    $("#drawer").setAttribute("aria-hidden","false");
+    $("#scrim").classList.add("open");
+    $("#drawerClose").focus({preventScroll:true});
+  }
+  function closeDrawer(){
+    $("#drawer").classList.remove("open");
+    $("#drawer").setAttribute("aria-hidden","true");
+    $("#scrim").classList.remove("open");
+  }
+  $("#drawerClose").addEventListener("click", closeDrawer);
+  $("#scrim").addEventListener("click", () => { closeDrawer(); closeModal(); });
+
+  function openContact(id){
+    const c = DB.contacts.find(x => x.id === id);
+    if(!c) return;
+    const body = `
+      <div style="display:flex;align-items:center;gap:11px;margin-bottom:15px">
+        <span class="avatar" style="width:44px;height:44px;font-size:14px;background:${avatarBg(c.name)}">${initials(c.name)}</span>
+        <div>
+          <div style="font-size:14px;font-weight:600">${esc(c.name)}</div>
+          <div class="fine">${esc(c.company)}</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div style="font-size:17px;font-weight:650;font-variant-numeric:tabular-nums">${money(c.value)}</div>
+          <div class="fine">estimated value</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px">${stageTag(c.stage)}${c.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+      <div class="d-section">
+        <h4>Details</h4>
+        <div class="kv"><span>Phone</span><b>${esc(c.phone)}</b></div>
+        <div class="kv"><span>Email</span><b>${esc(c.email)}</b></div>
+        <div class="kv"><span>Lead source</span><b>${esc(c.source)}</b></div>
+        <div class="kv"><span>Owner</span><b>${esc(c.owner)}</b></div>
+        <div class="kv"><span>Last activity</span><b>${esc(c.last)}</b></div>
+      </div>
+      <div class="d-section">
+        <h4>Notes</h4>
+        <p class="call-summary">${esc(c.notes)}</p>
+      </div>
+      <div class="d-section">
+        <h4>Activity</h4>
+        <div class="timeline">
+          <div class="tl-item"><b>Stage set to ${c.stage}</b><span>${c.last}</span></div>
+          <div class="tl-item"><b>Call handled by Ava</b><span>Summary synced to the contact record · ${c.last}</span></div>
+          <div class="tl-item"><b>Contact created from ${c.source}</b><span>3 days ago</span></div>
+        </div>
+      </div>`;
+    openDrawer(c.name, c.company, body, `
+      <button class="btn" data-drawer-call="1"><svg class="icon"><use href="#i-phone"/></svg>Call</button>
+      <button class="btn" data-drawer-text="1"><svg class="icon"><use href="#i-msg"/></svg>Text</button>
+      <button class="btn btn-primary" data-drawer-pipeline="1"><svg class="icon"><use href="#i-kanban"/></svg>Pipeline</button>`);
+    $$("[data-drawer-call],[data-drawer-text]").forEach(b => b.addEventListener("click", () => toast("Calling and texting are simulated in this prototype.")));
+    const pb = $("[data-drawer-pipeline]");
+    if(pb) pb.addEventListener("click", () => { closeDrawer(); go("pipeline"); });
+  }
+  function openDeal(id){
+    const d = DB.deals.find(x => x.id === id);
+    if(!d) return;
+    const body = `
+      <div style="display:flex;align-items:center;gap:11px;margin-bottom:15px">
+        <span class="avatar" style="width:42px;height:42px;font-size:13px;background:${avatarBg(d.name)}">${initials(d.name)}</span>
+        <div>
+          <div style="font-size:14px;font-weight:600">${esc(d.name)}</div>
+          <div class="fine">${esc(d.company)}</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div style="font-size:17px;font-weight:650;font-variant-numeric:tabular-nums">${money(d.value)}</div>
+          <div class="fine">opportunity value</div>
+        </div>
+      </div>
+      <div class="d-section">
+        <h4>Stage</h4>
+        <select class="input" id="dealStageSel">${STAGES.map(s => `<option ${s === d.stage ? "selected":""}>${s}</option>`).join("")}</select>
+      </div>
+      <div class="d-section">
+        <h4>Details</h4>
+        <div class="kv"><span>Service</span><b>${esc(d.tag)}</b></div>
+        <div class="kv"><span>Owner</span><b>${d.owner === "DW" ? "Dana Whitfield" : d.owner === "ML" ? "Marcus Lee" : "Priya Raman"}</b></div>
+        <div class="kv"><span>Time in stage</span><b>${d.age}</b></div>
+        <div class="kv"><span>Source</span><b>${esc((DB.contacts.find(c => c.name === d.name)||{}).source || "—")}</b></div>
+      </div>
+      <div class="d-section">
+        <h4>Next step</h4>
+        <p class="call-summary">Confirm scope on the site visit, then send the estimate from the Growth template. Follow-up sequence starts automatically once the estimate is marked sent.</p>
+      </div>`;
+    openDrawer(d.name, d.company + " · opportunity", body, `
+      <button class="btn" data-drawer-close="1">Close</button>
+      <button class="btn btn-primary" data-drawer-save="1"><svg class="icon"><use href="#i-check"/></svg>Save stage</button>`);
+    $("[data-drawer-close]").addEventListener("click", closeDrawer);
+    $("[data-drawer-save]").addEventListener("click", () => {
+      const stage = $("#dealStageSel").value;
+      d.stage = stage;
+      const c = DB.contacts.find(x => x.name === d.name);
+      if(c) c.stage = stage;
+      renderPipeline(); closeDrawer();
+      toast(`${d.name} moved to ${stage}`);
+    });
+  }
+  function openCall(id){
+    const c = DB.calls.find(x => x.id === id);
+    if(!c) return;
+    const body = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <span class="call-av" style="width:38px;height:38px;font-size:12px">${initials(c.name)}</span>
+        <div>
+          <div style="font-size:13.5px;font-weight:600">${esc(c.name)}</div>
+          <div class="fine">${c.phone}</div>
+        </div>
+        <span class="tag ${outcomeClass(c.outcome)}" style="margin-left:auto">${c.outcome}</span>
+      </div>
+      <div class="d-section" style="margin-top:14px">
+        <h4>Call summary</h4>
+        <p class="call-summary">${esc(c.summary)}</p>
+      </div>
+      <div class="d-section">
+        <h4>Call details</h4>
+        <div class="kv"><span>Handled by</span><b>Ava · AI receptionist</b></div>
+        <div class="kv"><span>Time</span><b>${c.time}</b></div>
+        <div class="kv"><span>Duration</span><b>${c.dur}</b></div>
+        <div class="kv"><span>Sentiment</span><b>${c.sentiment}</b></div>
+        <div class="kv"><span>Recording</span><b>Retention 30 days</b></div>
+      </div>
+      <div class="banner"><svg class="icon"><use href="#i-info"/></svg><span>This transcript and summary are illustrative. In production the voice provider posts the outcome to the backend, which validates the signature before writing to the CRM.</span></div>`;
+    openDrawer("Call detail", c.time + " · " + c.dur, body, `
+      <button class="btn" data-drawer-close="1">Close</button>
+      <button class="btn btn-primary" data-drawer-contact="1">Open contact</button>`);
+    $("[data-drawer-close]").addEventListener("click", closeDrawer);
+    $("[data-drawer-contact]").addEventListener("click", () => {
+      const contact = DB.contacts.find(x => x.name === c.name);
+      if(contact) openContact(contact.id); else toast("No matching contact in the featured sample.");
+    });
+  }
+
+  /* ---------------- modal ---------------- */
+  function openModal(){ $("#contactModal").classList.add("open"); setTimeout(() => $("#ncName").focus(), 60); }
+  function closeModal(){ $("#contactModal").classList.remove("open"); }
+  document.addEventListener("click", e => {
+    const o = e.target.closest("[data-open-modal]");
+    if(o){ openModal(); }
+    const c = e.target.closest("[data-close-modal]");
+    if(c){ closeModal(); }
+  });
+  $("#contactModal").addEventListener("click", e => { if(e.target.id === "contactModal") closeModal(); });
+  $("#contactForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = $("#ncName").value.trim();
+    if(!name){ $("#ncName").focus(); return; }
+    const value = Number($("#ncValue").value) || 2400;
+    const source = $("#ncSource").value;
+    const id = "c" + (DB.contacts.length + 1);
+    const contact = {
+      id, name,
+      company: $("#ncCompany").value.trim() || "New inquiry",
+      phone: $("#ncPhone").value.trim() || "(415) 555-0100",
+      email: $("#ncEmail").value.trim() || "unknown@example.com",
+      source, stage:"New Lead", value,
+      owner:"Dana Whitfield", last:"just now", tags:[source.replace(" Lead","")],
+      notes:"Created in the prototype contact form. No data leaves this page."
+    };
+    DB.contacts.unshift(contact);
+    DB.deals.unshift({id:"d" + (DB.deals.length + 1), name, company:contact.company, value, stage:"New Lead", tag:"New", age:"now", owner:"DW"});
+    renderContacts(); renderOverview(); renderPipeline();
+    $("#contactBadge").textContent = "2,848";
+    closeModal();
+    $("#contactForm").reset();
+    toast(`${name} added to contacts and pipeline.`);
+  });
+
+  /* ---------------- voice ---------------- */
+  function renderVoiceState(){
+    const on = state.agentActive;
+    const status = $("#agentStatus");
+    if(!status) return;
+    status.className = "status-pill " + (on ? "" : "paused");
+    status.innerHTML = `<span class="d"></span>${on ? "Active" : "Paused"}`;
+    const tg = $("#agentToggle");
+    tg.classList.toggle("on", on);
+    tg.setAttribute("aria-checked", String(on));
+  }
+  document.addEventListener("click", e => {
+    if(e.target.closest("#agentToggle")){
+      state.agentActive = !state.agentActive;
+      renderVoiceState();
+      toast(state.agentActive ? "Ava resumed answering calls (simulated)." : "Ava paused. Calls would route to voicemail.");
+    }
+  });
+  $("#savePromptBtn").addEventListener("click", () => toast("Prompt saved as v3.3 (simulated)."));
+  $("#resetPromptBtn").addEventListener("click", () => toast("Prompt restored to the last published version.", false));
+  $("#voiceNumbersBtn").addEventListener("click", () => toast("Number management would live in the telephony settings."));
+  $("#allCallsBtn").addEventListener("click", () => toast("Showing the six most recent calls in this prototype."));
+  $("#voiceSel").addEventListener("change", e => { if(state.agentActive) toast(`Voice changed to ${e.target.value.split(" — ")[0]} (simulated).`); });
+  $("#hoursSel").addEventListener("change", () => toast("Answering hours updated for the demo."));
+
+  const CALLERS = [
+    {name:"Jordan Alvarez", phone:"(415) 555-0199", summary:"Ava qualified an AC not cooling. Booked Thursday 09:00 and created a new opportunity for $4,200."},
+    {name:"Nina Whitfield", phone:"(510) 555-0161", summary:"Roof leak after rain. Ava collected the address, offered two windows and booked Friday 08:30."},
+    {name:"Carlos Mendez", phone:"(628) 555-0154", summary:"Asked about water heater replacement. Ava gave a price range, qualified ownership and booked a site visit."},
+    {name:"Helen Park", phone:"(415) 555-0128", summary:"No heat in a rental property. Ava captured the property manager's details and transferred to the front desk."}
+  ];
+  let callRotate = 0;
+  function simulateCall(){
+    const c = CALLERS[callRotate % CALLERS.length]; callRotate++;
+    const now = new Date();
+    const time = "Today, " + String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
+    DB.calls.unshift({id:"k" + (DB.calls.length + 1), name:c.name, phone:c.phone, time, dur:"1:41", outcome:"Booked", sentiment:"Positive", summary:c.summary});
+    const contactId = "c" + (DB.contacts.length + 1);
+    DB.contacts.unshift({id:contactId, name:c.name, company:"New caller", phone:c.phone, email:"caller@example.com", source:"AI Receptionist", stage:"Appointment Booked", value:4200, owner:"Dana Whitfield", last:"just now", tags:["AI booked"], notes:"Created by the simulated Ava call. Appointment booked and summary synced to the contact."});
+    state.filters.q = ""; state.filters.stage = "All"; state.filters.source = "";
+    if($("#contactSearch")) $("#contactSearch").value = "";
+    if($("#sourceFilter")) $("#sourceFilter").value = "";
+    renderCalls(); renderContacts(); renderOverview(); renderPipeline(); renderVoiceState();
+    const callsEl = $("#avaCalls"), bookedEl = $("#avaBooked");
+    if(callsEl) callsEl.textContent = String(Number(callsEl.textContent) + 1);
+    if(bookedEl) bookedEl.textContent = String(Number(bookedEl.textContent) + 1);
+    toast(`Ava handled a call with ${c.name} and booked an appointment.`);
+  }
+  $("#simCallBtn").addEventListener("click", simulateCall);
+  $("#simCallBtn2").addEventListener("click", simulateCall);
+
+  /* ---------------- settings / misc ---------------- */
+  $("#saveSettingsBtn").addEventListener("click", () => toast("Business profile saved (simulated)."));
+  $("#calTodayBtn").addEventListener("click", () => toast("The prototype week is fixed to 24–30 November.", false));
+  $("#calNewBtn").addEventListener("click", () => toast("Appointment creation is stubbed in this prototype.", false));
+  $("#inviteBtn").addEventListener("click", () => toast("Invite flow is stubbed. Roles would map to GHL user permissions.", false));
+  $("#bellBtn").addEventListener("click", () => toast("3 notifications: webhook auth, new voicemail, plan renewal.", false));
+  $("#wsBtn").addEventListener("click", () => toast("Workspace switching is disabled in the demo."));
+
+  /* ---------------- boot ---------------- */
+  renderWave();
+  renderKpis();
+  renderOverview();
+  drawFlow();
+  renderContacts();
+  renderPipeline();
+  renderCalls();
+  renderWorkflows();
+  renderWeek();
+  renderPlans();
+  renderProvisioning();
+  renderVoiceState();
+
+  $("#rangeSeg").addEventListener("click", e => {
+    const b = e.target.closest("[data-range]");
+    if(!b) return;
+    state.range = b.dataset.range;
+    $$("#rangeSeg button").forEach(x => x.classList.toggle("active", x === b));
+    drawFlow();
+  });
+
+  // Support deep links like #pipeline for sharing the prototype.
+  const TEST_VIEW = ""; // local QA hook: set to a view name to open it on load
+  if(TEST_VIEW && TITLES[TEST_VIEW]){
+    go(TEST_VIEW);
+  } else if(location.hash){
+    const h = location.hash.replace("#","");
+    if(TITLES[h]) go(h);
+  }
+  window.scrollTo(0,0);
+})();
+</script>
+</body>
+</html>

@@ -69,18 +69,18 @@ const qaStats = [
 
 const moreWork = [
   {
+    slug: "flowpilot-ai",
+    av: "FP",
+    cat: "CRM & Automation",
+    title: "FlowPilot AI",
+    blurb: "An AI CRM workspace for a home-services agency.",
+  },
+  {
     slug: "west-coast-workwear",
     av: "WC",
     cat: "Retail",
     title: "West Coast Workwear",
     blurb: "A storefront rebuild for a workwear brand.",
-  },
-  {
-    slug: "fansidea",
-    av: "FD",
-    cat: "Retail",
-    title: "Fansidea",
-    blurb: "Product storytelling for a custom apparel seller.",
   },
   {
     slug: "bandit-transfers",
