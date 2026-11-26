@@ -1133,9 +1133,9 @@ function CursorGlow() {
         .beakon-cursor-dot {
           width: 7px;
           height: 7px;
-          background: #e8ae24;
-          box-shadow: 0 0 9px rgba(232,174,36,.95),
-                      0 0 19px rgba(232,174,36,.65);
+          background: #e2ae35;
+          box-shadow: 0 0 9px rgba(226,174,53,.95),
+                      0 0 19px rgba(226,174,53,.65);
         }
 
         .beakon-cursor-glow {
@@ -1143,9 +1143,9 @@ function CursorGlow() {
           height: 46px;
           background: radial-gradient(
             circle,
-            rgba(232,174,36,.22) 0%,
-            rgba(232,174,36,.10) 38%,
-            rgba(232,174,36,.035) 60%,
+            rgba(226,174,53,.22) 0%,
+            rgba(226,174,53,.10) 38%,
+            rgba(226,174,53,.035) 60%,
             transparent 76%
           );
           filter: blur(3px);
@@ -1215,7 +1215,7 @@ function Navbar() {
 
         .site-header .work-nav-trigger:hover,
         .site-header .work-nav-trigger[aria-expanded="true"] {
-          color: #e8ae24;
+          color: #e2ae35;
         }
 
         .site-header .work-nav-menu {

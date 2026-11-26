@@ -79,7 +79,7 @@
   line-height: 1.75;
   color: var(--v2-dim);
   max-width: 70ch;
-  border-left: 2px solid rgba(232, 174, 36, 0.5);
+  border-left: 2px solid rgba(226, 174, 53, 0.5);
   padding-left: 14px;
   margin: 0 0 44px;
 }
@@ -844,7 +844,7 @@
 }
 
 .mlw-tag.t3 {
-  background: rgba(232, 174, 36, 0.14);
+  background: rgba(226, 174, 53, 0.14);
   color: var(--v2-gold-soft);
 }
 
@@ -986,7 +986,7 @@
 .mlw-flow-node {
   position: relative;
   padding-left: 18px;
-  border-left: 1px solid rgba(232, 174, 36, 0.35);
+  border-left: 1px solid rgba(226, 174, 53, 0.35);
 }
 
 .mlw-flow-node span {

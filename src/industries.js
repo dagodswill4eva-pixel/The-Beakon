@@ -4,7 +4,7 @@ export const industries = [
     short: "Early Years",
     name: "Early Years & Childcare",
     icon: "cap",
-    accent: "#e8ae24",
+    accent: "#e2ae35",
     eyebrow: "ENQUIRIES · VISITS · FOLLOW-UP",
     headline: ["No enquiry", "goes cold.", "No family", "gets lost."],
     promise:
