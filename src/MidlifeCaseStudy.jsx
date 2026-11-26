@@ -53,6 +53,59 @@ const stats = [
   ["QA", "18 cases · 0 fails"],
 ];
 
+const metaRows = [
+  ["Project", "Midlife Wellness Alliance — women's health nonprofit"],
+  ["Status", "Self-initiated demonstration, not a client engagement"],
+  [
+    "What I did",
+    "Design, CMS architecture, front-end build, automation, documentation",
+  ],
+  ["Built with", "Wix Studio · Wix CMS · Velo · email automation"],
+];
+
+const approach = [
+  {
+    number: "01",
+    title: "Start with what patients actually type",
+    body: "Before a single screen, I wrote down the words women use for their symptoms. Every filter label, search field and headline was written from that list — not from clinical terminology.",
+  },
+  {
+    number: "02",
+    title: "Put the verification date on everything",
+    body: "The date sits on the card, the profile and the admin row. The CMS drives a review queue from that field, so freshness becomes a scheduled event instead of something a person has to remember.",
+  },
+  {
+    number: "03",
+    title: "Build the handover, not just the site",
+    body: "The staff guide, the Velo reference and the maintenance plan were written while the templates were being built. Two people with no developer on call should be able to open it on a Monday.",
+  },
+];
+
+const journey = [
+  ["A question", "Symptoms in plain words, not specialty names"],
+  ["The directory", "Five filters, a live count, a clear-all"],
+  ["A profile", "Credentials, services, last-verified date"],
+  ["A webinar", "Registration, reminders, a review gate"],
+];
+
+const takeaways = [
+  {
+    number: "01",
+    title: "A directory is a trust problem first",
+    body: "The layout was the easy part. Showing when each record was last checked is what makes a listing believable — and it is the part most directories skip.",
+  },
+  {
+    number: "02",
+    title: "A visible date beats a review calendar",
+    body: "Nobody maintains a tab nobody opens. Putting the date on the page turns staleness into something the site reports on itself.",
+  },
+  {
+    number: "03",
+    title: "Automation still needs a human gate",
+    body: "The sequence drafts every reminder, then stops. One person approves the first send, so a broken registration link never reaches the whole list at once.",
+  },
+];
+
 const results = [
   {
     tag: "Implemented & working",
@@ -403,6 +456,15 @@ export default function MidlifeCaseStudy() {
             only — no client relationship or measured outcome is claimed.
           </p>
 
+          <div className="mlw-metagrid">
+            {metaRows.map(([label, value]) => (
+              <div key={label}>
+                <span>{label}</span>
+                <b>{value}</b>
+              </div>
+            ))}
+          </div>
+
           <div className="mlw-stats">
             {stats.map(([label, value]) => (
               <div key={label}>
@@ -417,8 +479,13 @@ export default function MidlifeCaseStudy() {
       <section className="mlw-section">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">THE PROBLEM</span>
+            <span className="v2-eyebrow">THE CHALLENGE</span>
             <h2>Four things were breaking the directory</h2>
+            <p className="mlw-intro">
+              A directory only works if people believe it. Every decision on
+              this build came back to one question: does this make the listing
+              more believable, or just better looking?
+            </p>
           </div>
           <div className="mlw-cards is-four">
             {problems.map((problem) => (
@@ -428,6 +495,46 @@ export default function MidlifeCaseStudy() {
                 <p>{problem.body}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mlw-section">
+        <div className="mlw-wrap">
+          <div className="mlw-section-head">
+            <span className="v2-eyebrow">THE APPROACH</span>
+            <h2>Plain words first, system second</h2>
+            <p className="mlw-intro">
+              Three decisions shaped everything that followed. Each one was
+              made before a template was drawn.
+            </p>
+          </div>
+
+          <div className="mlw-steps">
+            {approach.map((step) => (
+              <div className="mlw-step" key={step.number}>
+                <span className="mlw-num">{step.number}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mlw-flow">
+            <span className="mlw-flow-label">
+              The path the site is built around
+            </span>
+            <div className="mlw-flow-row">
+              {journey.map(([title, body], index) => (
+                <div className="mlw-flow-node" key={title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <b>{title}</b>
+                  <i>{body}</i>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -554,6 +661,25 @@ export default function MidlifeCaseStudy() {
             through the filters, a provider profile and the registration form.
             The implementation guide is available on request.
           </p>
+        </div>
+      </section>
+
+      <section className="mlw-section">
+        <div className="mlw-wrap">
+          <div className="mlw-section-head">
+            <span className="v2-eyebrow">THE TAKEAWAY</span>
+            <h2>What this means for your project</h2>
+          </div>
+
+          <div className="mlw-cards is-three">
+            {takeaways.map((item) => (
+              <div className="mlw-card" key={item.number}>
+                <span className="mlw-num">{item.number}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

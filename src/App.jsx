@@ -771,6 +771,116 @@ function IndustryWork({ industry, limit = 3, id = "chapter-work" }) {
   );
 }
 
+const caseStudyPoints = [
+  {
+    title: "A directory people can actually search",
+    body: "Five filters that stack, a live result count, and a verification date on every card instead of a stale spreadsheet.",
+  },
+  {
+    title: "A site two people can run",
+    body: "Twenty-five fields per record, and a review queue driven by the verification date — no developer on call for every update.",
+  },
+  {
+    title: "Automation with a brake",
+    body: "Registration through to follow-up, with a human review gate so nothing sends without a person approving it.",
+  },
+];
+
+const caseStudyStats = [
+  ["10", "responsive templates"],
+  ["25", "CMS fields"],
+  ["18", "QA cases · 0 fails"],
+  ["6", "views built"],
+];
+
+function FeaturedCaseStudy() {
+  return (
+    <section className="v2-section" id="chapter-case-study">
+      <div className="section-wrap">
+        <div className="v2-section-head">
+          <div>
+            <span className="v2-eyebrow">Featured case study</span>
+            <h2 className="v2-display">
+              One build,
+              <br />
+              <em>end to end.</em>
+            </h2>
+          </div>
+          <div className="v2-head-side">
+            <p>
+              Website, directory and automation in one project — so you can see
+              how the pieces work together rather than as separate services.
+            </p>
+            <Link className="v2-link" to="/work/midlife-wellness-alliance">
+              Read the case study <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </div>
+
+        <Link to="/work/midlife-wellness-alliance" className="v2-case">
+          <div className="v2-case-media">
+            <div className="v2-case-frame">
+              <div className="v2-case-bar">
+                <i /><i /><i />
+                <span>midlifewellness.example.org</span>
+              </div>
+              <div className="v2-case-screen">
+                <span className="v2-case-eb">PERIMENOPAUSE · MENOPAUSE</span>
+                <h4>Answers, and the right provider.</h4>
+                <p>
+                  Verified clinicians, free webinars and plain-language
+                  resources — no jargon, no sales pitch.
+                </p>
+                <div className="v2-case-pills">
+                  <span className="is-solid">Find a Provider</span>
+                  <span>See events</span>
+                </div>
+                <div className="v2-case-rows">
+                  <div><span>Verified listings</span><b>14</b></div>
+                  <div><span>Specialties</span><b>9</b></div>
+                  <div><span>This month&rsquo;s webinar</span><b>Free</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="v2-case-body">
+            <span className="v2-case-tag">Self-initiated demonstration</span>
+            <h3>Midlife Wellness Alliance</h3>
+            <p className="v2-case-lede">
+              A women&rsquo;s health nonprofit needed patients to find the right
+              provider in under two minutes, and two staff to keep 40+ listings
+              current without a developer.
+            </p>
+
+            <ul className="v2-case-points">
+              {caseStudyPoints.map((point) => (
+                <li key={point.title}>
+                  <strong>{point.title}</strong>
+                  <span>{point.body}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="v2-case-stats">
+              {caseStudyStats.map(([value, label]) => (
+                <div key={label}>
+                  <b>{value}</b>
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+
+            <span className="v2-case-cta">
+              See what was built <ArrowUpRight size={15} />
+            </span>
+          </div>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 function ProcessSection() {
   const steps = [
     {
@@ -1587,6 +1697,7 @@ function Home() {
       <PainSection industry={industry} />
       <SystemsSection industry={industry} />
       <IndustryWork industry={industry} />
+      <FeaturedCaseStudy />
       <PackagesSection industry={industry} />
 
       <div id="chapter-proof">

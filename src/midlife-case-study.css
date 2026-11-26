@@ -149,6 +149,10 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
+.mlw-cards.is-three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .mlw-card {
   background: var(--v2-bg-soft);
   padding: 24px 22px;
@@ -873,10 +877,160 @@
   margin-bottom: 0;
 }
 
+/* ---------- hero metadata ---------- */
+
+.mlw-metagrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 22px 0;
+  border-top: 1px solid var(--v2-line);
+  border-bottom: 1px solid var(--v2-line);
+  margin-bottom: 20px;
+}
+
+.mlw-metagrid > div {
+  min-width: 0;
+}
+
+.mlw-metagrid span {
+  display: block;
+  font-family: var(--v2-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v2-dim);
+  margin-bottom: 8px;
+}
+
+.mlw-metagrid b {
+  display: block;
+  font-weight: 400;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--v2-cream);
+}
+
+/* ---------- section intro ---------- */
+
+.mlw-intro {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--v2-muted);
+  max-width: 62ch;
+  margin: 16px 0 0;
+}
+
+/* ---------- approach ---------- */
+
+.mlw-steps {
+  display: grid;
+  gap: 1px;
+  background: var(--v2-line);
+  border: 1px solid var(--v2-line);
+}
+
+.mlw-step {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 8px;
+  background: var(--v2-bg-soft);
+  padding: 26px 24px;
+}
+
+.mlw-step .mlw-num {
+  margin: 0;
+  padding-top: 4px;
+}
+
+.mlw-step h3 {
+  font-family: var(--v2-serif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--v2-cream);
+  margin: 0 0 9px;
+}
+
+.mlw-step p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--v2-muted);
+  margin: 0;
+  max-width: 74ch;
+}
+
+.mlw-flow {
+  margin-top: 34px;
+  padding: 26px 24px;
+  border: 1px solid var(--v2-line);
+  background: var(--v2-bg-soft);
+}
+
+.mlw-flow-label {
+  display: block;
+  font-family: var(--v2-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v2-dim);
+  margin-bottom: 20px;
+}
+
+.mlw-flow-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.mlw-flow-node {
+  position: relative;
+  padding-left: 18px;
+  border-left: 1px solid rgba(232, 174, 36, 0.35);
+}
+
+.mlw-flow-node span {
+  display: block;
+  font-family: var(--v2-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--v2-gold);
+  margin-bottom: 7px;
+}
+
+.mlw-flow-node b {
+  display: block;
+  font-family: var(--v2-serif);
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--v2-cream);
+  margin-bottom: 6px;
+}
+
+.mlw-flow-node i {
+  display: block;
+  font-style: normal;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--v2-muted);
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 980px) {
   .mlw-cards.is-four {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mlw-cards.is-three {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mlw-metagrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mlw-flow-row {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -895,8 +1049,24 @@
     padding-top: 96px;
   }
 
-  .mlw-cards.is-four {
+  .mlw-cards.is-four,
+  .mlw-cards.is-three {
     grid-template-columns: 1fr;
+  }
+
+  .mlw-metagrid,
+  .mlw-flow-row {
+    grid-template-columns: 1fr;
+  }
+
+  .mlw-step {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 20px;
+  }
+
+  .mlw-flow {
+    padding: 22px 20px;
   }
 
   .mlw-stats {
