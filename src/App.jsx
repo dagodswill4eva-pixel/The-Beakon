@@ -795,87 +795,88 @@ const caseStudyStats = [
 
 function FeaturedCaseStudy() {
   return (
-    <section className="v2-section" id="chapter-case-study">
+    <section className="v2-section v2-caseband" id="chapter-case-study">
       <div className="section-wrap">
-        <div className="v2-section-head">
-          <div>
-            <span className="v2-eyebrow">Featured case study</span>
-            <h2 className="v2-display">
-              One build,
-              <br />
-              <em>end to end.</em>
-            </h2>
-          </div>
-          <div className="v2-head-side">
-            <p>
-              Website, directory and automation in one project — so you can see
-              how the pieces work together rather than as separate services.
-            </p>
-            <Link className="v2-link" to="/work/midlife-wellness-alliance">
-              Read the case study <ArrowUpRight size={14} />
-            </Link>
-          </div>
+        <div className="v2-casehead">
+          <span className="v2-casebadge">
+            <span className="v2-casedot" />
+            Case study
+          </span>
+          <h2 className="v2-casetitle">
+            The full <em>build</em>
+          </h2>
+          <p>
+            One project, end to end. Website, directory and automation working
+            together — so you can see how the pieces fit rather than as separate
+            services.
+          </p>
         </div>
 
-        <Link to="/work/midlife-wellness-alliance" className="v2-case">
-          <div className="v2-case-media">
-            <div className="v2-case-frame">
-              <div className="v2-case-bar">
-                <i /><i /><i />
-                <span>midlifewellness.example.org</span>
-              </div>
-              <div className="v2-case-screen">
-                <span className="v2-case-eb">PERIMENOPAUSE · MENOPAUSE</span>
-                <h4>Answers, and the right provider.</h4>
-                <p>
-                  Verified clinicians, free webinars and plain-language
-                  resources — no jargon, no sales pitch.
-                </p>
-                <div className="v2-case-pills">
-                  <span className="is-solid">Find a Provider</span>
-                  <span>See events</span>
+        <div className="v2-ccards">
+          <Link to="/work/midlife-wellness-alliance" className="v2-ccard">
+            <div className="v2-ccard-media">
+              <div className="v2-case-frame">
+                <div className="v2-case-bar">
+                  <i /><i /><i />
+                  <span>midlifewellness.example.org</span>
                 </div>
-                <div className="v2-case-rows">
-                  <div><span>Verified listings</span><b>14</b></div>
-                  <div><span>Specialties</span><b>9</b></div>
-                  <div><span>This month&rsquo;s webinar</span><b>Free</b></div>
+                <div className="v2-case-screen">
+                  <span className="v2-case-eb">PERIMENOPAUSE · MENOPAUSE</span>
+                  <h4>Answers, and the right provider.</h4>
+                  <p>
+                    Verified clinicians, free webinars and plain-language
+                    resources — no jargon, no sales pitch.
+                  </p>
+                  <div className="v2-case-pills">
+                    <span className="is-solid">Find a Provider</span>
+                    <span>See events</span>
+                  </div>
+                  <div className="v2-case-rows">
+                    <div><span>Verified listings</span><b>14</b></div>
+                    <div><span>Specialties</span><b>9</b></div>
+                    <div><span>This month&rsquo;s webinar</span><b>Free</b></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="v2-case-body">
-            <span className="v2-case-tag">Self-initiated demonstration</span>
-            <h3>Midlife Wellness Alliance</h3>
-            <p className="v2-case-lede">
-              A women&rsquo;s health nonprofit needed patients to find the right
-              provider in under two minutes, and two staff to keep 40+ listings
-              current without a developer.
-            </p>
+            <div className="v2-ccard-body">
+              <div className="v2-ccard-top">
+                <span className="v2-cmark">MW</span>
+                <span className="v2-ccard-tag">Self-initiated demonstration</span>
+              </div>
 
-            <ul className="v2-case-points">
-              {caseStudyPoints.map((point) => (
-                <li key={point.title}>
-                  <strong>{point.title}</strong>
-                  <span>{point.body}</span>
-                </li>
-              ))}
-            </ul>
+              <strong className="v2-ccard-name">Midlife Wellness Alliance</strong>
+              <span className="v2-ccard-line">
+                A women&rsquo;s health nonprofit needed patients to find the
+                right provider in under two minutes, and two staff to keep 40+
+                listings current without a developer.
+              </span>
 
-            <div className="v2-case-stats">
-              {caseStudyStats.map(([value, label]) => (
-                <div key={label}>
-                  <b>{value}</b>
-                  <span>{label}</span>
-                </div>
-              ))}
+              <ul className="v2-ccard-points">
+                {caseStudyPoints.map((point) => (
+                  <li key={point.title}>
+                    <strong>{point.title}</strong>
+                    <span>{point.body}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="v2-ccard-stats">
+                {caseStudyStats.map(([value, label]) => (
+                  <div key={label}>
+                    <b>{value}</b>
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <span className="v2-ccard-btn">
+                View case study <ArrowRight size={15} />
+              </span>
             </div>
-
-            <span className="v2-case-cta">
-              See what was built <ArrowUpRight size={15} />
-            </span>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
     </section>
   );

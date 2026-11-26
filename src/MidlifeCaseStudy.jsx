@@ -47,10 +47,48 @@ const deliverables = [
 ];
 
 const stats = [
-  ["Templates", "10 responsive pages"],
-  ["Directory", "14 records · 25 fields"],
-  ["Automation", "5 email templates"],
-  ["QA", "18 cases · 0 fails"],
+  ["10", "Responsive templates"],
+  ["14", "Directory records"],
+  ["25", "CMS fields per provider"],
+  ["18", "QA cases · 0 fails"],
+];
+
+const qaChart = [
+  ["Directory", 8],
+  ["Provider profile", 4],
+  ["Registration", 4],
+  ["Forms", 2],
+];
+
+const qaStats = [
+  ["18", "Test cases run"],
+  ["0", "Failures"],
+  ["12.4:1", "Body contrast"],
+  ["5", "Stacking filters"],
+];
+
+const moreWork = [
+  {
+    slug: "west-coast-workwear",
+    av: "WC",
+    cat: "Retail",
+    title: "West Coast Workwear",
+    blurb: "A storefront rebuild for a workwear brand.",
+  },
+  {
+    slug: "fansidea",
+    av: "FD",
+    cat: "Retail",
+    title: "Fansidea",
+    blurb: "Product storytelling for a custom apparel seller.",
+  },
+  {
+    slug: "bandit-transfers",
+    av: "BT",
+    cat: "Transport",
+    title: "Bandit Transfers",
+    blurb: "A booking flow that stops losing enquiries.",
+  },
 ];
 
 const metaRows = [
@@ -85,7 +123,6 @@ const journey = [
   ["A question", "Symptoms in plain words, not specialty names"],
   ["The directory", "Five filters, a live count, a clear-all"],
   ["A profile", "Credentials, services, last-verified date"],
-  ["A webinar", "Registration, reminders, a review gate"],
 ];
 
 const takeaways = [
@@ -420,53 +457,52 @@ export default function MidlifeCaseStudy() {
     <div className="mlw">
       <section className="mlw-hero">
         <div className="mlw-wrap">
-          <div className="mlw-meta">
-            <span className="v2-eyebrow">CASE STUDY · WIX STUDIO · CMS · AUTOMATION</span>
-            <span className="mlw-meta-num">SELF-INITIATED DEMONSTRATION</span>
-          </div>
+          <div className="mlw-hero-grid">
+            <div>
+              <span className="mlw-eb">Case study · Wix Studio</span>
 
-          <h1>A directory people trust, and a site two people can run.</h1>
+              <h1>
+                A directory people <em>trust</em>, and a site two people can run.
+              </h1>
 
-          <p className="mlw-lede">
-            A women&apos;s health nonprofit needed patients in perimenopause to
-            find the right provider in under two minutes — and needed two staff
-            members to keep 40+ listings current without a developer on call. I
-            designed the site, built the directory, and wired the webinar system
-            behind it.
-          </p>
+              <p className="mlw-lede">
+                A women&apos;s health nonprofit needed patients in perimenopause
+                to find the right provider in under two minutes — and needed two
+                staff members to keep 40+ listings current without a developer on
+                call. I designed the site, built the directory, and wired the
+                webinar system behind it.
+              </p>
 
-          <div className="mlw-actions">
-            <a
-              className="button button-gold"
-              href={prototypeUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open the live prototype <ArrowUpRight size={17} />
-            </a>
-            <a className="closing-booking-link" href="#the-work">
-              See the built views <ArrowRight size={15} />
-            </a>
-          </div>
-
-          <p className="mlw-note">
-            Fictional demonstration project. The organization, providers, events
-            and figures are invented; no live Wix site, Zoom account or email
-            platform is connected. This page documents the design and build work
-            only — no client relationship or measured outcome is claimed.
-          </p>
-
-          <div className="mlw-metagrid">
-            {metaRows.map(([label, value]) => (
-              <div key={label}>
-                <span>{label}</span>
-                <b>{value}</b>
+              <div className="mlw-actions">
+                <a
+                  className="button"
+                  href={prototypeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open the live prototype <ArrowUpRight size={16} />
+                </a>
+                <a className="closing-booking-link" href="#the-work">
+                  See the built views <ArrowRight size={14} />
+                </a>
               </div>
-            ))}
+
+              <p className="mlw-note">
+                Fictional demonstration project. The organization, providers,
+                events and figures are invented; no live Wix site, Zoom account
+                or email platform is connected. This page documents the design
+                and build work only — no client relationship or measured outcome
+                is claimed.
+              </p>
+            </div>
+
+            <div className="mlw-hero-art">
+              <HomepageMock />
+            </div>
           </div>
 
-          <div className="mlw-stats">
-            {stats.map(([label, value]) => (
+          <div className="mlw-metarow">
+            {metaRows.map(([label, value]) => (
               <div key={label}>
                 <span>{label}</span>
                 <b>{value}</b>
@@ -476,11 +512,24 @@ export default function MidlifeCaseStudy() {
         </div>
       </section>
 
+      <section className="mlw-band">
+        <div className="mlw-wrap">
+          {stats.map(([value, label]) => (
+            <div key={label}>
+              <b>{value}</b>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="mlw-section">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">THE CHALLENGE</span>
-            <h2>Four things were breaking the directory</h2>
+            <span className="mlw-eb">The challenge</span>
+            <h2>
+              A good product with an <em>untrusted</em> listing
+            </h2>
             <p className="mlw-intro">
               A directory only works if people believe it. Every decision on
               this build came back to one question: does this make the listing
@@ -499,14 +548,16 @@ export default function MidlifeCaseStudy() {
         </div>
       </section>
 
-      <section className="mlw-section">
+      <section className="mlw-section is-panel">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">THE APPROACH</span>
-            <h2>Plain words first, system second</h2>
+            <span className="mlw-eb">The approach</span>
+            <h2>
+              Plain words first, <em>system</em> second
+            </h2>
             <p className="mlw-intro">
-              Three decisions shaped everything that followed. Each one was
-              made before a template was drawn.
+              Three decisions shaped everything that followed. Each one was made
+              before a template was drawn.
             </p>
           </div>
 
@@ -528,7 +579,10 @@ export default function MidlifeCaseStudy() {
             </span>
             <div className="mlw-flow-row">
               {journey.map(([title, body], index) => (
-                <div className="mlw-flow-node" key={title}>
+                <div
+                  className={`mlw-flow-node${index === 1 ? " is-key" : ""}`}
+                  key={title}
+                >
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <b>{title}</b>
                   <i>{body}</i>
@@ -542,8 +596,10 @@ export default function MidlifeCaseStudy() {
       <section className="mlw-section">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">WHAT I BUILT</span>
-            <h2>Four pieces, one system</h2>
+            <span className="mlw-eb">What I built</span>
+            <h2>
+              Four pieces, one <em>system</em>
+            </h2>
           </div>
           <div className="mlw-cards is-four">
             {deliverables.map((item) => (
@@ -559,8 +615,10 @@ export default function MidlifeCaseStudy() {
       <section className="mlw-section" id="the-work">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">THE WORK</span>
-            <h2>Six views, built rather than described</h2>
+            <span className="mlw-eb">The work</span>
+            <h2>
+              Six views, built rather than <em>described</em>
+            </h2>
           </div>
 
           <div className="mlw-shots">
@@ -634,12 +692,47 @@ export default function MidlifeCaseStudy() {
         </div>
       </section>
 
-      <section className="mlw-section">
+      <section className="mlw-section is-panel">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">RESULTS, LABELLED HONESTLY</span>
-            <h2>What works, what&apos;s simulated, what needs a live site</h2>
+            <span className="mlw-eb">Results, labelled honestly</span>
+            <h2>
+              What works, what&apos;s simulated, what needs a <em>live site</em>
+            </h2>
           </div>
+
+          <div className="mlw-resultgrid">
+            <div className="mlw-chartcard">
+              <h4>What the 18 QA cases covered</h4>
+              <p className="sub">Test cases by area of the build</p>
+              {qaChart.map(([label, value]) => (
+                <div className="mlw-chartrow" key={label}>
+                  <span>{label}</span>
+                  <div className="mlw-chartbar">
+                    <i style={{ width: `${(value / 8) * 100}%` }} />
+                  </div>
+                  <b>{value}</b>
+                </div>
+              ))}
+            </div>
+
+            <div className="mlw-statcard">
+              <h4>The QA pass</h4>
+              <p className="sub">Run against the prototype, not a live site</p>
+              <div className="mlw-statgrid">
+                {qaStats.map(([value, label]) => (
+                  <div key={label}>
+                    <b>{value}</b>
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <p className="mlw-source">
+            Source: 18-case QA report run against the local prototype build.
+          </p>
 
           <div className="mlw-results">
             {results.map((block) => (
@@ -667,8 +760,10 @@ export default function MidlifeCaseStudy() {
       <section className="mlw-section">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">THE TAKEAWAY</span>
-            <h2>What this means for your project</h2>
+            <span className="mlw-eb">The takeaway</span>
+            <h2>
+              What this means for <em>your</em> project
+            </h2>
           </div>
 
           <div className="mlw-cards is-three">
@@ -686,23 +781,50 @@ export default function MidlifeCaseStudy() {
       <section className="mlw-section">
         <div className="mlw-wrap">
           <div className="mlw-section-head">
-            <span className="v2-eyebrow">BACK TO THE WORK</span>
-            <h2>See the other projects.</h2>
+            <span className="mlw-eb">More work</span>
+            <h2>
+              Other builds, same <em>approach</em>
+            </h2>
           </div>
-          <div className="closing-cta-actions">
+
+          <div className="mlw-morework">
+            {moreWork.map((item) => (
+              <Link
+                className="mlw-workcard"
+                key={item.slug}
+                to={`/work/${item.slug}`}
+              >
+                <span className="av">{item.av}</span>
+                <span className="cat">{item.cat}</span>
+                <b>{item.title}</b>
+                <p>{item.blurb}</p>
+                <span className="go">
+                  View case study <ArrowRight size={13} />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mlw-cta">
+        <div className="mlw-wrap">
+          <h2>Want a build like this for your organisation?</h2>
+          <p>
+            Open the prototype first — click the filters, a provider profile and
+            the registration form. If the approach fits, we can talk.
+          </p>
+          <div className="mlw-cta-actions">
             <a
-              className="button button-gold"
+              className="button"
               href={prototypeUrl}
               target="_blank"
               rel="noreferrer"
             >
-              Open the live prototype <ArrowUpRight size={17} />
+              Open the live prototype <ArrowUpRight size={16} />
             </a>
-            <Link className="closing-booking-link" to="/work">
-              All selected work <ArrowRight size={15} />
-            </Link>
             <Link className="closing-booking-link" to="/contact">
-              Start a conversation <ArrowUpRight size={15} />
+              Start a conversation <ArrowRight size={14} />
             </Link>
           </div>
         </div>
